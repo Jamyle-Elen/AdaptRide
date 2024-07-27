@@ -1,11 +1,11 @@
 
-import { useState } from 'react'
 import './App.css'
+import Router from './routes/UI/route.jsx'
 
-function App() {
+const App = () => {
   return (
     <>
-      
+    <Router/>
     </>
   )
 }
