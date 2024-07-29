@@ -8,37 +8,51 @@
     --bg-color: #3D4A6A;
     --text-color: #FFF;
     --button-color: #8D8B9C;
+    --button_hover-color: #63626c;
 }
 
 .menu {
     background-color: var(--bg-color);
     display: flex;
-    height: 2.5rem;
-    border: black solid  1px;
+    height: 4rem;
+    /* border: black solid  1px; */
     align-items: center;
     justify-content: space-around;
 }
 
+.menu-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+}
+
 img {
-    border: green solid 1px;
-    width: 80px;
+    /* border: green solid 1px; */
+    width: 150px;
 }
 
 .class1 {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
-    border: orangered solid 1px;
+    /* border: orangered solid 1px; */
 }
 
 .list {
     display: flex;
-    font-size: 8px;
+    font-size: 16px;
+}
+
+#list-two {
+    /* border: red solid; */
+    gap: 20px;
 }
 
 ul {
-    border: red solid 1px;
-    gap: 10px;
+    /* border: red solid 1px; */
+    gap: 20px;
     align-items: center;
 }
 
@@ -47,10 +61,18 @@ ul:hover {
 }
 
 button {
-    font-size: 8px;
-    padding: 3px 10px;
+    font-size: 16px;
+    padding: 7px 12px;
     color: var(--text-color);
-    border-radius: 10px;
-    border: none;
+    border-radius: 18px;
+    border: 2px transparent;
     background-color: var(--button-color);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--bg-color);
+    /* transition: ; */
+    border: var(--text-color) solid 1px;
+
 }
