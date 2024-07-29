@@ -1,0 +1,288 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: var(--cor-principal-menu);
+    color: var(--cor-letra-menu);
+}
+
+:root {
+    --cor-principal: #D9D9D9;
+    --cor-principal-menu: #3D4A6A;
+    --cor-letra-menu: #fff;
+    --cor-botao: #8D8B9C;
+    --cor-terceira-section: #CAC7C7;
+
+    --font-family-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.search {
+    background-color: var(--cor-principal-menu);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7% 15%;
+    gap: 2rem;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.search .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.search .text h1 {
+    font-family: var(--font-family-principal);
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #CAD0E5;
+}
+
+.search .text p {
+    font-family: var(--font-family-principal);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #CAD0E5;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    padding: 10% 0;
+    gap: 20px;
+}
+
+.input input {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: var(--cor-principal);
+    padding: 2.5% 0 2.5% 10%;
+    width: 75%;
+}
+
+.car-img img {
+    width: 100%;
+}
+
+/* Segunda Section */
+.search2 {
+    background-color: var(--cor-principal);
+    padding: 7% 15%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.search2-left-side {
+    background-color: var(--cor-principal);
+    font-family: var(--font-family-principal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 7rem;
+}
+
+.search2-left-side .text h1 {
+    background-color: var(--cor-principal);
+    font-size: 2.7rem;
+    font-weight: 700;
+    color: #050F2A;
+}
+
+.search2-left-side .button {
+    background-color: var(--cor-principal);
+    display: flex;
+    align-items: center;
+}
+
+.search2-left-side .button button {
+    border: none;
+    border-radius: 10px;
+    padding: 3% 6%;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.search2-left-side .button p {
+    background-color: var(--cor-principal);
+    font-size: 1rem;
+    font-weight: 500;
+    color: #050F2A;
+    margin-right: 5px;
+}
+
+.search2-left-side .button a {
+    background-color: var(--cor-principal);
+    text-decoration: none;
+    color: var(--cor-principal-menu);
+    font-weight: 500;
+}
+
+.people-img {
+    background: none;
+    font-family: var(--font-family-principal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.people-img img {
+    background: none;
+    width: 100%;
+}
+
+.people-img p {
+    background-color: var(--cor-principal);
+    color: var(--cor-principal-menu);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+
+/* Terceira Section */
+.search3 {
+    background-color: var(--cor-terceira-section);
+    padding: 7% 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.content {
+    background-color: var(--cor-terceira-section);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.content-img {
+    border-radius: 15px;
+    background-color: var(--cor-principal);
+    width: 30%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-img img {
+    background: none;
+    width: 80%;
+    height: 20vh;
+}
+
+.content-text1 {
+    border-radius: 15px;
+    background-color: var(--cor-principal);
+    padding: 0 3%;
+    width: 30%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.content-text1 h2 {
+    background-color: var(--cor-principal);
+    color: var(--cor-principal-menu);
+    font-family: var(--font-family-principal);
+    font-size: 1.1rem;
+}
+
+.content-text1 p {
+    background-color: var(--cor-principal);
+    color: var(--cor-principal-menu);
+    font-family: var(--font-family-principal);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.content-text1 span {
+    background-color: var(--cor-principal);
+    color: #8b2020;
+    font-family: var(--font-family-principal);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.content-text1 ul li {
+    background-color: var(--cor-principal);
+    color: var(--cor-principal-menu);
+    font-family: var(--font-family-principal);
+    font-weight: 700;
+    list-style-type: none;
+    text-align: start;
+    font-size: 1rem;
+}
+
+.content-text2 {
+    border-radius: 15px;
+    background-color: var(--cor-principal);
+    padding: 0 3%;
+    width: 30%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.content-text2 h2 {
+    background-color: var(--cor-principal);
+    font-family: var(--font-family-principal);
+    color: var(--cor-principal-menu);
+    font-size: 1.1rem;
+}
+
+.content-text2 h2 span {
+    background-color: var(--cor-principal);
+    color: var(--cor-principal-menu);
+    font-weight: 800;
+}
+
+.content-text2 p {
+    background-color: var(--cor-principal);
+    font-family: var(--font-family-principal);
+    color: var(--cor-principal-menu);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.content-text2 img {
+    background-color: var(--cor-principal);
+    padding-top: 2rem;
+    width: 80%;
+    align-self: center;
+}
+
+.search3-button {
+    background: var(--cor-principal-menu);
+    border-radius: 10px;
+    padding: 1% 3%;
+}
+
+.search3-button button {
+    background-color: var(--cor-principal-menu);
+    border: none;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.7rem;
+}
