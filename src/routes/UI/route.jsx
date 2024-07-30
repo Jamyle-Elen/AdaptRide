@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from '../../components/pages/homepage/homepage.jsx'
-import SignIn from '../../components/pages/passenger/sign_in/sign-in.jsx'
+import SignIn from '../../components/pages/passenger/Sign_in/sign-in.jsx'
 
 const Router = () => {
     return (
