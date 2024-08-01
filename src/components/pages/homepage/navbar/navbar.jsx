@@ -27,7 +27,7 @@ const NavBar = () => {
             </ul>
           </div>
           <div className="list" id="list-two">
-            <button className="access" onClick={ModeAccess}>A</button>
+            {/* <button className="access" onClick={ModeAccess}>A</button> */}
             <ul className="list">
               <li className="drop_down_item">
                 <Link to="/help">Ajuda<i className="bx bx-chevron-down"></i></Link>
