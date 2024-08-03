@@ -24,11 +24,9 @@ function AboutUsSection() {
                     Ter a liberdade de se locomover com facilidade,<br /> conforto e segurança.
                     </figcaption>
                 </figure>
-                      
-              
-              
-                    </div>
-    </div>
+                    <div className="square">Conheça nossas vantagens!</div>
+                </div>
+      </div>
     </>
   )
 }
