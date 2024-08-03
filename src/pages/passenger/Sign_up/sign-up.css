@@ -1,0 +1,128 @@
+.main {
+    background-color: #D9D9D9;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section {
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+}
+
+.sign_in_area {
+    padding: 4rem 3rem;
+    background-color: #3D4A6A;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    gap: 3rem;
+}
+
+.sign_in_area img {
+    width: 8rem;
+}
+
+.sign_in_text {
+    font-family: #3D4A6A;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+}
+
+.sign_in_text h2 {
+    text-align: justify;
+    text-wrap: wrap;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.sign_in_text h2 span {
+    color: #A1C7F4;
+    font-weight: 700;
+}
+
+.sign_in_text p {
+    font-size: 0.7rem;
+    font-weight: lighter;
+}
+
+.sign_in_area_button {
+    border: 2px solid #D9D9D9;
+    /* background: #3D4A6A; */
+    background: linear-gradient(to right,#3D4A6A, #D9D9D9 90%);
+    color: #fff;
+    border-radius: 5px;
+    height: 2.5rem;
+    width: 10rem;
+    cursor: pointer;
+}
+
+
+/* ========== */
+.sign_up {
+    padding: 2rem 5rem;
+    background-color: #E9E9E9;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.sign_up_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign_up_text h2 {
+    color: #3D4A6A;
+    font-weight: 700;
+    font-size: 1.7rem;
+}
+
+.sign_up_text p {
+    color: #3D4A6A;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.sign_up_input {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sign_up_input input {
+    background: #D9D9D9;
+    color: #7a7a7a;
+    border: none;
+    outline: none;
+    padding-left: 15px;
+    height: 2.2rem;
+    width: 25rem;
+}
+
+.sign_up button {
+    /* background-color: #3D4A6A; */
+    background: linear-gradient(to right,#3D4A6A, #D9D9D9 90%);
+    font-size: 1rem;
+    font-weight: 400;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 12rem;
+    height: 3rem;
+    cursor: pointer;
+}
