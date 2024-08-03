@@ -1,5 +1,5 @@
 import React from 'react'
-import images from '../../../assets/images'
+import images from '../../assets/images'
 import './homepage.css'
 
 const HeroSection = () => {

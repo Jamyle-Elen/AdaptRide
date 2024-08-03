@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import CardBenefits from '../../CardBenefits/CardBenefits';
-import images from '../../../assets/images.js'
+import images from '../../assets/images.js'
 
 function BenefitsSection() {
   return (
