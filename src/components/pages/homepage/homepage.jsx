@@ -2,7 +2,7 @@ import react from 'react';
 import NavBar from './navbar/navbar.jsx'
 import HeroSection from './herosection.jsx';
 import AboutUsSection from './aboutussection.jsx'
-import BenefitsSection from './benefitssection.jsx'
+import BenefitsSection from './BenefitsSection.jsx'
 
 function HomePage() {
     return <>
