@@ -21,7 +21,7 @@ function Footer() {
             </li>
             <li>
               <Link className="footer-List" to="/">
-                {/* O que fazemos */}
+                O que fazemos
               </Link>
             </li>
             <li>
