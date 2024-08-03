@@ -3,6 +3,7 @@ import NavBar from './navbar/navbar.jsx'
 import HeroSection from './herosection.jsx';
 import AboutUsSection from './aboutussection.jsx'
 import BenefitsSection from './BenefitsSection.jsx'
+import Footer from '../../components/Footer/footer.jsx';
 
 function HomePage() {
     return <>
@@ -10,6 +11,7 @@ function HomePage() {
         <HeroSection/>
         <AboutUsSection/>
         <BenefitsSection/>
+        <Footer/>
     </>
 }
  
