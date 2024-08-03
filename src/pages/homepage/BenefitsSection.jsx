@@ -34,7 +34,7 @@ function BenefitsSection() {
             </div>
             <div className="card">
                 <h5>Corrida BÔNUS</h5>
-                <p className='description'>Passageiros idosos ou que tenha alguma deficência são corridas bônus</p>
+                <p className='description'>Passageiros idosos ou que tenha alguma deficência são corridas bônus!</p>
                 <img src={images.moneyAdapt} alt="Moeda" />
             </div>
         </div>
