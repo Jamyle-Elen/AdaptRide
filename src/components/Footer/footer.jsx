@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
+    <>
     <footer className="footer">
       <div className="firstColumn">
         <div className="logoFooter">
@@ -46,10 +47,13 @@ function Footer() {
         <h3>Seja parceiro</h3>
         <p>Apoie esta causa, seja parceiro</p>
       </div>
-      <div className="Arrow">
+      {/* <div className="Arrow">
         <img src={images.arrowAdapt} alt="Arrow" />
-      </div>
+      </div> */}
     </footer>
+      <div className="sub-footer">
+        </div>
+        </>
   );
 }
 

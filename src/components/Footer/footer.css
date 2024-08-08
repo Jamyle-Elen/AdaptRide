@@ -14,8 +14,6 @@
     width: 100%;
     height: 3rem;
     padding: 16rem 20rem;
-    position: absolute;
-    /* O footer desceu com esse comando */
     bottom: -100rem;
     width: 100vw;
     
@@ -112,7 +110,7 @@
     padding-top: 1rem;
 }
 
-.Arrow{
+/* .Arrow{
     position: absolute;
     bottom: 5rem;
     right: 5rem;
@@ -120,4 +118,10 @@
 
 .Arrow img{
     width: 5rem;
+} */
+
+.sub-footer {
+    width: 100%;
+    height: 2vh;
+    background-color: #ffffff;
 }
