@@ -6,7 +6,7 @@ import peopleAdapt from './images/people-adapt.png'
 import profileAdapt from './images/profile-adapt.png'
 import qrcodeApp from './images/QrCodeApp.png'
 import qrcodeParceiro from './images/QrCodeParceiro.png'
-import arrowAdapt from './images/Arrow-AdaptRide.png'
+// import arrowAdapt from './images/Arrow-AdaptRide.png'
 
 const images = {
     carAdapt,
@@ -17,7 +17,7 @@ const images = {
     profileAdapt,
     qrcodeApp,
     qrcodeParceiro,
-    arrowAdapt,
+    // arrowAdapt,
 }
 
 export default images;
