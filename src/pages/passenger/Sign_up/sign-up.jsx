@@ -11,6 +11,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputMask from 'react-input-mask'
 import "./sign-up.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = yup.object({
   name: yup.string().required("Nome obrigatorio"),
