@@ -8,6 +8,7 @@ import SignUp from '../../pages/passenger/Sign_up/sign-up.jsx'
 import SignInDriver from '../../pages/driver/Sign_in/sign-in-driver.jsx'
 import SignUpDriver from '../../pages/driver/Sign_up/sign-up-driver.jsx'
 import ProfilePassenger from '../../pages/Profile/profile.jsx'
+import AboutPage from '../../pages/about/about.jsx';
 
 const Router = () => {
     return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path='/sign-up/driver' element={<SignUpDriver/>}/>
         <Route path='/profile-passenger' element={<ProfilePassenger/>}/>
         <Route path='*' element={<h1>Not Found</h1>}/>
+        <Route path='/about' element={<AboutPage/>}/>
       </Routes>
     </BrowserRouter>
     </>
