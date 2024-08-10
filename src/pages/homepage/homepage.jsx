@@ -1,9 +1,10 @@
 import react from 'react';
-import NavBar from './navbar/navbar.jsx'
+import NavBar from '../../components/NavBar/navbar.jsx'
 import HeroSection from './herosection.jsx';
 import AboutUsSection from './aboutussection.jsx'
 import BenefitsSection from './BenefitsSection.jsx'
 import Footer from '../../components/Footer/footer.jsx';
+import RaceRequest from '../RaceRequest/RaceRequest.jsx';
 
 function HomePage() {
     return <>
