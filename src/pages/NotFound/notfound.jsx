@@ -1,4 +1,4 @@
-import NavBar from "../homepage/navbar/navbar";
+import NavBar from "../../components/NavBar/navbar";
 import ErrorMessage from "../../components/Errormessage/errormessage";
 
 function NotFound() {
