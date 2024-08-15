@@ -8,15 +8,15 @@
 
 .footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around; /* alterado na responsividade*/
     align-items: center;
     background-color: #191A1F;
+    padding: 0 2rem;
     width: 100%;
-    height: 3rem;
-    padding: 16rem 20rem;
+    height: 20rem; /* alterado na responsividade*/
+    /* padding: 16rem 20rem; */
     bottom: -100rem;
-    width: 100vw;
-    
+    width: 100vw;   
 }
 
 .firstColumn {
@@ -124,4 +124,55 @@
     width: 100%;
     height: 2vh;
     background-color: #ffffff;
+}
+
+/* RESPONSIVIIDADE */
+
+@media (max-width: 1280px) {    
+    .firstColumn {
+        gap: 2rem;
+    }
+    
+    .logoFooter  {
+        width: 13rem;
+    }
+
+    .logoFooter img{
+        width: 10rem;
+    }
+    
+    .logoFooter h3{
+        font-size: 1.2rem;
+    }
+    
+    .QrCodeApp, .QrCodeParceiro{
+        width: 7rem;
+    }
+    
+    .QrCodeAppInfo h3, .QrCodeParceiroInfo h3{
+        font-size: 1.1rem;
+    }
+    
+    .QrCodeAppInfo p, .QrCodeParceiroInfo p{
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 970px) {
+    .footer {
+        padding: 0 1rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    .QrCodeAppInfo p, .QrCodeParceiroInfo p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 425px) {
+    .footer {
+        height: auto;
+        flex-wrap: wrap;
+    }
 }

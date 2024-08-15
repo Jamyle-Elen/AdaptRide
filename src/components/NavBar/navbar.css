@@ -12,9 +12,10 @@
     --button_hover-color: #63626c;
 }
 
-.menu {
+.menu-nav {  /*classname alterado na resposividade pois estava em conflito com outra*/
     background-color: var(--bg-color);
     display: flex;
+    width: 100vw;
     height: 4rem;
     border: var(--menu-border-color) solid  1px;
     align-items: center;
@@ -75,4 +76,45 @@ button:hover {
     background-color: var(--bg-color);
     /* transition: ; */
     border: var(--text-color) solid 1px;
+}
+
+/* RESPONSIVIIDADE */
+
+@media (max-width: 1280px) {
+    .menu-content {
+        padding: 0 2rem;
+    }
+    
+    img {
+        width: 8rem;
+    }
+    
+    .list {
+        font-size: 0.9rem;
+    }
+    
+    button {
+        font-size: 0.9rem;
+    }
+}
+
+
+@media (max-width: 970px) {
+    .menu-content {
+        padding: 0 1rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .list .solicitar-corrida {
+        display: none;
+    }
+}
+
+
+@media (max-width: 425px) {
+    img {
+        width: 5.5rem;
+    }
 }
