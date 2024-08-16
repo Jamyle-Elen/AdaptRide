@@ -6,12 +6,12 @@ import images from "../../assets/images.js";
 const NavBar = () => {
   return (
     <>
-      <div className="menu">
+      <div className="menu-nav">
         <div className="menu-content">
           <div className="class1">
             <Link to="/"><img src={images.logoAdapt} alt="Logo" /></Link>
             <ul className="list">
-              <li>
+              <li className="solicitar-corrida">
                 <Link to="/request-a-ride">Solicitar Corrida</Link>
               </li>
               <li>
