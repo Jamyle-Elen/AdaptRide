@@ -5,41 +5,36 @@ import { Link, useNavigate } from "react-router-dom";
 import images from "../../../assets/images";
 import axios from 'axios';
 // Axios é quem faz a requisição HTTP do front para o back
-import api from '../../../lib/axios.jsx';
+import api from '../../../../../backend/config/axios.jsx';
 // Arquivo onde o Axios ta configurado
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+// import * as yup from 'yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
 import InputMask from 'react-input-mask'
 import "./sign-up.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const schema = yup.object({
-  name: yup.string().required("Nome obrigatorio"),
-  cpf: yup.string().required("CPF obrigatorio"),
-  email: yup.string().required("Email obrigatório"),
-  phone: yup.string().required("Telefone obrigatorio"),
-  date: yup.date().required("Data de nascimento obrigatorio"),
-  password: yup.string().required("Senha obrigatorio"),
-  // Validação dos dados do form
-})
-.required("Todos os campos devem ser preenchidos");
+// const schema = yup.object({
+//   name: yup.string().required("Nome obrigatorio"),
+//   cpf: yup.string().required("CPF obrigatorio"),
+//   email: yup.string().required("Email obrigatório"),
+//   phone: yup.string().required("Telefone obrigatorio"),
+//   date: yup.date().required("Data de nascimento obrigatorio"),
+//   password: yup.string().required("Senha obrigatorio"),
+//   // Validação dos dados do form
+// })
+// .required("Todos os campos devem ser preenchidos");
 
 const SignUp = () => {
   
-  const navigate = useNavigate();
-  // Vai redirecionar para a pagina de login, pra que ele já entre em sua conta
+  // const navigate = useNavigate();
+  // // Vai redirecionar para a pagina de login, pra que ele já entre em sua conta
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
-    resolver: yupResolver(schema),
-  });
+  // const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  //   resolver: yupResolver(schema),
+  // });
 
-  function handleCreatePassager(data) {
-    api.post('/passengers', data)
-    console.log('Cadastrado com sucesso!')
-    navigate('/sign-in')
-    reset()
-  }
+
 
   return (
     <main className="main">
@@ -128,18 +123,5 @@ const SignUp = () => {
   );
 
 };
-
-// const SignUp2 = () => {
-//     return (
-//       <>
-//         <form action="http://localhost:3000/home/register" method="POST">
-//             <input type="text" name="name" />
-//             <input type="email" name="email" />
-//             <button type="submit">Enviar</button>
-//         </form>
-
-//       </>
-//     )
-//   }
 
 export default SignUp;

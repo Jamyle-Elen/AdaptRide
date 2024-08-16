@@ -1,0 +1,55 @@
+/* Estilo para o contêiner principal */
+.main-profile-passenger {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.img-profile-passenger {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-profile-passenger img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.info-profile-passenger {
+    flex: 2;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-profile-passenger h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.info-section, .contact-section, .disability-section {
+    margin-bottom: 20px;
+}
+
+.info-profile-passenger h5 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.info-profile-passenger p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.info-profile-passenger strong {
+    color: #333;
+}

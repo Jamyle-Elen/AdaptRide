@@ -1,8 +1,8 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 class Passenger {
     constructor(name, cpf, email, phone, dateBirth, password) {
-        this.id = uuidv4;
+        // this.id = uuidv4;
         this.name = name;
         this.cpf = cpf;
         this.email = email;

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import images from "../../../assets/images.js";
 // É ele o que vai fazer a requisição HTTP do front para o back
-import api from '../../../lib/axios.jsx';
+import api from '../../../../../backend/config/axios.jsx';
 // yup é a biblioteca que valida os dados do form
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
