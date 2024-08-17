@@ -1,0 +1,178 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.footer {
+    display: flex;
+    justify-content: space-around; /* alterado na responsividade*/
+    align-items: center;
+    background-color: #191A1F;
+    padding: 0 2rem;
+    width: 100%;
+    height: 20rem; /* alterado na responsividade*/
+    /* padding: 16rem 20rem; */
+    bottom: -100rem;
+    width: 100vw;   
+}
+
+.firstColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.logoFooter  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 14rem;
+}
+
+.logoFooter img{
+    width: 11rem;
+}
+
+.logoFooter h3{
+    color: white;
+    font-size: 1.4rem;
+}
+
+.footerLinks{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footerLinks h3{
+    color: white;
+    font-size: 1.2rem;
+}
+
+.footer-ul{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+}
+
+.footer-ul li{
+    list-style-type: none;
+}
+
+.footer-List{
+    color: white;
+    text-decoration: none;
+}
+
+.QrCodeAppInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.QrCodeApp{
+    width: 10rem;
+}
+
+.QrCodeAppInfo h3{
+    color: white;
+}
+
+.QrCodeAppInfo p{
+    color: white;
+    padding-top: 1rem;
+}
+
+.QrCodeParceiroInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.QrCodeParceiro{
+    width: 10rem;
+}
+
+.QrCodeParceiroInfo h3{
+    color: white;
+}
+
+.QrCodeParceiroInfo p{
+    color: white;
+    padding-top: 1rem;
+}
+
+/* .Arrow{
+    position: absolute;
+    bottom: 5rem;
+    right: 5rem;
+}
+
+.Arrow img{
+    width: 5rem;
+} */
+
+.sub-footer {
+    width: 100%;
+    height: 2vh;
+    background-color: #ffffff;
+}
+
+/* RESPONSIVIIDADE */
+
+@media (max-width: 1280px) {    
+    .firstColumn {
+        gap: 2rem;
+    }
+    
+    .logoFooter  {
+        width: 13rem;
+    }
+
+    .logoFooter img{
+        width: 10rem;
+    }
+    
+    .logoFooter h3{
+        font-size: 1.2rem;
+    }
+    
+    .QrCodeApp, .QrCodeParceiro{
+        width: 7rem;
+    }
+    
+    .QrCodeAppInfo h3, .QrCodeParceiroInfo h3{
+        font-size: 1.1rem;
+    }
+    
+    .QrCodeAppInfo p, .QrCodeParceiroInfo p{
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 970px) {
+    .footer {
+        padding: 0 1rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    .QrCodeAppInfo p, .QrCodeParceiroInfo p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 425px) {
+    .footer {
+        height: auto;
+        flex-wrap: wrap;
+    }
+}
