@@ -19,7 +19,7 @@ const HeroSection = () => {
           <img className='car-adapt' src={images.carAdapt} alt="Carro adaptado" />
       </div>
       <div className="block">
-        <i class='bx bx-chevron-down'></i>
+        <i className='bx bx-chevron-down'></i>
         </div>
     </div>
   )

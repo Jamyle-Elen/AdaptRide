@@ -16,19 +16,19 @@ function BenefitsSection() {
                 <p className='alert'>EM VERMELHO</p>
                 <p className='safe'>Quando o SAFE notificar um alerta, siga os passos a seguir:</p>
                 <div className="icons">
-                    <i class='bx bxs-alarm-exclamation' ></i>
+                    <i className='bx bxs-alarm-exclamation' ></i>
                     <p>Ligue o pisca alerta!</p>
                 </div>
                 <div className="icons">
-                    <i class='bx bxs-alarm-exclamation' ></i>
+                    <i className='bx bxs-alarm-exclamation' ></i>
                     <p>Ligue o pisca alerta!</p>
                 </div>
                 <div className="icons">
-                    <i class='bx bxs-alarm-exclamation' ></i>
+                    <i className='bx bxs-alarm-exclamation' ></i>
                     <p>Ligue o pisca alerta!</p>
                 </div>
                 <div className="icons">
-                    <i class='bx bxs-alarm-exclamation' ></i>
+                    <i className='bx bxs-alarm-exclamation' ></i>
                     <p>Ligue o pisca alerta!</p>
                 </div>
             </div>
