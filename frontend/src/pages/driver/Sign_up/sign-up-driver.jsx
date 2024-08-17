@@ -1,75 +1,58 @@
 import React from "react";
 // react-hook-form é a lib pra fazer isso com o form
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import images from "../../../assets/images.js";
 // É ele o que vai fazer a requisição HTTP do front para o back
-import api from '../../../../../backend/config/axios.jsx';
+import api from "../../../../../frontend/config/axios.jsx";
 // yup é a biblioteca que valida os dados do form
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+
 // InputMask é pra formatar os dados do form (Ex: 000.000.000-00 que é o CPF)
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 import "./sign-up-driver.css";
 // Lib dos alerts personalizados
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-// Config do yup, pra requerir que todos os campos sejam preenchidos
-const schema = yup.object({
-  // OBS.: CPF e Telefone estão como string por conta do InputMask (Com ele é obrigatorio que o valor seja string/text)
-  name: yup.string().required("Nome obrigatorio"),
-  cpf: yup.string().required("CPF obrigatorio"),
-  email: yup.string().required("Email obrigatório"),
-  phone: yup.string().required("Telefone obrigatorio"),
-  date: yup.date().required("Data de nascimento obrigatorio"),
-  password: yup.string().required("Senha obrigatorio"),
-}).required("Todos os campos devem ser preenchidos");
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { sucessToast, errorToast } from "../../../utils/toastUtils.jsx";
 
 const SignUpDriver = () => {
-  
+  const [step, setStep] = useState(1);
   const navigate = useNavigate();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  function handleCreateDriver(data) {
-    // Essa api que envia os dados do form para o db.json
-    api.post('/drivers', data)
-      .then(() => {
-        toast.success('Cadastrado com sucesso!', {
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          className: 'custom-toast-success',
-          style: {
-            backgroundColor: '#2c3f1b',
-            color: '#fff'
-            },
-          }
-        );
+  
+  const onSubmit = async (data) => {
+    if (step === 2) {
+      await handleCreateDriver(data);
+      
+    } else {
+      setStep(step + 1);
+    }
+  };
+  const handleCreateDriver = async (data) => {
+    try {
+      const response = await api.post("/drivers", data);
+      sucessToast("Cadastrado com sucesso!");
+      // volta para a tela de login
+      navigate("/sign-in/driver");
+      reset()
 
-        // Redireciona para a tela de login
-        navigate('/sign-in/driver');
-        reset();
-      })
-      .catch((error) => {
-        toast.error('Erro ao cadastrar!', {
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-        console.error(error);
-      });
-  }
+    } catch (error) {
+      errorToast("Falha ao cadastrar, tente novamente!");
+      console.error(error);
+      reset();
+    }
+  };
+  // voltar
+  const goBack = () => {
+    step > 1 ? setStep(step - 1) : null;
+  };
 
   return (
     <main className="main">
@@ -77,78 +60,201 @@ const SignUpDriver = () => {
         <div className="sign_in_area">
           <img src={images.logoAdapt} alt="Logo Adapt" />
           <div className="sign_in_text">
-            <h2>Olá, <span>parceiro!</span> Que bom ver você novamente.</h2>
+            <h2>
+              Olá, parceiro! Que bom ver você novamente.
+            </h2>
             <p>Acesse sua conta</p>
           </div>
-          <Link to="/sign-in">
+          <Link to="/sign-in/driver">
             <button className="sign_in_area_button">Entrar</button>
           </Link>
         </div>
-        <form onSubmit={handleSubmit(handleCreateDriver)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="sign_up">
             <div className="sign_up_text">
               <h2>Crie sua conta</h2>
               <p>Preencha seus dados</p>
             </div>
             <div className="sign_up_input">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Ex.: Maria Ferreira Oliveira"
-                {...register("name")}
-              />
-              {errors.name?.message}
-              <InputMask
-                mask="999.999.999-99"
-                maskChar=""
-                type="text"
-                name="cpf"
-                id="cpf"
-                placeholder="Ex.: 123.456.789-10"
-                {...register("cpf")}
-              />
-              {errors.cpf?.message}
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Ex.: mariaferreiraoliveira@gmail.com"
-                {...register("email")}
-              />
-              {errors.email?.message}
-              <InputMask
-                mask="(99) 99999-9999"
-                maskChar=""
-                type="text"
-                name="phone"
-                id="phone"
-                placeholder="Ex.: +55 81 99999-9999"
-                {...register("phone")}
-              />
-              {errors.phone?.message}
-              <input
-                type="date"
-                name="date"
-                id="date"
-                placeholder="Ex.: 22/04/1500"
-                {...register("date")}
-              />
-              {errors.date?.message}
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Ex.: #Maria2697V"
-                {...register("password")}
-              />
-              {errors.password?.message}
+              {step === 1 && (
+                <>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome"
+                    {...register("name", { required: true })}
+                    className={
+                      errors.name
+                        ? "input-error" && console.log("SEM NOME")
+                        : ""
+                    }
+                  />
+                  <InputMask
+                    mask="999.999.999-99"
+                    maskChar=""
+                    type="text"
+                    name="cpf"
+                    id="cpf"
+                    placeholder="CPF"
+                    {...register("cpf", { required: true })}
+                    className={
+                      errors.cpf ? "input-error" && console.log("SEM CPF") : ""
+                    }
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    {...register("email", { required: true })}
+                    className={
+                      errors.email
+                        ? "input-error" && console.log("SEM EMAIL")
+                        : ""
+                    }
+                  />
+                  <InputMask
+                    mask="(99) 99999-9999"
+                    maskChar=""
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    placeholder="Telefone"
+                    {...register("phone", { required: true })}
+                    className={
+                      errors.phone
+                        ? "input-error" && console.log("SEM TELEFONE")
+                        : ""
+                    }
+                  />
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    {...register("date", { required: true })}
+                    className={
+                      errors.date
+                        ? "input-error" && console.log("SEM DATA DE NASCIMENTO")
+                        : ""
+                    }
+                  />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Senha"
+                    {...register("password", { required: true })}
+                    className={
+                      errors.password
+                        ? "input-error" && console.log("SEM SENHA")
+                        : ""
+                    }
+                  />
+                </>
+              )}
+              {step === 2 && (
+                <>
+                  {/* cadastrar veiculo */}
+                  <p>Informações do Veículo:</p>
+                  <input
+                    type="text"
+                    name="numCNH"
+                    id="numCNH"
+                    placeholder="Número da CNH"
+                    {...register("numCNH", { required: true })}
+                    className={errors.numCNH ? "input-error" : ""}
+                  />
+                  <input
+                    type="text"
+                    name="vehiclePlate"
+                    placeholder="Placa do Veículo"
+                    {...register("vehiclePlate")}
+                  />
+                   <select
+                    name="vehicleBrand"
+                    id="vehicleBrand"
+                    {...register("vehicleBrand", { required: true })}
+                    className={errors.vehicleBrand ? "input-error" : ""}
+                  >
+                    <option value="">Selecione a Marca</option>
+                    <option value="Fiat">Fiat</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Toyota">Toyota</option>
+                  </select>
+
+                   {/* <select name="vehicleModel" id="vehicleModel">
+                    <option value="">Selecione o Modelo</option>{" "} 
+                    {/* dinamico */}
+                  {/* </select>  */}
+                  <select
+                    name="vehicleYear"
+                    id="vehicleYear"
+                    {...register("vehicleYear", { required: true })}
+                    className={errors.vehicleYear ? "input-error" : ""}
+                  >
+                    <option value="">Selecione o Ano</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                  </select>
+
+                  <select
+                    name="vehicleColor"
+                    id="vehicleColor"
+                    {...register("vehicleColor", { required: true })}
+                    className={errors.vehicleColor ? "input-error" : ""}
+                  >
+                    <option value="">Selecione a Cor</option>
+                    <option value="Vermelho">Vermelho</option>
+                    <option value="Preto">Preto</option>
+                  </select>
+                  <select
+                    name="typesAdaptations"
+                    id="typesAdaptations"
+                    {...register("typesAdaptations", { required: true })}
+                    className={errors.typesAdaptations ? "input-error" : ""}
+                  >
+                    <option value="">Selecione as Adaptações</option>
+                    <option value="Rampa de acesso">Rampa de acesso</option>
+                    <option value="Espaço para cadeira de rodas">Espaço para cadeira de rodas</option>
+                  </select>
+                  <select
+                    name="totalCapacity"
+                    id="totalCapacity"
+                    {...register("totalCapacity", { required: true })}
+                    className={errors.totalCapacity ? "input-error" : ""}
+                  >
+                    <option value="">Selecione Capacidade Total</option>
+                    <option value="1">1</option>
+                    <option value="1">2</option>
+                  </select>
+                  <textarea name="descriptionAdaptations" id="" {...register("descriptionAdaptations")}></textarea>
+                </>
+              )}
             </div>
-            <button type="submit">Cadastrar</button>
+
+            <div className="form_navigation">
+              {step > 1 && (
+                <button type="button" onClick={goBack}>
+                  <span>
+                    <i className="bx bx-chevron-left"></i>
+                  </span>
+                </button>
+              )}
+              <button type="submit">
+                {step === 2 ? (
+                  "Cadastrar"
+                ) : (
+                  <span>
+                    <i className="bx bxs-chevron-right"></i>
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
         </form>
       </section>
-      {/* o ToastContainer é foi chamado na parte debaixo, mas é ele quem exibe o quadradinho la em cima de 'sucess or error' */}
       <ToastContainer />
     </main>
   );
