@@ -6,6 +6,9 @@ import peopleAdapt from './images/people-adapt.png'
 import profileAdapt from './images/profile-adapt.png'
 import qrcodeApp from './images/QrCodeApp.png'
 import qrcodeParceiro from './images/QrCodeParceiro.png'
+import shortly from './images/shortly.png'
+import maps from './images/maps.png'
+import notFound from './images/NotFound.png'
 // import arrowAdapt from './images/Arrow-AdaptRide.png'
 
 const images = {
@@ -17,6 +20,9 @@ const images = {
     profileAdapt,
     qrcodeApp,
     qrcodeParceiro,
+    shortly,
+    maps,
+    notFound,
     // arrowAdapt,
 }
 

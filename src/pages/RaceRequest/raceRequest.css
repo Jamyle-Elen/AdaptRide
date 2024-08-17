@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+* {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+main {
+    background-color: #D9D9D9;
+}
+
+.container {
+    max-width: 500px;
+    border-radius: 0 20px 0 0;
+    height: 100vh;
+    background-color: #E9E9E9;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.menu {
+    border-radius: 0 20px 0 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+.menu i {
+    font-size: 30px;
+}
+
+.menu img {
+    width: 120px;
+    margin-right: 100px;
+}
+
+.card-raceRequest {
+    max-width: 750px;
+    border-radius: 8px;
+    background-color: #D9D9D9;
+    display: flex;
+    height: 120px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 40px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 0 35px;
+    transition: .4s;
+}
+
+.card-raceRequest:hover {
+    transform: scale(1.02);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 600px;
+}
+
+.card-raceRequest img {
+    max-width:100px;
+    max-height: 60px;
+}
+
+.request-info {
+    padding: 0 20px 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.request-info label {
+    color: #3D4A6A;
+    font-weight: 800;
+}
+
+.description {
+    font-size: 12px;
+    font-weight: 100;
+    color: #282F41;
+}
+
+.prox {
+    font-size: 10px;
+    color: #282F41;
+    font-weight: 700;
+}
+
+.value {
+    padding-bottom: 25px;
+}
+
+.price {
+    font-weight: 800;
+    color: #282F41;
+}
+
+.shortly img {
+    margin-top: 25px;
+    width: 350px;
+    border-radius: 8px;
+    transition: .4s;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+}
+
+.shortly img:hover {
+    transform: scale(1.02);
+}
+
+
+.race-request-btn {
+    background-color: #627194;
+    border-radius: 5px;
+    margin-top: 30px;
+    width: 170px;
+    height: 38px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border: none;
+    transition: .4s all;
+}
+
+.race-request-btn:hover {
+    color: #3D4A6A;
+    transform: scale(1.02);
+    background-color: #E9E9E9;
+    border: #3D4A6A solid 1px;
+
+}
