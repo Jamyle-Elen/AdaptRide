@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'
 import axios from 'axios'
-import api from '../../../../../backend/config/axios.jsx'
+import api from '../../../../../frontend/config/axios.jsx'
 import './sign-in-driver.css'
 
 const schema = yup.object({
