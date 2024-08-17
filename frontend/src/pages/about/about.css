@@ -1,11 +1,20 @@
-.aboutPage{
+.aboutPage {
     background-color: #E9E9E9;
-    height: 100vh;
+    width: 100vw;
+    height: 100vh; /* Opcional: faz com que o contêiner ocupe toda a altura da viewport */
+    
+}
+
+.page{
     display: flex;
-    justify-content: center;
-    /* padding-left: 12rem; */
-    align-items: center;
-    gap: 3rem;
+    justify-content:center;  /* Alinha os nichos à direita */
+    align-items: center; /* Centraliza os nichos verticalmente */
+    max-width: max-content;
+    padding: 2rem 4rem 0rem 8rem;;
+    gap: 7rem;
+    width: 100vw;
+    height: 100vh; /* Opcional: faz com que o contêiner ocupe toda a altura da viewport */
+    border: solid red;
 }
 
 .aboutPage_text1{
@@ -15,7 +24,7 @@
     border: 0;
     border-radius: 15px;
     border-bottom-left-radius: 0;
-    padding: 12px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -27,23 +36,23 @@
 
 .aboutPage_text1 h2{
    font-size: 2rem;
-    
+   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .aboutPage_text1 p{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
 }
 
 
 .aboutPage_img img{
     width: 20rem;
-    margin-left: 0;
+    left: 50;
     position: absolute;
     bottom: 0;
     right: 0;
 
-  
-   
 }
 
 
@@ -54,7 +63,7 @@
     border: 0;
     border-radius: 15px;
     border-bottom-left-radius: 0;
-    padding: 12px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -65,9 +74,10 @@
 
 .aboutPage_text2 h2{
     font-size: 2rem;
-
-}
-
-.aboutPage_text2 p{
-
-}
+    font-family: Georgia, 'Times New Roman', Times, serif;
+ }
+ 
+ .aboutPage_text2 p{
+     font-size: 1.1rem;
+     font-family: Georgia, 'Times New Roman', Times, serif;
+ }
