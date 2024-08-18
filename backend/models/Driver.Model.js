@@ -20,6 +20,7 @@ const Driver = sequelize.define('Driver', {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   phone: {
     type: DataTypes.STRING,
@@ -36,10 +37,12 @@ const Driver = sequelize.define('Driver', {
   numCNH: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   vehiclePlate: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   vehicleBrand: {
     type: DataTypes.STRING,
