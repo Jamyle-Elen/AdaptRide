@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import images from "../../../assets/images";
 import axios from 'axios';
 // Axios é quem faz a requisição HTTP do front para o back
-import api from '../../../../../backend/config/axios.jsx';
+import api from '../../../../../frontend/config/axios.jsx';
 // Arquivo onde o Axios ta configurado
 // import * as yup from 'yup';
 // import { yupResolver } from '@hookform/resolvers/yup';

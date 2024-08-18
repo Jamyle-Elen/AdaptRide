@@ -120,3 +120,7 @@
     width: 10rem;
     cursor: pointer;
 }
+
+.sign-in-input .input-error {
+    border: rgb(116, 62, 62) solid 1px;
+}

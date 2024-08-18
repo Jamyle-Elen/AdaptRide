@@ -2,22 +2,14 @@ import React from 'react'
 import images from '../../../assets/images'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup'
 import axios from 'axios'
-import api from '../../../../../backend/config/axios.jsx'
+import api from '../../../../../frontend/config/axios.jsx'
 import './sign-in.css'
 
-const schema = yup.object({
-    email: yup.string().email("Email inválido").required("Email obrigatório"),
-    password: yup.string().required("Senha obrigatória"),
-})
-.required("Todos os campos devem ser preenchidos");
 
 const SignIn = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
     });
 
     const onSubmit = async (data) => {

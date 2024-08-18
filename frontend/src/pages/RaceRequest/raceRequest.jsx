@@ -9,7 +9,7 @@ const RaceRequest = () => {
       <div className="container">
         <div className="menu">
           <Link to="/">
-            <i class="bx bx-chevron-left"></i>
+            <i className="bx bx-chevron-left"></i>
           </Link>
           <img src={images.logoAdapt} alt="Logo Adaptride" />
         </div>
