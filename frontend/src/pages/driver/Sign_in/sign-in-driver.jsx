@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'
-import axios from 'axios'
 import api from '../../../../../frontend/config/axios.jsx'
 import './sign-in-driver.css'
 
@@ -67,7 +66,7 @@ const SignInDriver = () => {
                                 <p>Crie sua conta</p>
                             </div>
                             <Link to="/sign-up/driver">
-                                <button className="sign-up-area-button">Cadastrar</button>
+                                <button type="submit" className="sign-up-area-button">Cadastrar</button>
                             </Link>
                         </div>
                     </section>

@@ -21,6 +21,23 @@ app.post('/drivers', (req, res) => {
     console.log(teste)
 })
 
+app.post('/login', async (req, res) => {
+
+    try {
+        const loginDriver = await Driver.findAll({
+            where: {
+                email: req.body.email,
+                password: req.body.password
+            }
+        });
+        console.log(loginDriver);
+        res.send(loginDriver);
+    } catch (error) {
+        res.status(500).send('Erro ao consultar o banco de dados');
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`running in http://localhost:${port}`)
 })
