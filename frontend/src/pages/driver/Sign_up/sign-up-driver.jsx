@@ -37,18 +37,39 @@ const SignUpDriver = () => {
   };
   const handleCreateDriver = async (data) => {
     try {
-      const response = await api.post("/drivers", data);
-      sucessToast("Cadastrado com sucesso!");
-      // volta para a tela de login
-      navigate("/sign-in/driver");
-      reset()
+    const { name, cpf, email, phone, date, password, numCNH, vehiclePlate, vehicleBrand, vehicleYear, vehicleColor, typesAdaptations, totalCapacity, descriptionAdaptations } = data;
+      const transformedName = name.toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase());
+      data.name = transformedName;
+      // const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi
+      // validador do cpf
+      // function nameValidator(event) {
+      //   const nameOnChage = 
+      //   if (name.length < 3) {
+      //     console.log("Nome muito curto");
+      //   }
+      // }
+      if (cpf.length < 11) {
+        console.log('CPF obrigatório');       
+      } else {
+        const response = await api.post("/drivers", data);
+        sucessToast("Cadastrado com sucesso!");
+        // volta para a tela de login
+        reset()
+        navigate("/sign-in/driver");
+      }
+
+      
 
     } catch (error) {
       errorToast("Falha ao cadastrar, tente novamente!");
       console.error(error);
       reset();
+      // navigator('/sign-up/driver')
+      setStep(step - 1)
     }
   };
+
+  // /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi              valiação do email, email regex
   // voltar
   const goBack = () => {
     step > 1 ? setStep(step - 1) : null;
@@ -86,7 +107,7 @@ const SignUpDriver = () => {
                     {...register("name", { required: true })}
                     className={
                       errors.name
-                        ? "input-error" && console.log("SEM NOME")
+                        ? "input-error"
                         : ""
                     }
                   />
@@ -99,7 +120,7 @@ const SignUpDriver = () => {
                     placeholder="CPF"
                     {...register("cpf", { required: true })}
                     className={
-                      errors.cpf ? "input-error" && console.log("SEM CPF") : ""
+                      errors.cpf ? "input-error" : ""
                     }
                   />
                   <input
@@ -110,8 +131,7 @@ const SignUpDriver = () => {
                     {...register("email", { required: true })}
                     className={
                       errors.email
-                        ? "input-error" && console.log("SEM EMAIL")
-                        : ""
+                        ? "input-error": ""
                     }
                   />
                   <InputMask
@@ -124,8 +144,7 @@ const SignUpDriver = () => {
                     {...register("phone", { required: true })}
                     className={
                       errors.phone
-                        ? "input-error" && console.log("SEM TELEFONE")
-                        : ""
+                        ? "input-error" : ""
                     }
                   />
                   <input
@@ -135,8 +154,7 @@ const SignUpDriver = () => {
                     {...register("date", { required: true })}
                     className={
                       errors.date
-                        ? "input-error" && console.log("SEM DATA DE NASCIMENTO")
-                        : ""
+                        ? "input-error" : ""
                     }
                   />
                   <input
@@ -147,8 +165,7 @@ const SignUpDriver = () => {
                     {...register("password", { required: true })}
                     className={
                       errors.password
-                        ? "input-error" && console.log("SEM SENHA")
-                        : ""
+                        ? "input-error" : ""
                     }
                   />
                 </>
