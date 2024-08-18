@@ -150,3 +150,7 @@ textarea {
     color: #7a7a7a;
     border: none;
 }
+
+.sign_up_input .input-error {
+    border: rgb(116, 62, 62) solid 1px;
+}
