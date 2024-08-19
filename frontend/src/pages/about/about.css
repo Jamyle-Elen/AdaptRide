@@ -14,7 +14,7 @@
     gap: 7rem;
     width: 100vw;
     height: 100vh; /* Opcional: faz com que o contêiner ocupe toda a altura da viewport */
-    border: solid red;
+    
 }
 
 .aboutPage_text1{
