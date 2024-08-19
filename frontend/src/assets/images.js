@@ -9,6 +9,7 @@ import qrcodeParceiro from './images/QrCodeParceiro.png'
 import shortly from './images/shortly.png'
 import maps from './images/maps.png'
 import notFound from './images/NotFound.png'
+import about from './images/about.png'
 // import arrowAdapt from './images/Arrow-AdaptRide.png'
 
 const images = {
@@ -23,6 +24,7 @@ const images = {
     shortly,
     maps,
     notFound,
+    about,
     // arrowAdapt,
 }
 

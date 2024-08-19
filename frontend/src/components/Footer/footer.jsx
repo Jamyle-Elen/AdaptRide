@@ -16,7 +16,7 @@ function Footer() {
           <h3>Saiba mais</h3>
           <ul className="footer-ul">
             <li>
-              <Link className="footer-List" to="/">
+              <Link className="footer-List" to="/aboutpage">
                 Quem somos
               </Link>
             </li>

@@ -1,0 +1,83 @@
+.aboutPage {
+    background-color: #E9E9E9;
+    width: 100vw;
+    height: 100vh; /* Opcional: faz com que o contêiner ocupe toda a altura da viewport */
+    
+}
+
+.page{
+    display: flex;
+    justify-content:center;  /* Alinha os nichos à direita */
+    align-items: center; /* Centraliza os nichos verticalmente */
+    max-width: max-content;
+    padding: 2rem 4rem 0rem 8rem;;
+    gap: 7rem;
+    width: 100vw;
+    height: 100vh; /* Opcional: faz com que o contêiner ocupe toda a altura da viewport */
+    border: solid red;
+}
+
+.aboutPage_text1{
+    background-color: #3D4A6A;
+    height: 25rem;
+    width: 20rem;
+    border: 0;
+    border-radius: 15px;
+    border-bottom-left-radius: 0;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 8px 2px #3D4A6A;
+
+}
+
+.aboutPage_text1 h2{
+   font-size: 2rem;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.aboutPage_text1 p{
+    font-size: 1.1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+
+.aboutPage_img img{
+    width: 20rem;
+    left: 50;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+}
+
+
+.aboutPage_text2{
+    background-color: #3D4A6A;
+    height: 25rem;
+    width: 20rem;
+    border: 0;
+    border-radius: 15px;
+    border-bottom-left-radius: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 8px 2px #3D4A6A;
+}
+
+.aboutPage_text2 h2{
+    font-size: 2rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+ }
+ 
+ .aboutPage_text2 p{
+     font-size: 1.1rem;
+     font-family: Georgia, 'Times New Roman', Times, serif;
+ }
