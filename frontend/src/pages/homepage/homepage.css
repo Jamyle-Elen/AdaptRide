@@ -1,0 +1,480 @@
+.homepage {
+    position: relative;
+    width: 100vw; /*Adicionado na responsividade*/
+}
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 100px;
+    background-color: #3D4A6A;
+    color: #fff;
+    height: 85vh;
+}
+
+.form-container h1 {
+    font-size: 3rem;
+}
+
+.form-container p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-container input {
+    padding: 0.6rem;
+    max-width: 25rem;
+    height: 2.8rem;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.car-adapt {
+    width: 46rem;
+}
+
+.block {
+    width: 7.8rem;
+    height: 6.9rem;
+    border-radius: 40px 40px 0 0;
+    background-color: #D9D9D9;
+    position: absolute;
+    bottom: 0;
+    justify-items: end;
+    text-align: center;
+    right: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    cursor: pointer;
+}
+
+.block i {
+    color: #000;
+    font-size: 2.5rem;
+}
+
+.block:hover {
+    bottom: 10px;
+    transition: .4s;
+}
+
+/* ------------------ AboutUsSection ------------------ */
+
+.about-us-section {
+    /* max-width: 1280px; */
+    position: relative;
+    top: -30px;
+    width: 100vw;
+    height: 70vh;
+    /* padding-bottom: 100px; */
+    background-color: #D9D9D9;
+    border-radius: 40px 40px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15rem;
+    /* tirar isso aqui jaja */
+}
+
+.accessibility {
+    bottom: 0;
+}
+
+.accessibility h2 {
+    font-size: 3.8rem;
+    font-weight: 900;
+    color: #050F2A;
+}
+
+.sign-in-up {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.sign-in-up button {
+    background-color: #3D4A6A;
+    border-radius: 8px;
+    width: 8.8rem;
+    height: 2.5rem;
+}
+
+.sign-in-up button:hover {
+    background-color: transparent;
+    color: #050F2A;
+    border: #3D4A6A solid 1px;
+    transition: .2s ease;
+}
+
+span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+span p {
+    text-align: center;
+    color: #050F2A;
+    font-weight: 700;
+}
+
+.link {
+    color: #050F2A;
+    font-size: 13px;
+    text-align: center;
+}
+
+.link:hover {
+    color: #756641;
+    transition: .4s ease-in;
+}
+
+.section-accessibility {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.people-adapt {
+    width: 37.5rem;
+}
+
+figcaption {
+    color: #3D4A6A;
+    margin-bottom: 15px;
+}
+
+.square {
+    width: 35rem;
+    background-color: #4B5878;
+    border-radius: 40px;
+    height: 15.6rem;
+    position: absolute;
+    bottom: -11.2rem;
+    z-index: 1;
+    font-size: 1.6rem;
+    padding: 50px 80px 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ------------------------- BenefitsSection ----------------------------- */
+
+.benefits-section {
+    position: relative;
+    width: 100vw; /*adicionado na responsividade*/
+    padding: 20px;
+    /* background-color: #CAC7C7; */
+    background-color: #f3f3f3;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+.benefits-section h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-benefits {
+    display: flex;
+    gap: 3.1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: #D9D9D9;
+    border: 1px solid #ddd;
+    z-index: 2;
+    border-radius: 20px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+    height: 27.5rem;
+    transition: .2s ease-in;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.card h5 {
+    color: #3D4A6A;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.description {
+    color: #3D4A6A;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.card img {
+    width: 12.5rem;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.alert {
+    color: rgb(134, 8, 8);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.safe {
+    color: #3D4A6A;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin: 5px 0;
+}
+
+.icons i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: #050F2A;
+}
+
+.icons p {
+    margin: 0;
+}
+
+/* RESPONSIVIIDADE */
+
+@media (max-width: 1280px) {
+    .hero-section {
+        padding: 20px 30px;
+    }
+
+    .form-container h1 {
+        font-size: 2.5rem;
+    }
+    
+    .form-container p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .form-container input {
+        height: 2.5rem;
+    }
+    
+    .car-adapt {
+        width: 30rem;
+    }
+    
+    .block {
+        width: 7rem;
+        height: 6.1rem;
+    }
+
+
+    /* --- AboutUsSection --- */
+
+    .about-us-section {
+        gap: 5rem;
+        /* tirar isso aqui jaja */
+    }
+    
+    .accessibility h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .sign-in-up {
+        align-items: start;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .sign-in-up button {
+        width: 8.5rem;
+        height: 2.5rem;
+    }
+    
+    .people-adapt {
+        width: 28rem;
+    }
+    
+    .square {
+        width: 28rem;
+        height: 15rem;
+        bottom: -10rem;
+        font-size: 1.3rem;
+    }
+    
+    
+    /* --- BenefitsSection --- */
+
+    .card-benefits {
+        gap: 2rem;
+    }
+    
+    .card {
+        width: 16rem;
+        height: 25rem;
+    }
+    
+    .card img {
+        width: 12rem;
+    }
+}
+
+
+@media (max-width: 970px) {
+    .hero-section {
+        padding: 15px 20px;
+        justify-content: space-around;
+    }
+
+    .form-container h1 {
+        font-size: 2.4rem;
+    }
+    
+    .form-container input {
+        height: 2.3rem;
+    }
+    
+    .car-adapt {
+        width: 28rem;
+    }
+    
+    .block {
+        right: 10%;
+    }
+
+    
+    /* --- AboutUsSection --- */
+
+    .about-us-section {
+        padding: 0 20px;
+        gap: 2.5rem;
+        /* tirar isso aqui jaja */
+    }
+    
+    .people-adapt {
+        width: 26rem;
+    }
+
+    .square {
+        width: 25rem;
+        font-size: 1.1rem;
+    }
+    
+    
+    /* --- BenefitsSection --- */
+
+    .card-benefits {
+        gap: 1rem;
+    }
+
+    .card {
+        width: 15rem;
+        height: 25rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        height: 90vh;
+    }
+
+    .block {
+        display: none;
+    }
+
+
+    /* --- AboutUsSection --- */
+
+    .about-us-section {
+        gap: 1rem;
+        /* tirar isso aqui jaja */
+    }
+    
+    .accessibility h2 {
+        font-size: 2.2rem;
+    }
+
+    .people-adapt {
+        width: 20rem;
+    }
+
+    .square {
+        width: 20rem;
+    }
+    
+    
+    /* --- BenefitsSection --- */
+
+    .card-benefits {
+        gap: 1rem;
+    }
+
+    .card {
+        width: 11.5rem;
+        height: 24rem;
+    }
+}
+
+
+@media (max-width: 425px) {
+
+    .car-adapt {
+        width: 25rem;
+    }
+
+    /* --- AboutUsSection --- */
+
+    .about-us-section {
+        flex-direction: column;
+    }
+
+    figcaption {
+        margin: 0 0 5rem;
+    }
+
+    /* --- BenefitsSection --- */
+
+    .benefits-section{
+        height: auto;
+    }
+
+    .card-benefits {
+        flex-direction: column;
+    }
+}

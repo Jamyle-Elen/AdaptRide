@@ -1,0 +1,28 @@
+.notfound {
+  background-color: #d9d9d9;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.Title-NotFound {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.Title-NotFound h1 {
+  color: #3d4a6a;
+  font-size: 4.5rem;
+}
+
+.Title-NotFound p {
+  color: #3e4452;
+  font-size: 1.3rem;
+}
+
+.imageError img {
+  width: 26rem;
+}
