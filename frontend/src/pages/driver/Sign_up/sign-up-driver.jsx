@@ -13,6 +13,7 @@ import InputMask from "react-input-mask";
 import "./sign-up-driver.css";
 // Lib dos alerts personalizados
 import { ToastContainer, toast } from "react-toastify";
+import { validateSchema } from "../../../validators/validationSchema.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { sucessToast, errorToast } from "../../../utils/toastUtils.jsx";
 
@@ -26,51 +27,52 @@ const SignUpDriver = () => {
     formState: { errors },
   } = useForm();
 
-  
   const onSubmit = async (data) => {
     if (step === 2) {
       await handleCreateDriver(data);
-      
     } else {
       setStep(step + 1);
     }
   };
   const handleCreateDriver = async (data) => {
     try {
-    const { name, cpf, email, phone, date, password, numCNH, vehiclePlate, vehicleBrand, vehicleYear, vehicleColor, typesAdaptations, totalCapacity, descriptionAdaptations } = data;
-      const transformedName = name.toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase());
+      const {
+        name
+      } = data;
+
+      const transformedName = name
+        .toLowerCase()
+        .replace(/\b\w/g, (letter) => letter.toUpperCase());
       data.name = transformedName;
-      // const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi
-      // validador do cpf
-      // function nameValidator(event) {
-      //   const nameOnChage = 
-      //   if (name.length < 3) {
-      //     console.log("Nome muito curto");
-      //   }
-      // }
-      if (cpf.length < 11) {
-        console.log('CPF obrigatório');       
-      } else {
-        const response = await api.post("/drivers", data);
-        sucessToast("Cadastrado com sucesso!");
-        // volta para a tela de login
-        reset()
-        navigate("/sign-in/driver");
-      }
 
-      
+      // validações dos campos
+      await validateSchema.validate(data, { abortEarly: false });
 
-    } catch (error) {
-      errorToast("Falha ao cadastrar, tente novamente!");
-      console.error(error);
+      const response = await api.post("/register/drivers", data);
+      sucessToast("Cadastrado com sucesso!");
+      // verificar se o tempo ta legal ou ta mt longo
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      navigate("/sign-in/driver");
       reset();
-      // navigator('/sign-up/driver')
-      setStep(step - 1)
+
+
+      const divInfos = document.createElement('')
+      title.innerHtrml = firstData
+
+      // criar a funçao getPerson
+
+      // volta para a tela de login
+    } catch (error) {
+      if (error.name === "ValidationError") {
+        errorToast(`Erros de validação: ${error.errors.join(", ")}`);
+      } else {
+        errorToast("Falha ao cadastrar, tente novamente!");
+      }
+      console.error(error);
+      setStep(step - 1);
     }
   };
 
-  // /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi              valiação do email, email regex
-  // voltar
   const goBack = () => {
     step > 1 ? setStep(step - 1) : null;
   };
@@ -81,9 +83,7 @@ const SignUpDriver = () => {
         <div className="sign_in_area">
           <img src={images.logoAdapt} alt="Logo Adapt" />
           <div className="sign_in_text">
-            <h2>
-              Olá, parceiro! Que bom ver você novamente.
-            </h2>
+            <h2>Olá, parceiro! Que bom ver você novamente.</h2>
             <p>Acesse sua conta</p>
           </div>
           <Link to="/sign-in/driver">
@@ -105,11 +105,7 @@ const SignUpDriver = () => {
                     id="name"
                     placeholder="Nome"
                     {...register("name", { required: true })}
-                    className={
-                      errors.name
-                        ? "input-error"
-                        : ""
-                    }
+                    className={errors.name ? "input-error" : ""}
                   />
                   <InputMask
                     mask="999.999.999-99"
@@ -119,9 +115,7 @@ const SignUpDriver = () => {
                     id="cpf"
                     placeholder="CPF"
                     {...register("cpf", { required: true })}
-                    className={
-                      errors.cpf ? "input-error" : ""
-                    }
+                    className={errors.cpf ? "input-error" : ""}
                   />
                   <input
                     type="email"
@@ -129,10 +123,7 @@ const SignUpDriver = () => {
                     id="email"
                     placeholder="Email"
                     {...register("email", { required: true })}
-                    className={
-                      errors.email
-                        ? "input-error": ""
-                    }
+                    className={errors.email ? "input-error" : ""}
                   />
                   <InputMask
                     mask="(99) 99999-9999"
@@ -142,20 +133,14 @@ const SignUpDriver = () => {
                     id="phone"
                     placeholder="Telefone"
                     {...register("phone", { required: true })}
-                    className={
-                      errors.phone
-                        ? "input-error" : ""
-                    }
+                    className={errors.phone ? "input-error" : ""}
                   />
                   <input
                     type="date"
                     name="date"
                     id="date"
                     {...register("date", { required: true })}
-                    className={
-                      errors.date
-                        ? "input-error" : ""
-                    }
+                    className={errors.date ? "input-error" : ""}
                   />
                   <input
                     type="password"
@@ -163,10 +148,7 @@ const SignUpDriver = () => {
                     id="password"
                     placeholder="Senha"
                     {...register("password", { required: true })}
-                    className={
-                      errors.password
-                        ? "input-error" : ""
-                    }
+                    className={errors.password ? "input-error" : ""}
                   />
                 </>
               )}
@@ -174,7 +156,9 @@ const SignUpDriver = () => {
                 <>
                   {/* cadastrar veiculo */}
                   <p>Informações do Veículo:</p>
-                  <input
+                  <InputMask
+                    mask="999999999"
+                    maskChar=""
                     type="text"
                     name="numCNH"
                     id="numCNH"
@@ -186,9 +170,16 @@ const SignUpDriver = () => {
                     type="text"
                     name="vehiclePlate"
                     placeholder="Placa do Veículo"
-                    {...register("vehiclePlate")}
+                    {...register("vehiclePlate", {
+                      required: true,
+                      maxLength: 7,
+                      onChange: (e) => {
+                        e.target.value = e.target.value.toUpperCase();
+                      },
+                    })}
+                    className={errors.vehiclePlate ? "input-error" : ""}
                   />
-                   <select
+                  <select
                     name="vehicleBrand"
                     id="vehicleBrand"
                     {...register("vehicleBrand", { required: true })}
@@ -200,7 +191,7 @@ const SignUpDriver = () => {
                     <option value="Toyota">Toyota</option>
                   </select>
 
-                   {/* <select name="vehicleModel" id="vehicleModel">
+                  {/* <select name="vehicleModel" id="vehicleModel">
                     <option value="">Selecione o Modelo</option>{" "} 
                     {/* dinamico */}
                   {/* </select>  */}
@@ -234,7 +225,9 @@ const SignUpDriver = () => {
                   >
                     <option value="">Selecione as Adaptações</option>
                     <option value="Rampa de acesso">Rampa de acesso</option>
-                    <option value="Espaço para cadeira de rodas">Espaço para cadeira de rodas</option>
+                    <option value="Espaço para cadeira de rodas">
+                      Espaço para cadeira de rodas
+                    </option>
                   </select>
                   <select
                     name="totalCapacity"
@@ -246,7 +239,11 @@ const SignUpDriver = () => {
                     <option value="1">1</option>
                     <option value="1">2</option>
                   </select>
-                  <textarea name="descriptionAdaptations" id="" {...register("descriptionAdaptations")}></textarea>
+                  <textarea
+                    name="descriptionAdaptations"
+                    id=""
+                    {...register("descriptionAdaptations")}
+                  ></textarea>
                 </>
               )}
             </div>
