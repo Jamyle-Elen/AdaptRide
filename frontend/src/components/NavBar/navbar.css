@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 * {
-    margin: 0;padding: 0;text-decoration: none;list-style: none;scroll-behavior: smooth;box-sizing: border-box;font-family: "Inter", sans-serif;
+    margin: 0;padding: 0;text-decoration: none;list-style: none;scroll-behavior: smooth;box-sizing: border-box;font-family: "Inter", sans-serif;list-style: none; /*color: var(--text-color); */
 }
 
 :root {
@@ -14,6 +14,7 @@
 
 .menu-nav {  /*classname alterado na resposividade pois estava em conflito com outra*/
     background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     width: 100vw;
     height: 4rem;
@@ -23,6 +24,7 @@
 }
 
 .menu-content {
+    background-color: var(--bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,30 +32,39 @@
     max-width: 1280px;
 }
 
-img {
-    /* border: green solid 1px; */
-    width: 150px;
-}
-
 .class1 {
+    background-color: var(--bg-color);
     display: flex;
     gap: 20px;
     align-items: center;
-    /* border: orangered solid 1px; */
+}
+
+.class1 img {
+    background-color: var(--bg-color);
+    width: 150px;
+}
+
+.class1 a, .list a {
+    background-color: var(--bg-color);
 }
 
 .list {
+    background-color: var(--bg-color);
     display: flex;
     font-size: 16px;
+    color: var(--text-color);
+}
+
+.list .list-help Link {
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 #list-two {
-    /* border: red solid; */
     gap: 20px;
 }
 
 ul {
-    /* border: red solid 1px; */
     gap: 20px;
     align-items: center;
 }
@@ -64,17 +75,21 @@ ul:hover {
 
 button {
     font-size: 16px;
-    padding: 7px 12px;
+    padding: 8px 14px;
+    width: 8.8rem;
+    height: 2.5rem;
     color: var(--text-color);
-    border-radius: 18px;
-    border: 2px transparent;
+    border-radius: 8px;
+    border: 1px transparent;
     background-color: var(--button-color);
     cursor: pointer;
+    transition: .4s;
+    box-shadow: #000;
 }
 
 button:hover {
     background-color: var(--bg-color);
-    /* transition: ; */
+    transition: 0.5s;
     border: var(--text-color) solid 1px;
 }
 
@@ -114,7 +129,46 @@ button:hover {
 
 
 @media (max-width: 425px) {
-    img {
-        width: 5.5rem;
+    .list-item {
+        display: none;
+    }
+
+    .list-help {
+        display: none;
+    }
+}
+
+@media (max-width: 375px) {
+    .menu-content {
+        padding: 0 0.5rem;
+    }
+
+    .class1 img {
+        width: 7rem;
+    }
+
+    .list-item {
+        display: none;
+    }
+
+    .list-help {
+        display: none;
+    }
+
+}
+
+@media (max-width: 320px) {
+    .class1 img {
+        width: 5rem;
+    }
+
+    .list-help {
+        display: none;
+    }
+
+    button {
+        font-size: 12px;
+        font-weight: 700;
+        padding: 7px 12px;
     }
 }

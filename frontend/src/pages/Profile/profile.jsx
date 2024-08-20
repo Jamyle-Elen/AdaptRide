@@ -15,8 +15,8 @@ const ProfilePassenger = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await api.get(/info/${id}); 
-                setUser(response.data); 
+                const response = await api.get(`/info/${id}`); // Busca os dados
+                setUser(response.data); // Atualiza o estado com os dados recebidos
             } catch (error) {
                 setError("Failed to fetch user data"); 
             } finally {
@@ -24,7 +24,7 @@ const ProfilePassenger = () => {
             }
         };
 
-        fetchUserData(); 
+        fetchUserData(); // Chama a função para buscar os dados
     }, [id]);
     
     if (loading) return <label>Loading...</label>;
