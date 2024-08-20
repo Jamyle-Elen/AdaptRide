@@ -157,7 +157,7 @@ const SignUpDriver = () => {
                   {/* cadastrar veiculo */}
                   <p>Informações do Veículo:</p>
                   <InputMask
-                    mask="999999999"
+                    mask="99999999999"
                     maskChar=""
                     type="text"
                     name="numCNH"

@@ -1,10 +1,10 @@
 import express from 'express'
-import { createDrivers, loginDriver } from '../controllers/driverController.js'
+import { createDrivers, loginDriver, getDriverInfo } from '../controllers/driverController.js'
 
 const router = express.Router()
 
 router.post('/register/drivers', createDrivers)
 router.post('/login/driver', loginDriver)
-app.get('/info',infoDriver)
+router.get('/info/:id', getDriverInfo)
 
 export default router

@@ -80,9 +80,36 @@ export const loginDriver = async (req, res) => {
   }
 }
 
-export const infoDriver = async (req,res)=>{
-  res.send({name: 'Je',
-    email: 'mgsbsgsb@ddmdmd',
-    phone: '9999',
-    dateOfBirth: '1990-05-15'})
+export const getDriverInfo = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const driver = await Driver.findOne({
+      where: { id },
+      attributes: [
+        'name',
+        'cpf',
+        'email',
+        'phone',
+        'date',
+        'numCNH',
+        'vehiclePlate',
+        'vehicleBrand',
+        'vehicleModel',
+        'vehicleYear',
+        'vehicleColor',
+        'typesAdaptations',
+        'totalCapacity',
+        'descriptionAdaptations'
+      ]
+    });
+
+    if (!driver) {
+      return res.status(404).json({ error: 'Motorista não encontrado.' });
+    }
+
+    res.status(200).json(driver);
+  } catch (error) {
+    res.status(500).json({ error: 'Ocorreu um erro ao buscar as informações do motorista.' });
+  }
 };
