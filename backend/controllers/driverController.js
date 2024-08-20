@@ -95,7 +95,6 @@ export const getDriverInfo = async (req, res) => {
         'numCNH',
         'vehiclePlate',
         'vehicleBrand',
-        'vehicleModel',
         'vehicleYear',
         'vehicleColor',
         'typesAdaptations',
@@ -110,6 +109,6 @@ export const getDriverInfo = async (req, res) => {
 
     res.status(200).json(driver);
   } catch (error) {
-    res.status(500).json({ error: 'Ocorreu um erro ao buscar as informações do motorista.' });
+    res.status(500).json({ error: 'Ocorreu um erro ao buscar as informações do motorista.', error });
   }
 };
