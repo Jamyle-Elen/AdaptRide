@@ -27,7 +27,7 @@ const Router = () => {
           <Route path="/sign-up/driver" element={<SignUpDriver />} />
           {/* <Route path="/profile-passenger" element={<ProfilePassenger />} /> */}
           <Route path="/race-request" element={<RaceRequest />} />
-          <Route path="/profile" element={<ProfilePassenger/>} />
+          <Route path="/profile/:id" element={<ProfilePassenger/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
