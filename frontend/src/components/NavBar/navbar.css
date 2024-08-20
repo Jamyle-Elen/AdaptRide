@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 * {
-    margin: 0;padding: 0;text-decoration: none;list-style: none;scroll-behavior: smooth;box-sizing: border-box;font-family: "Inter", sans-serif;color: var(--text-color);
+    margin: 0;padding: 0;text-decoration: none;list-style: none;scroll-behavior: smooth;box-sizing: border-box;font-family: "Inter", sans-serif;list-style: none;
 }
 
 :root {
@@ -14,6 +14,7 @@
 
 .menu-nav {  /*classname alterado na resposividade pois estava em conflito com outra*/
     background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     width: 100vw;
     height: 4rem;
@@ -45,6 +46,7 @@ img {
 .list {
     display: flex;
     font-size: 16px;
+    color: var(--text-color);
 }
 
 #list-two {
@@ -64,18 +66,22 @@ ul:hover {
 
 button {
     font-size: 16px;
-    padding: 7px 12px;
+    padding: 8px 14px;
+    width: 8.8rem;
+    height: 2.5rem;
     color: var(--text-color);
-    border-radius: 18px;
-    border: 2px transparent;
+    border-radius: 8px;
+    border: 1px transparent;
     background-color: var(--button-color);
     cursor: pointer;
+    transition: .4s;
+    box-shadow: #000;
 }
 
 button:hover {
     background-color: var(--bg-color);
     /* transition: ; */
-    border: var(--text-color) solid 1px;
+    border: var(--text-color) solid .5px;
 }
 
 /* RESPONSIVIIDADE */
