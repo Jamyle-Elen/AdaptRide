@@ -3,7 +3,7 @@ import { createDrivers, loginDriver } from '../controllers/driverController.js'
 
 const router = express.Router()
 
-router.post('/drivers', createDrivers)
-router.post('/login', loginDriver)
+router.post('/register/drivers', createDrivers)
+router.post('/login/driver', loginDriver)
 
 export default router
