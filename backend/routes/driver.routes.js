@@ -5,5 +5,6 @@ const router = express.Router()
 
 router.post('/register/drivers', createDrivers)
 router.post('/login/driver', loginDriver)
+app.get('/info',infoDriver)
 
 export default router

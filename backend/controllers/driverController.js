@@ -79,3 +79,10 @@ export const loginDriver = async (req, res) => {
     return res.status(500).json({ message: "Erro ao tentar logar" })
   }
 }
+
+export const infoDriver = async (req,res)=>{
+  res.send({name: 'Je',
+    email: 'mgsbsgsb@ddmdmd',
+    phone: '9999',
+    dateOfBirth: '1990-05-15'})
+};

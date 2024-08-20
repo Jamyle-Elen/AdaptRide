@@ -30,6 +30,7 @@
     "react-toastify": "^10.0.5",
     "scrollreveal": "^4.0.9",
     "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
     "yup": "^1.4.0"
   },
   "devDependencies": {

@@ -11,21 +11,18 @@ const NavBar = () => {
           <div className="class1">
             <Link to="/"><img src={images.logoAdapt} alt="Logo" /></Link>
             <ul className="list">
-              <li className="solicitar-corrida">
-                <Link to="/request-a-ride">Solicitar Corrida</Link>
-              </li>
               <li>
-                <Link to="/driver">Dirigir</Link>
+                <Link to="/sign-in/driver" className="list-item">Dirigir</Link>
               </li>
               <li className="drop_down_item">
-                <Link to="/about">Sobre</Link>
+                <Link to="/aboutpage" className="list-item">Sobre</Link>
               </li>
             </ul>
           </div>
           <div className="list" id="list-two">
             <ul className="list">
-              <li className="drop_down_item">
-                <Link to="/help">Ajuda</Link>
+              <li>
+                <Link to="/help" className="list-help">Ajuda</Link>
               </li>
               <li>
                 <Link to="/sign-in">Login</Link>
