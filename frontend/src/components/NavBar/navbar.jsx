@@ -12,10 +12,10 @@ const NavBar = () => {
             <Link to="/"><img src={images.logoAdapt} alt="Logo" /></Link>
             <ul className="list">
               <li>
-                <Link to="/sign-in/driver">Dirigir</Link>
+                <Link to="/sign-in/driver" className="list-item">Dirigir</Link>
               </li>
               <li className="drop_down_item">
-                <Link to="/about" className="list-item" >Sobre</Link>
+                <Link to="/aboutpage" className="list-item">Sobre</Link>
               </li>
             </ul>
           </div>
