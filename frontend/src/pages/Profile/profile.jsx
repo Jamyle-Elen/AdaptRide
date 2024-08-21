@@ -7,7 +7,7 @@ import SignUpDriver from "../driver/Sign_up/sign-up-driver";
 
 
 
-const ProfilePassenger = () => {
+const ProfileDriver = () => {
     const { id } = useParams();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true); 
@@ -33,8 +33,7 @@ const ProfilePassenger = () => {
     return (
         <main className="profile-driver">
             <nav className="navbar">
-        
-                <Link><box-icon name='log-out' color='#ffffff' ></box-icon></Link>
+    
             </nav>
             <section className="info-profile-driver">
               
