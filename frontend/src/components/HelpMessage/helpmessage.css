@@ -1,0 +1,65 @@
+.help{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #E9E9E9;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.help-page{
+    margin: 0 30rem;
+}
+
+.help-text-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 4rem;
+    gap: 2rem;
+
+}
+
+.image-help img{  
+    width: 62.5rem;
+}
+
+.help-text-center h1{
+    color: #050F2A;
+    font-size: 3rem;
+    
+}
+
+.help-text-center p{
+    color: #050F2A;
+    font-size: 1.5rem;
+}
+
+.help-mail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+    gap: 0.5rem;
+    background-color: #D9D9D9;
+    padding: 24px;
+    border-radius: 1rem;
+}
+
+.help-mail img{
+    height: 3rem;
+    width: 3rem;
+}
+
+.help-mail p{
+    color: #050F2A;
+    font-size: 32px;
+}
+
+
