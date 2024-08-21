@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
+import { useParams } from 'react-router-dom';
 import images from "../../assets/images";
 import "./profile.css";
 import api from '../../../config/axios.jsx'
@@ -7,6 +8,7 @@ import SignUpDriver from "../driver/Sign_up/sign-up-driver";
 
 
 const ProfilePassenger = () => {
+    const { id } = useParams();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true); // Adicionar estado de carregamento
     const [error, setError] = useState(null); 
@@ -14,7 +16,7 @@ const ProfilePassenger = () => {
         // Função assíncrona para buscar os dados
         const fetchUserData = async () => {
             try {
-                const response = await api.get('/info'); // Busca os dados
+                const response = await api.get(`/info/${id}`); // Busca os dados
                 setUser(response.data); // Atualiza o estado com os dados recebidos
             } catch (error) {
                 setError("Failed to fetch user data"); // Define o estado de erro em caso de falha
@@ -24,7 +26,7 @@ const ProfilePassenger = () => {
         };
 
         fetchUserData(); // Chama a função para buscar os dados
-    }, []);
+    }, [id]);
     
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;

@@ -19,7 +19,7 @@ const SignInDriver = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await api.post("/login", data);
+      const response = await api.post("/login/driver", data);
       sucessToast(`Login realizado com sucesso!`)
       navigate("/profile");
     } catch (error) {
