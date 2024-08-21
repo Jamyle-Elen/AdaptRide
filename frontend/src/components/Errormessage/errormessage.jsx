@@ -1,7 +1,7 @@
 import images from "../../assets/images";
 import "./errormessage.css";
 
-function ErrorMessage() {
+const ErrorMessage= () => {
   return (
     <div className="notfound">
       <div className="Title-NotFound">
