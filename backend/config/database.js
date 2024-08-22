@@ -2,13 +2,9 @@ import { Sequelize } from "sequelize";
 
 dotenv.config()
 
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD,
-  {
-  dialect: "mysql",
-  host: process.env.DB_HOST,
-
-  // dialect: "sqlite",
-  // storage: "./db/banco.db",
+const db = new Sequelize({
+  dialect: "sqlite",
+  storage: "./db/banco.db",
 });
 
 const syncDatabase = async () => {
@@ -25,7 +21,7 @@ db.authenticate()
     console.log("Database, OK!");
   })
   .catch((error) => {
-    console.error("Error Error Error Error, Database");
+    console.error("Error Error Error Error, Database", error);
   });
 
 
