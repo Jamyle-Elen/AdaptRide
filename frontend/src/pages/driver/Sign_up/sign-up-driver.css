@@ -1,5 +1,11 @@
+:root {
+    --main-cad-color: #D9D9D9;
+    --second-cad-color: #E9E9E9;
+    --rigthSide-cad-color: #282F41;
+}
+
 .main {
-    background-color: #D9D9D9;
+    background-color: var(--main-cad-color);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -11,14 +17,14 @@ form {
 }
 
 .section {
-    background-color: #D9D9D9;
+    background-color: var(--main-cad-color);
     display: flex;
     justify-content: center;
 }
 
 .sign_in_area {
     padding: 4rem 3rem;
-    background-color: #282F41;
+    background-color: var(--rigthSide-cad-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,11 +34,13 @@ form {
 }
 
 .sign_in_area img {
+    background-color: var(--rigthSide-cad-color);
     width: 8rem;
 }
 
 .sign_in_text {
-    font-family: #282F41;
+    background-color: var(--rigthSide-cad-color);
+    font-family: var(--rigthSide-cad-color);
     color: #fff;
     display: flex;
     /* flex-direction: column; */
@@ -41,7 +49,8 @@ form {
 }
 
 .sign_in_text h2 {
-    text-align: justify;
+    background-color: var(--rigthSide-cad-color);
+    /* text-align: justify; */
     text-wrap: wrap;
     font-size: 1.2rem;
     font-weight: 400;
@@ -53,12 +62,13 @@ form {
 }
 
 .sign_in_text p {
+    background-color: var(--rigthSide-cad-color);
     font-size: 0.7rem;
     font-weight: lighter;
 }
 
 .sign_in_area_button {
-    border: 2px solid #D9D9D9;
+    border: 2px solid var(--main-cad-color);
     background: #3D4A6A;
     background: linear-gradient(to right,#282F41, #D9D9D9 90%);
     color: #fff;
@@ -72,7 +82,7 @@ form {
 /* ========== */
 .sign_up {
     padding: 2rem 5rem;
-    background-color: #E9E9E9;
+    background-color: var(--second-cad-color);
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     display: flex;
@@ -82,29 +92,35 @@ form {
 }
 
 input {
-    color: #282F41;
+    color: var(--rigthSide-cad-color);
 }
 
 .sign_up_text {
+    background-color: var(--second-cad-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.sign_up_text h2, .sign_up_text p {
+    background-color: var(--second-cad-color);
+}
+
 .sign_up_text h2 {
-    color: #282F41;
+    color: var(--rigthSide-cad-color);
     font-weight: 700;
     font-size: 1.7rem;
 }
 
 .sign_up_text p {
-    color: #282F41;
+    color: var(--rigthSide-cad-color);
     font-size: 0.9rem;
     font-weight: 600;
 }
 
 .sign_up_input {
+    background-color: var(--second-cad-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -112,14 +128,13 @@ input {
 }
 
 .sign_up_input input {
-    background: #D9D9D9;
+    background: var(--main-cad-color);
     color: #7a7a7a;
     border: none;
     outline: none;
     padding-left: 15px;
     height: 2.2rem;
     width: 25rem;
-
 }
 
 .sign_up button {
@@ -137,7 +152,7 @@ input {
 
 select {
     color: #7a7a7a;
-    background-color: #D9D9D9;
+    background-color: var(--main-cad-color);
     height: 2rem;
 }
 
@@ -146,11 +161,19 @@ option {
 }
 
 textarea {
-    background-color: #D9D9D9;
+    background-color: var(--main-cad-color);
     color: #7a7a7a;
     border: none;
 }
 
 .sign_up_input .input-error {
     border: rgb(116, 62, 62) solid 1px;
+}
+
+.form_navigation button span {
+    background-color: transparent;
+}
+
+.bxs-chevron-right, .bx-chevron-left {
+    background-color: transparent;
 }
