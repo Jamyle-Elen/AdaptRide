@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "../pages/homepage/homepage.jsx";
 import NotFound from "../pages/NotFound/notfound.jsx";
 import AboutPage from "../pages/about/about.jsx";
+import Help from "../pages/help/help.jsx"
 // Passageiro
 import SignIn from "../pages/passenger/Sign_in/sign-in.jsx";
 import SignUp from "../pages/passenger/Sign_up/sign-up.jsx";
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path= "/aboutpage" element={<AboutPage/>}/>
+          <Route path="/help" element={<Help/>}/>
           {/* Parceiro */}
           <Route path="/sign-in/driver" element={<SignInDriver />} />
           <Route path="/sign-up/driver" element={<SignUpDriver />} />

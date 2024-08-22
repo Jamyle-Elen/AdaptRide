@@ -1,7 +1,7 @@
 import NavBar from "../../components/NavBar/navbar";
 import ErrorMessage from "../../components/Errormessage/errormessage";
 
-function NotFound() {
+const NotFound = () => {
   return (
     <>
       <NavBar />

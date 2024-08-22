@@ -10,6 +10,8 @@ import shortly from './images/shortly.png'
 import maps from './images/maps.png'
 import notFound from './images/NotFound.png'
 import about from './images/about.png'
+import imageHelp from './images/image-help.png'
+import iconMail from './images/icon-mail.png'
 // import arrowAdapt from './images/Arrow-AdaptRide.png'
 
 const images = {
@@ -25,6 +27,8 @@ const images = {
     maps,
     notFound,
     about,
+    imageHelp,
+    iconMail,
     // arrowAdapt,
 }
 
