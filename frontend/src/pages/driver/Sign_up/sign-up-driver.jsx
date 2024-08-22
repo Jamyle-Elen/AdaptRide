@@ -55,12 +55,6 @@ const SignUpDriver = () => {
       navigate("/sign-in/driver");
       reset();
 
-
-      const divInfos = document.createElement('')
-      title.innerHtrml = firstData
-
-      // criar a funçao getPerson
-
       // volta para a tela de login
     } catch (error) {
       if (error.name === "ValidationError") {
