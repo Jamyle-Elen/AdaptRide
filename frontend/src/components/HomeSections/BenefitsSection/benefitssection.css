@@ -1,0 +1,235 @@
+.benefits-section {
+    background-color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 3rem;
+    height: auto;
+    width: 100vw;
+    padding: 3rem 0;
+}
+
+.benefits-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3rem;
+    gap: 4rem;
+}
+
+.benefits-content figure {
+    display: flex;
+    flex-direction: column;
+}
+
+.benefits-content figurecaption {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--first-section-color);
+}
+
+.car-safe {
+    width: 27rem;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%;
+    gap: 2rem;
+}
+
+.description p {
+    background-color: var(--main-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--first-section-color);
+}
+
+.description button {
+    background-color: var(--first-section-color);
+    height: 2.5rem;
+    width: 13rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.description button:hover {
+    transform: scale(1.1);
+}
+
+.card-benefits {
+    display: flex;
+    gap: 3.1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .card {
+    background: var(--first-section-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    width: 8rem;
+    height: 7rem;
+    transition: .2s ease-in;
+} */
+
+.def-icon {
+    width: 8rem;
+    height: 7rem;
+    border-radius: 15px;
+}
+
+.benefits {
+    background: #6d7b9b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 45px;
+    border-radius: 10px;
+}
+
+.benefits p {
+    background-color: #6d7b9b;
+    font-size: 1.2rem;
+}
+
+
+/* --RESPONSIVIDADE-- */
+
+@media (max-width: 1280px) {  
+    .benefits-content {
+        gap: 2rem;
+    }
+
+    .description {
+        width: 30%;
+    }
+
+    .card-benefits {
+        gap: 1.5rem;
+    }   
+}
+
+@media (max-width: 970px) {
+    .car-safe {
+        width: 22rem;
+    }
+
+    .description {
+        gap: 1rem;
+    }
+
+    .card-benefits {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .car-safe {
+        width: 18rem;
+    }
+
+    .description p {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .card-benefits {
+        gap: 1rem;
+    }
+
+    .def-icon {
+        width: 7rem;
+        height: 6rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .benefits-section{
+        height: auto;
+    }
+
+    .description-button {
+        height: 2rem;
+        width: 10rem;
+    }
+
+    .def-icon {
+        height: 6rem;
+        width: 6rem;
+    }
+
+    .benefits {
+        width: 13rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .benefits-section{
+        height: auto;
+        gap: 1rem;
+    }
+
+    .benefits-content {
+        flex-direction: column;
+    }
+
+    .description {
+        width: 70%;
+    }
+
+    .description-button {
+        align-self: center;
+    }
+
+    .benefits {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
+    .benefits p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .def-icon {
+        height: 5.5rem;
+        width: 5.5rem;
+    }
+
+    .benefits {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
+    .benefits p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .card-benefits {
+        gap: 0.5rem;
+    }
+
+    .benefits {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
+    .benefits p {
+        font-size: 1rem;
+    }
+}

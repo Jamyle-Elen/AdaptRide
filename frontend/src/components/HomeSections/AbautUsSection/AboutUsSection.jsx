@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import images from '../../assets/images'
+import React from "react";
+import { Link } from "react-router-dom";
+import images from "../../../assets/images";
+import "./aboutussection.css";
 
-function AboutUsSection() {
-  return (
-    <>
+const AboutUsSection = () => {
+    return (
         <div className="about-us-section">
             <div className="accessibility">
                 <h2>Acessibilidade,<br /> mobilidade e<br /> segurança.</h2>
@@ -12,7 +12,7 @@ function AboutUsSection() {
                     <Link to="/sign-up"><button className="sign-up">Cadastro</button></Link>
                     <span>
                         <p>Já possui uma conta?</p>
-                        <Link to="/sign-in"><p className='link'>Fazer login</p></Link>
+                        <Link to="/sign-in"><p className="link">Fazer login</p></Link>
                     </span>
                 </div>
             </div>
@@ -20,14 +20,13 @@ function AboutUsSection() {
                 <figure>
                     <img className="people-adapt" src={images.peopleAdapt} alt="Pessoas com acessibilidade" />
                     <figcaption>
-                    Ter a liberdade de se locomover com facilidade,<br /> conforto e segurança.
+                        Ter a liberdade de se locomover com facilidade,<br /> conforto e segurança.
                     </figcaption>
                 </figure>
-                <div className="square">Conheça nossas vantagens!</div>
+                <div className="square"></div>
             </div>
         </div>
-    </>
-  )
+    )
 }
 
 export default AboutUsSection;

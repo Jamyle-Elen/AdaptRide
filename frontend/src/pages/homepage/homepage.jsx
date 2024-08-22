@@ -1,8 +1,8 @@
 import react from "react";
 import NavBar from "../../components/NavBar/navbar.jsx";
-import HeroSection from "./herosection.jsx";
-import AboutUsSection from "./aboutussection.jsx";
-import BenefitsSection from "./BenefitsSection.jsx";
+import HeroSection from "../../components/HomeSections/HeroSection/herosection.jsx";
+import AboutUsSection from "../../components/HomeSections/AbautUsSection/AboutUsSection.jsx";
+import BenefitsSection from "../../components/HomeSections/BenefitsSection/BenefitsSection.jsx";
 import Footer from "../../components/Footer/footer.jsx";
 
 function HomePage() {

@@ -1,6 +1,7 @@
-import React from 'react'
-import images from '../../assets/images'
-import './homepage.css'
+import React from "react";
+import images from "../../../assets/images";
+import "./herosection.css";
+// import "../../../pages/homepage/homepage.css";
 
 const HeroSection = () => {
   return (
