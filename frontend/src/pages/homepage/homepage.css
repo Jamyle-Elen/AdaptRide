@@ -1,21 +1,21 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: #f3f3f3;
-}
+} */
 
-:root {
+/* :root {
     --main-color: #f3f3f3;
     --first-section-color: #3D4A6A;
     --second-section-color: #D9D9D9;
 
     --text-color: #fff;
-}
+} */
 
-.homepage {
+/* .homepage {
     position: relative;
-    width: 100vw; /*Adicionado na responsividade*/
+    width: 100vw;
 }
 
 .hero-section {
@@ -64,7 +64,7 @@
 
 .car-adapt {
     background-color: var(--first-section-color);
-    width: 40rem;
+    width: 35rem;
 }
 
 .block {
@@ -93,24 +93,24 @@
 .block:hover {
     bottom: 10px;
     transition: .4s;
-}
+} */
 
 /* ------------------ AboutUsSection ------------------ */
 
-.about-us-section {
-    /* max-width: 1280px; */
+/* .about-us-section {
+    
+    background-color: var(--second-section-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     top: -40px;
     width: 100vw;
     height: 80vh;
     padding-bottom: 100px;
-    background-color: var(--second-section-color);
     border-radius: 40px 40px 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 10rem;
-    /* tirar isso aqui jaja */
+    
 }
 
 .accessibility {
@@ -127,9 +127,9 @@
 
 .sign-in-up {
     background-color: var(--second-section-color);
-    margin-top: 20px;
     display: flex;
     align-items: center;
+    margin-top: 20px;
     gap: 1.5rem;
 }
 
@@ -138,6 +138,10 @@
     border-radius: 8px;
     width: 8.8rem;
     height: 2.5rem;
+}
+
+.sign-in-up a {
+    background-color: var(--second-section-color);
 }
 
 .sign-in-up button:hover {
@@ -188,7 +192,7 @@ span p {
 
 .people-adapt {
     background-color: var(--second-section-color);
-    width: 37.5rem;
+    width: 30rem;
 }
 
 figcaption {
@@ -198,35 +202,76 @@ figcaption {
 }
 
 .square {
-    width: 35rem;
     background-color: #4B5878;
-    border-radius: 40px;
-    height: 15.6rem;
+    width: 30rem;
+    height: 11rem;
+    border-radius: 35px;
     position: absolute;
-    bottom: -11.2rem;
+    bottom: -6rem;
     z-index: 1;
-    font-size: 1.6rem;
-    padding: 50px 80px 0 0;
-    display: flex;
-    justify-content: center;
-}
+} */
 
 
 /* ------------------------- BenefitsSection ----------------------------- */
 
-.benefits-section {
-    position: relative;
-    width: 100vw; /*adicionado na responsividade*/
-    padding: 20px;
+/* .benefits-section {
     background-color: var(--main-color);
-    height: 80vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 3rem;
+    height: auto;
+    width: 100vw;
+    padding: 3rem 0;
 }
 
-.benefits-section h3 {
+.benefits-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3rem;
+    gap: 4rem;
+    z-index: 2;
+} */
+
+/* .benefits-content figure {
+    display: flex;
+    flex-direction: column;
+}
+
+.benefits-content figurecaption {
+    font-size: 1.5rem;
+    font-weight: 700;
     text-align: center;
-    margin-bottom: 20px;
+    color: var(--first-section-color);
+}
+
+.car-safe {
+    width: 27rem;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%;
+    gap: 2rem;
+}
+
+.description p {
+    background-color: var(--main-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--first-section-color);
+}
+
+.description button {
+    background-color: var(--first-section-color);
+    height: 2.5rem;
+    width: 13rem;
+    border-radius: 10px;
 }
 
 .card-benefits {
@@ -237,84 +282,45 @@ figcaption {
 }
 
 .card {
-    background: var(--second-section-color);
+    background: var(--first-section-color);
     border: 1px solid #ddd;
-    z-index: 2;
-    border-radius: 20px;
-    padding: 15px;
+    border-radius: 15px;
     text-align: center;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 20rem;
-    height: 27.5rem;
+    width: 8rem;
+    height: 7rem;
     transition: .2s ease-in;
-}
+} */
 
-.card:hover {
+/* .card:hover {
     transform: scale(1.1);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+} */
+
+/* .card p {
+    background-color: var(--first-section-color);
 }
 
-.card h5, p {
-    background-color: var(--second-section-color);
-}
-
-.card h5 {
-    color: var(--first-section-color);
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-.description {
-    color: var(--first-section-color);
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-.card img {
-    background-color: var(--second-section-color);
-    width: 12.5rem;
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-}
-
-.alert {
-    color: rgb(134, 8, 8);
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.safe {
-    color: var(--first-section-color);
-    font-size: 0.9rem;
-    text-align: left;
-}
-
-.icons {
-    background-color: var(--second-section-color);
+.benefits {
+    background: #8a9ecc;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: left;
-    margin: 5px 0;
+    width: 250px;
+    height: 45px;
+    border-radius: 10px;
 }
 
-.icons i {
-    background-color: var(--second-section-color);
-    font-size: 1.5rem;
-    margin-right: 10px;
-    color: #050F2A;
-}
-
-.icons p {
-    margin: 0;
-}
+.benefits p {
+    background-color: #8a9ecc;
+    font-size: 1.2rem;
+} */
 
 /* RESPONSIVIIDADE */
 
-@media (max-width: 1280px) {
+/* @media (max-width: 1280px) {
     .hero-section {
         padding: 20px 30px;
     }
@@ -342,11 +348,10 @@ figcaption {
     }
 
 
-    /* --- AboutUsSection --- */
+    --- AboutUsSection ---
 
     .about-us-section {
         gap: 5rem;
-        /* tirar isso aqui jaja */
     }
     
     .accessibility h2 {
@@ -370,27 +375,26 @@ figcaption {
     }
     
     .square {
-        width: 28rem;
-        height: 15rem;
-        bottom: -10rem;
+        
+        height: 10rem;
+        bottom: -5rem;
         font-size: 1.3rem;
     }
     
     
-    /* --- BenefitsSection --- */
-
-    .card-benefits {
+    --- BenefitsSection ---
+    
+    .benefits-content {
         gap: 2rem;
     }
-    
-    .card {
-        width: 16rem;
-        height: 25rem;
+
+    .description {
+        width: 30%;
     }
-    
-    .card img {
-        width: 12rem;
-    }
+
+    .card-benefits {
+        gap: 1.5rem;
+    }   
 }
 
 
@@ -417,12 +421,12 @@ figcaption {
     }
 
     
-    /* --- AboutUsSection --- */
+    --- AboutUsSection ---
 
     .about-us-section {
         padding: 0 20px;
         gap: 2.5rem;
-        /* tirar isso aqui jaja */
+        tirar isso aqui jaja
     }
     
     .people-adapt {
@@ -431,19 +435,24 @@ figcaption {
 
     .square {
         width: 25rem;
-        font-size: 1.1rem;
+        height: 7rem;
+        bottom: -4rem;
     }
     
     
-    /* --- BenefitsSection --- */
+    --- BenefitsSection ---
 
-    .card-benefits {
+    .car-safe {
+        width: 22rem;
+    }
+
+    .description {
         gap: 1rem;
     }
 
-    .card {
-        width: 15rem;
-        height: 25rem;
+    .card-benefits {
+        flex-wrap: wrap;
+        gap: 1rem;
     }
 }
 
@@ -459,11 +468,11 @@ figcaption {
     }
 
 
-    /* --- AboutUsSection --- */
+    --- AboutUsSection ---
 
     .about-us-section {
         gap: 1rem;
-        /* tirar isso aqui jaja */
+        tirar isso aqui jaja
     }
     
     .accessibility h2 {
@@ -479,34 +488,56 @@ figcaption {
     }
     
     
-    /* --- BenefitsSection --- */
+    --- BenefitsSection ---
+
+    .car-safe {
+        width: 18rem;
+    }
+
+    .description p {
+        font-size: 1rem;
+        font-weight: 500;
+    }
 
     .card-benefits {
         gap: 1rem;
     }
 
     .card {
-        width: 11.5rem;
-        height: 24rem;
+        width: 7rem;
+        height: 6rem;
     }
 }
 
 
 @media (max-width: 600px) {
 
-    /* --- AboutUsSection --- */
+    .about-us-section {
+        flex-direction: column;
+    }
+
+    --- BenefitsSection ---
 
     .benefits-section{
         height: auto;
     }
 
-    .card-benefits {
-        flex-direction: column;
+    .description-button {
+        height: 2rem;
+        width: 10rem;
     }
 
+    .card-benefits {
+        flex-direction: column; 
+    } comentado
+
     .card {
-        height: 17rem;
-        width: 28rem;
+        height: 6rem;
+        width: 6rem;
+    }
+
+    .benefits {
+        width: 13rem;
     }
 }
 
@@ -517,7 +548,7 @@ figcaption {
         width: 22rem;
     }
 
-    /* --- AboutUsSection --- */
+    --- AboutUsSection ---
 
     .about-us-section {
         flex-direction: column;
@@ -533,19 +564,37 @@ figcaption {
         padding: 30px 60px 0 0;
     }
 
-    /* --- BenefitsSection --- */
+    --- BenefitsSection ---
 
     .benefits-section{
         height: auto;
+        gap: 1rem;
     }
 
-    .card-benefits {
+    .benefits-content {
         flex-direction: column;
     }
 
+    .description {
+        width: 70%;
+    }
+
+    .description-button {
+        align-self: center;
+    }
+
     .card {
-        height: 17rem;
-        width: 22rem;
+        height: 6rem;
+        width: 6rem;
+    }
+
+    .benefits {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
+    .benefits p {
+        font-size: 1rem;
     }
 }
 
@@ -555,7 +604,7 @@ figcaption {
         display: none;
     }
 
-    /* --- AboutUsSection --- */
+    --- AboutUsSection ---
 
     .square {
         width: 18rem;
@@ -564,17 +613,26 @@ figcaption {
         left: 2.6rem;
     }
 
-    /* --- BenefitsSection --- */
+    --- BenefitsSection ---
 
     .card {
-        height: 17rem;
-        width: 20rem;
+        height: 6rem;
+        width: 6rem;
+    }
+
+    .benefits {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
+    .benefits p {
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 320px) {
     
-    /* --- AboutUsSection --- */
+    --- AboutUsSection ---
 
     .square {
         width: 16rem;
@@ -583,10 +641,23 @@ figcaption {
         left: 2rem;
     }
 
-    /* --- BenefitsSection --- */
+    --- BenefitsSection ---
+
+    .card-benefits {
+        gap: 0.5rem;
+    }
 
     .card {
-        height: 17rem;
-        width: 17rem;
+        height: 6rem;
+        width: 6rem;
     }
-}
+
+    .benefits {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
+    .benefits p {
+        font-size: 1rem;
+    }
+} */
