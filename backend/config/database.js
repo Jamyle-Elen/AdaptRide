@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 const db = new Sequelize({
-  dialect: "sqlite",
+  dialect: "mysql",
   storage: "./db/banco.db",
 });
 
