@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { cpf as cpfValidator } from "cpf-cnpj-validator";
 import validator from "validator";
+import { differenceInYears } from "date-fns";
 
 export const validateSchema = yup.object().shape({
   name: yup
@@ -29,10 +30,12 @@ export const validateSchema = yup.object().shape({
     .matches(/^\(\d{2}\) \d{5}-\d{4}$/, "Telefone inválido")
     .required("Telefone é obrigatório"),
 
-  date: yup
-  .date()
-
-  .required("Data de nascimento é obrigatória"),
+    date: yup
+    .date()
+    .test("is-of-age", "Você deve ter ao menos 18 anos", (value) => {
+      return differenceInYears(new Date(), new Date(value)) >= 18;
+    })
+    .required("Data de nascimento é obrigatória"),
 
   password: yup
     .string()
