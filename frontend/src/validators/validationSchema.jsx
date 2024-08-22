@@ -6,7 +6,7 @@ export const validateSchema = yup.object().shape({
   name: yup
     .string()
     .min(3)
-    .matches(/^\S+\s\S+$/, "Nome muito curto")
+    .matches(/^\S+(\s\S+)+$/, "Nome muito curto")
     .required("Nome é obrigatório"),
 
   cpf: yup
