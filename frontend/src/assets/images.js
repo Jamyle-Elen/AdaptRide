@@ -1,5 +1,6 @@
 import carAdapt from './images/car-adapt.png'
 import car2Adapt from './images/car2-adapt.png'
+import car3Adapt from './images/car3-adapt.png'
 import logoAdapt from './images/logo-adapt.png'
 import moneyAdapt from './images/money-adapt.png'
 import peopleAdapt from './images/people-adapt.png'
@@ -9,11 +10,18 @@ import qrcodeParceiro from './images/QrCodeParceiro.png'
 import shortly from './images/shortly.png'
 import maps from './images/maps.png'
 import notFound from './images/NotFound.png'
+import def1Icon from './images/def1-icon.png'
+import def2Icon from './images/def2-icon.png'
+import def3Icon from './images/def3-icon.png'
+import def4Icon from './images/def4-icon.png'
+import def5Icon from './images/def5-icon.png'
+import def6Icon from './images/def6-icon.png'
 // import arrowAdapt from './images/Arrow-AdaptRide.png'
 
 const images = {
     carAdapt,
     car2Adapt,
+    car3Adapt,
     logoAdapt,
     moneyAdapt,
     peopleAdapt,
@@ -23,6 +31,12 @@ const images = {
     shortly,
     maps,
     notFound,
+    def1Icon,
+    def2Icon,
+    def3Icon,
+    def4Icon,
+    def5Icon,
+    def6Icon,
     // arrowAdapt,
 }
 
