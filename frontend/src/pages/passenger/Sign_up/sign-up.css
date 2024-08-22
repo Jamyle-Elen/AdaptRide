@@ -37,13 +37,14 @@
 }
 
 .sign_in_text h2 {
-    text-align: justify;
+    /* text-align: justify; */
     text-wrap: wrap;
     font-size: 1.2rem;
     font-weight: 400;
 }
 
 .sign_in_text h2 span {
+    background-color: transparent;
     color: #A1C7F4;
     font-weight: 700;
 }
