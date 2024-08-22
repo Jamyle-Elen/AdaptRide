@@ -11,6 +11,11 @@ export const createPassenger = async (req, res) => {
         phone,
         date,
         password,
+        emergencyContact,
+        contactName,
+        disability,
+        assistanceLevel,
+        specialEquipment
         } = req.body;
 
         const cpfExists = await Passenger.findOne({
@@ -31,6 +36,11 @@ export const createPassenger = async (req, res) => {
         phone,
         date,
         password: hashedPassword,
+        emergencyContact,
+        contactName,
+        disability,
+        assistanceLevel,
+        specialEquipment
         });
 
         res.status(201).json(newPassenger);
