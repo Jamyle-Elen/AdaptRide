@@ -1,29 +1,26 @@
-import { Sequelize } from 'sequelize'
+import { Sequelize } from "sequelize";
 
-const db = new Sequelize( {
-    // host: process.DB_HOST,
-    // dialect: 'mysql'
-    dialect: 'sqlite',
-    storage: './db/banco.db' 
-})
+const db = new Sequelize({
+  dialect: "sqlite",
+  storage: "./db/banco.db",
+});
 
-const syncDatabase = async() => {
-        try {
-            await db.sync();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
+const syncDatabase = async () => {
+  try {
+    await db.sync({ force: true });
+    console.log('Database sincronizada!');
+  } catch (error) {
+    console.error('Erro de sicronizacão:', error);
+  }
+};
 db.authenticate()
-    .then(() => {
-        syncDatabase()
-        console.log('Database, OK!')
-    })
-    .catch((error) => {
-        console.error('Error Error Error Error, Database')
-    })
+  .then(() => {
+    syncDatabase();
+    console.log("Database, OK!");
+  })
+  .catch((error) => {
+    console.error("Error Error Error Error, Database");
+  });
 
-    
-    
-export default db
+
+export default db;
