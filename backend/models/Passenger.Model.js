@@ -33,7 +33,27 @@ const Passenger = sequelize.define('Passenger', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+  emergencyContact: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  contactName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  disability: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  assistanceLevel: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  specialEquipment: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 }, {
   timestamps: true,
 })
