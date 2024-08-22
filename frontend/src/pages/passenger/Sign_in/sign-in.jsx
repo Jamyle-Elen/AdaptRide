@@ -14,7 +14,7 @@ const SignIn = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await api.post('/login', data);
+            const response = await api.post('/login/passenger', data);
             navigate('/profile-passenger');
         } catch (error) {
             console.error("Erro ao fazer login:", error);

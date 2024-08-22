@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from 'react'
+import { useState } from "react";
 import images from "../../../assets/images";
 import api from "../../../../../frontend/config/axios.jsx";
 import InputMask from "react-input-mask";
@@ -9,20 +9,17 @@ import "./sign-up.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { sucessToast, errorToast } from "../../../utils/toastUtils.jsx";
+import { validateSchema } from "../../../validators/validationSchemaP.jsx";
 
 const SignUp = () => {
-  const [step, setStep] = useState(1)
-  const navigate = useNavigate()
+  const [step, setStep] = useState(1);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  
-  const goBack = () => {
-    step > 1 ? setStep(step - 1) : null;
-  };
 
   const onSubmit = async (data) => {
     if (step === 2) {
@@ -30,18 +27,11 @@ const SignUp = () => {
     } else {
       setStep(step + 1);
     }
-  }
-
+  };
   const handleCreatePassenger = async (data) => {
     try {
-      let {
-        name,
-        cpf: cpfNumber,
-        email,
-        phone,
-        date,
-        password,
-        
+      const {
+        name
       } = data;
 
       const transformedName = name
@@ -49,25 +39,31 @@ const SignUp = () => {
         .replace(/\b\w/g, (letter) => letter.toUpperCase());
       data.name = transformedName;
 
-      if (!name) {
-        console.log('Nome deve ter ao menos 2 palavras')
-        return;
-      }
+      // validações dos campos
+      await validateSchema.validate(data, { abortEarly: false });
 
-      else {
-        const response = await api.post("/register/passenger", data);
-        sucessToast("Cadastrado com sucesso!");
-        reset();
-        navigate("/sign-in");
-      }
-    } catch (error) {
-      errorToast("Falha ao cadastrar, tente novamente!");
-      console.error(error);
+      const response = await api.post("/register/passengers", data);
+      sucessToast("Cadastrado com sucesso!");
+      // verificar se o tempo ta legal ou ta mt longo
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      navigate("/sign-in/driver");
       reset();
+
+      // volta para a tela de login
+    } catch (error) {
+      if (error.name === "ValidationError") {
+        errorToast(`Erros de validação: ${error.errors.join(", ")}`);
+      } else {
+        errorToast("Falha ao cadastrar, tente novamente!");
+      }
+      console.error(error);
       setStep(step - 1);
     }
   };
-  
+
+  const goBack = () => {
+    step > 1 ? setStep(step - 1) : null;
+  };
 
   return (
     <main className="main">
@@ -93,92 +89,141 @@ const SignUp = () => {
             <div className="sign_up_input">
               {step === 1 && (
                 <>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Nome"
-                  {...register("name", { required: true })}
-                  className={errors.name ? "input-error" : ""}
-                />
-                {errors.name?.message}
-                <InputMask
-                  mask="999.999.999-99"
-                  maskChar=""
-                  type="text"
-                  name="cpf"
-                  id="cpf"
-                  placeholder="CPF"
-                  {...register("cpf", { required: true })}
-                  className={errors.cpf ? "input-error" : ""}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  {...register("email", { required: true })}
-                  className={errors.email ? "input-error" : ""}
-                />
-                <InputMask
-                  mask="(99) 99999-9999"
-                  maskChar=""
-                  type=""
-                  name="phone"
-                  id="phone"
-                  placeholder="Telefone"
-                  {...register("phone", { required: true })}
-                  className={errors.phone ? "input-error" : ""}
-                />
-                <input
-                  type="date"
-                  name="dateBirth"
-                  id="dateBirth"
-                  {...register("date", { required: true })}
-                  className={errors.date ? "input-error" : ""}
-                />
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Senha"
-                  {...register("password", { required: true })}
-                  className={errors.password ? "input-error" : ""}
-                />
-                </>
-                )}
-                {step === 2 && (
-                  <>
                   <input
-                  type="text"
-                  name="dateBirth"
-                  id="dateBirth"
-                  {...register("date", { required: true })}
-                  className={errors.text ? "input-error" : ""}
-                />
-                <select
-                    name="teste"
-                    id="teste"
-                    {...register("teste", { required: true })}
-                    className={errors.teste ? "input-error" : ""}
-                  >
-                    <option value="">Selecione sua Deficiencia</option>
-                    <option value="Deficiente visual">Deficiente visual</option>
-                    <option value="Deficiente fisico">Deficiente fisico</option>
-                  </select>
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome"
+                    {...register("name", { required: true })}
+                    className={errors.name ? "input-error" : ""}
+                  />
+                  {errors.name?.message}
+                  <InputMask
+                    mask="999.999.999-99"
+                    maskChar=""
+                    type="text"
+                    name="cpf"
+                    id="cpf"
+                    placeholder="CPF"
+                    {...register("cpf", { required: true })}
+                    className={errors.cpf ? "input-error" : ""}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    {...register("email", { required: true })}
+                    className={errors.email ? "input-error" : ""}
+                  />
+                  <InputMask
+                    mask="(99) 99999-9999"
+                    maskChar=""
+                    type=""
+                    name="phone"
+                    id="phone"
+                    placeholder="Telefone"
+                    {...register("phone", { required: true })}
+                    className={errors.phone ? "input-error" : ""}
+                  />
+                  <input
+                    type="date"
+                    name="dateBirth"
+                    id="dateBirth"
+                    {...register("date", { required: true })}
+                    className={errors.date ? "input-error" : ""}
+                  />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Senha"
+                    {...register("password", { required: true })}
+                    className={errors.password ? "input-error" : ""}
+                  />
+                </>
+              )}
+              {/* // motorista ser achado aleatoriamente, login do passageiro
+// tela de login mandar p profile
+// cadastro do passageiro
+// solicitação de uma corrida
+
+// O AdaptRRide surge com a proposta de oferecer melhores condições de mobilidade atraves de uma aplicação onde o 
+                
+
+// info pessoais
+// endereço
+tiopode deficienci equipamentosde mobilidade
+necessidade de acompanhante
+info medicas importantes
+
+                 */}
+              {step === 2 && (
+                <>
+                  <p>Acessibilidade</p>
+                  <InputMask
+                    mask="(99) 99999-9999"
+                    maskChar=""
+                    type="text"
+                    name="emergencyContact"
+                    id="emergencyContact"
+                    placeholder="Contato de Emergência"
+                    {...register("emergencyContact", { required: true })}
+                    className={errors.emergencyContact ? "input-error" : ""}
+                  />
+                  <input
+                    type="text"
+                    name="contactName"
+                    id="contactName"
+                    placeholder="Nome do contato de Emergência"
+                    {...register("contactName", { required: true })}
+                    className={errors.contactName ? "input-error" : ""}
+                  />
+
                   <select
-                    name="teste2"
-                    id="teste2"
-                    {...register("teste2", { required: true })}
-                    className={errors.teste2 ? "input-error" : ""}
+                    name="vehicleBrand"
+                    id="vehicleBrand"
+                    {...register("vehicleBrand", { required: true })}
+                    className={errors.vehicleBrand ? "input-error" : ""}
                   >
-                    <option value="">Teste</option>
-                    <option value="teste">teste</option>
-                    <option value="teste2">teste2</option>
+                    <option value="">Selecione sua Deficiência</option>
+                    <option value="Nenhuma">Nenhuma</option>
+                    <option value="Deficiente visual">Deficiente visual</option>
+                    Auditiva
+                    <option value="Deficiente fisico">Deficiente fisico</option>
+                    <option value="Deficiente Intelectual">
+                      Deficiente Intelectual
+                    </option>
+                    <option value="Deficiente mental">Deficiente mental</option>
+                    Intelectual
+                    <option value="Deficiente Psicossocial ou por Saúde Mental">
+                      Deficiente Psicossocial ou por Saúde Mental
+                    </option>
                   </select>
-                  </>
-                )}
-              
+
+                  <select
+                    name="vehiassistanceLevel"
+                    {...register("vehiassistanceLevel", { required: true })}
+                    className={errors.vehiassistanceLevel ? "input-error" : ""}
+                  >
+                    <option value="">Selecione seu Nivel de Assistência</option>
+                    <option value="Nenhuma">Nenhuma</option>
+                    <option value="Minima">Assistência mínima</option>
+                    <option value="Média">Assistência moderada</option>
+                    <option value="Completa">Assistência completa</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    name="specialEquipment"
+                    placeholder="Equipamentos especiais (ex: cadeira de rodas)"
+                    {...register("specialEquipment")}
+                    className={errors.specialEquipment ? "input-error" : ""}
+                  />
+
+          
+                </>
+              )}
             </div>
             <div className="form_navigation">
               {step > 1 && (
@@ -201,7 +246,7 @@ const SignUp = () => {
           </div>
         </form>
       </section>
-      <ToastContainer/>
+      <ToastContainer />
     </main>
   );
 };

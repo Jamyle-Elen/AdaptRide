@@ -233,9 +233,9 @@ const SignUpDriver = () => {
                     <option value="1">1</option>
                     <option value="1">2</option>
                   </select>
-                  <textarea
+                  <textarea placeholder="Descreva as Adaptações (OPCIONAL)"
                     name="descriptionAdaptations"
-                    id=""
+                    id="descriptionAdaptations"
                     {...register("descriptionAdaptations")}
                   ></textarea>
                 </>
