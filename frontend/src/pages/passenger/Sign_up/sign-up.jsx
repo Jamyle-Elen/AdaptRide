@@ -9,6 +9,7 @@ import "./sign-up.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { sucessToast, errorToast } from "../../../utils/toastUtils.jsx";
+import { validateSchema } from "../../../validators/validationSchemaP.jsx";
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
@@ -20,10 +21,6 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const goBack = () => {
-    step > 1 ? setStep(step - 1) : null;
-  };
-
   const onSubmit = async (data) => {
     if (step === 2) {
       await handleCreatePassenger(data);
@@ -31,31 +28,41 @@ const SignUp = () => {
       setStep(step + 1);
     }
   };
-
   const handleCreatePassenger = async (data) => {
     try {
-      let { name, cpf: cpfNumber, email, phone, date, password } = data;
+      const {
+        name
+      } = data;
 
       const transformedName = name
         .toLowerCase()
         .replace(/\b\w/g, (letter) => letter.toUpperCase());
       data.name = transformedName;
 
-      if (!name) {
-        console.log("Nome deve ter ao menos 2 palavras");
-        return;
-      } else {
-        const response = await api.post("/register/passenger", data);
-        sucessToast("Cadastrado com sucesso!");
-        reset();
-        navigate("/sign-in");
-      }
-    } catch (error) {
-      errorToast("Falha ao cadastrar, tente novamente!");
-      console.error(error);
+      // validações dos campos
+      await validateSchema.validate(data, { abortEarly: false });
+
+      const response = await api.post("/register/passengers", data);
+      sucessToast("Cadastrado com sucesso!");
+      // verificar se o tempo ta legal ou ta mt longo
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      navigate("/sign-in/driver");
       reset();
+
+      // volta para a tela de login
+    } catch (error) {
+      if (error.name === "ValidationError") {
+        errorToast(`Erros de validação: ${error.errors.join(", ")}`);
+      } else {
+        errorToast("Falha ao cadastrar, tente novamente!");
+      }
+      console.error(error);
       setStep(step - 1);
     }
+  };
+
+  const goBack = () => {
+    step > 1 ? setStep(step - 1) : null;
   };
 
   return (
