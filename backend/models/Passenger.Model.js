@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
-import sequelize from '../config/database.js';
+import { DataTypes } from 'sequelize';
+import db from '../config/database.js';
 
-const Passenger = sequelize.define('Passenger', {
+const Passenger = db.define('Passenger', {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
