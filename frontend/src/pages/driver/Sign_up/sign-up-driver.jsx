@@ -55,12 +55,6 @@ const SignUpDriver = () => {
       navigate("/sign-in/driver");
       reset();
 
-
-      const divInfos = document.createElement('')
-      title.innerHtrml = firstData
-
-      // criar a funçao getPerson
-
       // volta para a tela de login
     } catch (error) {
       if (error.name === "ValidationError") {
@@ -239,9 +233,9 @@ const SignUpDriver = () => {
                     <option value="1">1</option>
                     <option value="1">2</option>
                   </select>
-                  <textarea
+                  <textarea placeholder="Descreva as Adaptações (OPCIONAL)"
                     name="descriptionAdaptations"
-                    id=""
+                    id="descriptionAdaptations"
                     {...register("descriptionAdaptations")}
                   ></textarea>
                 </>
