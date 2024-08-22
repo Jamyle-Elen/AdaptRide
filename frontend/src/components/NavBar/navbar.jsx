@@ -14,18 +14,18 @@ const NavBar = () => {
               <li>
                 <Link to="/sign-in/driver" className="list-item">Dirigir</Link>
               </li>
-              <li className="drop_down_item">
-                <Link to="/aboutpage">Sobre</Link>
+              <li>
+                <Link to="/aboutpage" className="list-item">Sobre</Link>
               </li>
             </ul>
           </div>
           <div className="list" id="list-two">
             <ul className="list">
-              <li className="drop_down_item">
-                <Link to="/help">Ajuda</Link>
+              <li>
+                <Link to="/help" className="list-item">Ajuda</Link>
               </li>
               <li>
-                <Link to="/sign-in">Login</Link>
+                <Link to="/sign-in" className="list-item">Login</Link>
               </li>
             </ul>
             <Link to="/sign-up"><button>Cadastre-se</button></Link>
