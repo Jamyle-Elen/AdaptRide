@@ -33,6 +33,15 @@ export const createRides = async (req, res) => {
   }
 };
 
+export const requestRides = async (req, res) => {
+  try {
+    const { startLocation, destinationLocation } = req.body;
+    res.status(201).json({  message: 'Corrida solicitada com sucesso', startLocation, destinationLocation });
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+}
+
 export const getAllRides = async (req, res) => {
   try {
     const allRides = await Ride.findAll();
