@@ -3,7 +3,7 @@ import { createPassenger, loginPassenger } from '../controllers/passengerControl
 
 const router = express.Router()
 
-router.post('/register/passenger', createPassenger)
+router.post('/register/passengers', createPassenger)
 router.post('/login/passenger', loginPassenger)
 
 export default router;
