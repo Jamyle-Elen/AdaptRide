@@ -1,19 +1,13 @@
 import { Sequelize } from "sequelize";
 
-dotenv.config()
-
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD,
-  {
-  dialect: "mysql",
-  host: process.env.DB_HOST,
-
-  // dialect: "sqlite",
-  // storage: "./db/banco.db",
+const db = new Sequelize({
+  dialect: "sqlite",
+  storage: "./db/banco.db",
 });
 
 const syncDatabase = async () => {
   try {
-    await db.sync({ force: true });
+    await db.sync();
     console.log('Database sincronizada!');
   } catch (error) {
     console.error('Erro de sicronizacão:', error);
