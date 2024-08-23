@@ -181,10 +181,10 @@ info medicas importantes
                   />
 
                   <select
-                    name="vehicleBrand"
-                    id="vehicleBrand"
-                    {...register("vehicleBrand", { required: true })}
-                    className={errors.vehicleBrand ? "input-error" : ""}
+                    name="disability"
+                    id="disability"
+                    {...register("disability", { required: true })}
+                    className={errors.disability ? "input-error" : ""}
                   >
                     <option value="">Selecione sua Deficiência</option>
                     <option value="Nenhuma">Nenhuma</option>
@@ -202,9 +202,10 @@ info medicas importantes
                   </select>
 
                   <select
-                    name="vehiassistanceLevel"
-                    {...register("vehiassistanceLevel", { required: true })}
-                    className={errors.vehiassistanceLevel ? "input-error" : ""}
+                    name="assistanceLevel"
+                    id="assistanceLevel"
+                    {...register("assistanceLevel", { required: true })}
+                    className={errors.assistanceLevel ? "input-error" : ""}
                   >
                     <option value="">Selecione seu Nivel de Assistência</option>
                     <option value="Nenhuma">Nenhuma</option>
