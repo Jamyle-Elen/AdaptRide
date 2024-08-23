@@ -19,27 +19,33 @@ const Ride = db.define('Ride', {
   //     key: 'id'
   //   }
   // },
-  idDriver: {
-    type: DataTypes.UUID,
+  // idDriver: {
+  //   type: DataTypes.UUID,
+  //   allowNull: false,
+  //   references:{
+  //     model: Driver,
+  //     key: 'id'
+  //   }
+  // },
+  statusRide: {
+    type: DataTypes.ENUM('Pending', 'Accepted', 'Declined'),
     allowNull: false,
-    references:{
-      model: Driver,
-      key: 'id'
+    defaultValue: 'Pending',
+  },
+  startLocation: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [2, 255]
     }
   },
-  // statusRide: {
-  //   type: DataTypes.ENUM('Pending', 'Accepted', 'Declined'),
-  //   allowNull: false,
-  //   defaultValue: 'Pending',
-  // },
-  // origin: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  // },
-  // destination: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false
-  // },
+  destinationLocation: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [2, 255]
+    }
+  },
 }, {
   timestamps: true,
 })
