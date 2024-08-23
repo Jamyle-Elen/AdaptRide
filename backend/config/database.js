@@ -1,4 +1,6 @@
 import { Sequelize } from "sequelize";
+import mysql from 'mysql2'
+import dotenv from 'dotenv'
 
 const db = new Sequelize({
   dialect: "sqlite",
@@ -19,7 +21,7 @@ db.authenticate()
     console.log("Database, OK!");
   })
   .catch((error) => {
-    console.error("Error Error Error Error, Database");
+    console.error("Error Error Error Error, Database", error);
   });
 
 
