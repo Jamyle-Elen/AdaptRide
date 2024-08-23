@@ -1,9 +1,8 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import images from "../../../assets/images";
-import api from "../../../../../frontend/config/axios.jsx";
+import api from "../../../../../frontend/config/axios.js";
 import InputMask from "react-input-mask";
 import "./sign-up.css";
 import { ToastContainer, toast } from "react-toastify";

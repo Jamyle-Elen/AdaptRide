@@ -3,7 +3,7 @@ import images from '../../../assets/images'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import axios from 'axios'
-import api from '../../../../../frontend/config/axios.jsx'
+import api from '../../../../../frontend/config/axios.js'
 import './sign-in.css'
 
 
