@@ -54,7 +54,7 @@ export const createDrivers = async (req, res) => {
 
         res.status(201).json(newDriver);
     } catch (error) {
-    res.status(500).json({ message: "Erro ao tentar cadastrar motorista" });
+    res.status(500).json({ message: "Erro ao tentar cadastrar motorista", error });
   }
 };
 
