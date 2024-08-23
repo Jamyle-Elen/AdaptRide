@@ -53,6 +53,10 @@ export const validateSchema = yup.object().shape({
     .matches(/^\S+\s\S+$/, "Nome muito curto")
     .required("Nome é do contato de emergência é obrigatório"),
 
+    disability: yup
+    .string()
+    .required("Deficiência é obrigatória"),
+
   descriptionAdaptations: yup
   .string(),
 });
