@@ -1,19 +1,23 @@
 import Ride from "../models/Ride.Model.js";
 import Driver from "../models/Driver.Model.js";
 import Passenger from "../models/Passenger.Model.js";
+import db from "../config/database.js";
 import { v4 as uuidv4 } from "uuid";
+import { Op } from "sequelize";
 
 export const createRides = async (req, res) => {
-  // if (!idDriver) {
-  //   return res.status(400).json({ message: "Todos os campos são necessarios" });
-  // }
   const getFirstDriver = async() => {
-    const drivers = await Driver.findAll();
-    const firstDriver =  drivers[0];
-    const idDriver  = await firstDriver.id;
+    
+    const randomDriver = await Driver.findOne({ 
+      order: [ [db.fn('RANDOM')]],
+      where: { id: { [Op.not]: null } } });
+    const idDriver  = await randomDriver.id;
     return (idDriver)}
-  try {
-    const driver = await Driver.findByPk(await getFirstDriver());
+    try {
+      const driver = await Driver.findByPk(await getFirstDriver());
+      if (!driver) {
+        return res.status(400).json({ message: "Todos os campos são necessarios" });
+      }
     
     if (!driver) {
       return res.status(404).json({ message: "Motorista não encontrado" });
