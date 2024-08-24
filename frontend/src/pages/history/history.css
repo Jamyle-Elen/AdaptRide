@@ -6,7 +6,10 @@
     padding: 20px;
     box-sizing: border-box;
   }
-  
+  .ride-item {
+    border: solid red;
+  }
+
   /* Estilos para a imagem */
   .ride-history-page img {
     max-width: 6rem;
@@ -14,18 +17,17 @@
     object-fit: cover;
   }
   
-  /* Estilos para a lista de corridas */
+  /* Estilos para a lista das Linhas das corridas */
   .ride-list {
     background-color: white;
     width: 100%;
     gap: 2rem;
     border-radius: 0.5rem;
     padding: 15px;
-    margin-bottom: 20px;
-    position: relative; /* Adicionado para que o botão possa ser posicionado de forma absoluta */
+    border: solid red;
   }
   
-  /* Estilos para o texto do título */
+  /* Estilos para o texto ATIVIDADE do título */
   .ride-history-page h1 {
     margin: 0;
     font-size: 2em;
@@ -35,6 +37,7 @@
     padding: 12px;
   }
   
+  /* Estilos para o texto  CORRIDAS do título */
   .ride-history-page h2 {
     margin: 0;
     font-size: 1.5em;
@@ -43,28 +46,41 @@
     text-align: left;
     padding: 12px;
   }
+  
+  /* Estilos para o item de corrida */
+  .ride-history-page .ride-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
 
+  }
 
-  .ride-history-page .ride-info strong {
+  /* Estilos para o texto de detalhes */
+  .ride-history-page .ride-info {
+    display: flex;
+    gap: 5rem;
+
+    
+  }
+
+  /* .ride-history-page .ride-info strong {
     color: #141519;
     margin: 1px;
-    display:flex;
+    display:flex; */
     /* border: solid red; */
-    height: 1rem;
-  }
+    /* height: 1rem;
+  } */
 
   
   /* Estilos para o botão de detalhes */
   .ride-history-page button {
-    /* padding: 10px 15px; */
-    font-size: 1em;
+    font-size: 1rem;
     color: #fff;
     background-color: #4B5878;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    position: absolute; /* Faz o botão ser posicionado de forma absoluta dentro do contêiner pai */
-    right: 25px; /* Posiciona o botão a 15px do lado direito do contêiner */
-    bottom: 45px; /* Posiciona o botão a 15px do fundo do contêiner */
+    
   }
   
