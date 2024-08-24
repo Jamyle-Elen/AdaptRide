@@ -47,6 +47,7 @@ const Teste = () => {
             <nav className="navbar">
                 <Link to="/history"><i className='bx bx-time-five'></i></Link>
                 <Link to="/"><abbr title="Sair"><i className='bx bx-log-out'></i></abbr></Link>
+                <Link to="/profile"><i className='bx bx-home-alt-2'></i></Link>
             </nav>
             <section className="info-profile-driver">
                 <section className='driver'> 
