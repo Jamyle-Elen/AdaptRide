@@ -4,22 +4,31 @@ import "./herosection.css";
 import { Link, useNavigate } from "react-router-dom";
 import ReactInputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
-import { sucessToast, errorToast } from "../../../utils/toastUtils";
-import api from "../../../../config/axios.js";
+import { sucessToast, errorToast, rideAcceptToast } from "../../../utils/toastUtils";
+import {api, url} from "../../../../config/axios.js";
 // import "../../../pages/homepage/homepage.css";
+import { TailSpin } from "react-loader-spinner";
+
+
+// usar o geohash pegar o moto mais proximo, criar uma tabela pra colocar o id, loc e status (livre e ocupado)
+// colocar o id (nao pega do db ainda)
+
 
 const HeroSection = () => {
-  const [startLocation, setStartLocation] = useState("");
-  const [destinationLocation, setDestinationLocation] = useState("");
+  const [startLocation, setStartLocation] = useState(null);
+  const [destinationLocation, setDestinationLocation] = useState({ latitude:"", longitude: "" });
   const [geolocationActive, setGeolocationActive] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  
 
   const handleGeolocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setStartLocation(`${latitude} ${longitude}`);
-          setGeolocationActive(true)
+          setStartLocation({ latitude: latitude.toFixed(6), longitude: longitude.toFixed(6) });
+          setGeolocationActive(true);
         },
         (error) => {
           console.log("Erro ao tentar pegar a localização", error);
@@ -37,32 +46,52 @@ const HeroSection = () => {
   // }
 
   const handleClearLocation = () => {
-    setStartLocation("");
+    setStartLocation({latitude: "", longitude: ""});
     setGeolocationActive(false);
   }
-
+  
   const handleRequestRide = async () => {
+    setLoading(true);
+    const token= localStorage.getItem('authToken')
+    if (!token) {
+      localStorage.setItem('rideRequest', JSON.stringify({
+        startLocation,
+        destinationLocation
+      }))
+      navigate('/race-request')
+      setLoading(false)
+      return
+    }
+
+
     const data = {
-      startLocation,
-      destinationLocation,
+      // passengerId: "360ee361-ebfe-4723-af1a-32fd58029f40", // comentei e ya realmente ta indo
+      // // idDRIVER: '7a41bd7e-9a52-4867-bf0c-80b33a86a888',
+      startLocation: {
+        latitude: parseFloat(startLocation.latitude),
+        longitude: parseFloat(startLocation.longitude),
+      },
+      destinationLocation: {
+        latitude: parseFloat(destinationLocation.latitude),
+        longitude: parseFloat(destinationLocation.longitude),
+      },
     };
     try {
-      const response = await api.post("/request-rides", data);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      const response = await url.post("/rides", data);
       console.log("Corrida solicitada com sucesso!");
-      sucessToast("Corrida solicitada!");
+      rideAcceptToast("Motorista solicitado!");
+      navigate("/race-request")
     } catch (error) {
       console.error("Erro ao solicitar corrida", error);
       errorToast('Erro ao solicitar corrida', error)
+    } finally {
+      setLoading(false);
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    if (!startLocation || !destinationLocation) {
-      alert("Preencha todos os campos");
-    }
-
-    handleRequestRide();
+    handleRequestRide()
   };
   return (
     <div className="homepage">
@@ -74,48 +103,59 @@ const HeroSection = () => {
             </h1>
             <p>Viagens Confortáveis, solicite agora.</p>
           </div>
-          <form onSubmit={handleSubmit} className="ride-request-form">
-            <div className="input-container">
-              <input
-                id="start-location"
-                value={startLocation}
-                onChange={(e) => setStartLocation(e.target.value)}
-                aria-label="Onde você está?"
-                type="text"
-                name="name"
-                placeholder="Onde você está?"
-                // {...register("name", { required: true })}
-                // className={errors.name ? "input-error" : ""}
-                required
+          {loading ? (
+            // Exibe o spinner quando o loading for true
+            <div className="loading-container">
+              <TailSpin
+                height="70"
+                width="70"
+                color="#4A90E2"
+                ariaLabel="loading"
               />
-              <i
-                className={`bx ${
-                  geolocationActive ? "bx-x" : "bx-target-lock"
-                }`}
-                style={{ color: "#ffffff", cursor: "pointer" }}
-                onClick={
-                  geolocationActive ? handleClearLocation : handleGeolocation
-                }
-              ></i>
+              <p>Procurando motorista...</p>
             </div>
-            <div className="input-container">
-              <input
-                id="destination-location"
-                value={destinationLocation}
-                onChange={(e) => setDestinationLocation(e.target.value)}
-                aria-label="Para onde você quer ir?"
-                type="text"
-                name="destination"
-                placeholder="Para onde você quer ir?"
-                required
-              />
-              <i
-          className="bx bx-target-lock"
-          style={{ color: '#ffffff', cursor: 'pointer' }}
-        ></i>
-            </div>
-            <button type="submit">Solicitar</button>
-          </form>
+          ) : (
+            <form onSubmit={handleSubmit} className="ride-request-form">
+              <div className="input-container">
+                <input
+                  id="start-location"
+                  value={startLocation ? `${startLocation.latitude}, ${startLocation.longitude}` : ""}
+                  onChange={(e) => {
+                    const [latitude, longitude] = e.target.value.split(",").map((coord) => coord.trim());
+                    setStartLocation({ latitude, longitude });
+                  }}
+                  aria-label="Onde você está?"
+                  type="text"
+                  placeholder="Onde você está?"
+                  required
+                />
+                <i
+                  className={`bx ${geolocationActive ? "bx-x" : "bx-target-lock"}`}
+                  style={{ color: "#ffffff", cursor: "pointer" }}
+                  onClick={geolocationActive ? handleClearLocation : handleGeolocation}
+                ></i>
+              </div>
+              <div className="input-container">
+                <input
+                  id="destination-location"
+                  value={`${destinationLocation.latitude}, ${destinationLocation.longitude}`}
+                  onChange={(e) => {
+                    const [latitude, longitude] = e.target.value.split(",").map((coord) => coord.trim());
+                    setDestinationLocation({ latitude, longitude });
+                  }}
+                  aria-label="Para onde você quer ir?"
+                  type="text"
+                  placeholder="Para onde você quer ir?"
+                  required
+                />
+                <i
+                  className="bx bx-target-lock"
+                  style={{ color: "#ffffff", cursor: "pointer" }}
+                ></i>
+              </div>
+              <button type="submit">Solicitar</button>
+            </form>
+          )}
         </section>
         <img className="car-adapt" src={images.carAdapt} alt="Carro adaptado" />
       </div>
