@@ -93,8 +93,4 @@ const Driver = db.define(
   }
 );
 
-Driver.associate = (models) => {
-  Driver.hasMany(models.Ride, { foreignKey: "driverId" });
-};
-
 export default Driver;
