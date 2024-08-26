@@ -1,0 +1,13 @@
+.safe-area {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 4rem;
+}
+
+.safe-text {
+    text-align: center;
+}
