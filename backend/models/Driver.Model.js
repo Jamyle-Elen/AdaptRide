@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 import db from "../config/database.js";
+// import Ride from "./Ride.Model.js";
 
 const Driver = db.define(
   "Driver",
@@ -14,6 +15,10 @@ const Driver = db.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    available: {
+      type: DataTypes.ENUM('Active', 'Busy', 'Offline'),
+      defaultValue: 'Active',
     },
     cpf: {
       type: DataTypes.STRING,
@@ -69,10 +74,27 @@ const Driver = db.define(
     descriptionAdaptations: {
       type: DataTypes.TEXT,
     },
+    locationZone: {
+      type: DataTypes.STRING(12),
+      allowNull: false,
+    },
+    // latitude: {
+    //   type: DataTypes.FLOAT,
+    //   allowNull: true,
+    // },
+    // longitude: {
+    //   type: DataTypes.FLOAT,
+    //   allowNull: true,
+    //   defaultValue: 40.712776,
+    // },
   },
   {
     timestamps: true,
   }
 );
+
+Driver.associate = (models) => {
+  Driver.hasMany(models.Ride, { foreignKey: "driverId" });
+};
 
 export default Driver;
