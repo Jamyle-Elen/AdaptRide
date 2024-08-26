@@ -1,20 +1,21 @@
 import React from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
 const CustomMap = () => {
-  const initialPosition = [-5.87914, -5.91094];
+  const initialPosition = [-7.887258, -34.914304];
+  
   const riskAreas = [
-    { lat: -5.887258, lon: -54.914304, info: "risco" },
-    { lat: -5.891234, lon: -54.915678, info: "risco" },
+    { lat: -7.887258, lon: -34.914304, info: "Área perigosa 1" },
+    { lat: -7.891234, lon: -34.915678, info: "Área perigosa 2" },
   ];
 
   return (
@@ -23,14 +24,6 @@ const CustomMap = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-
-      {riskAreas.map((area, idx) => (
-        <Marker key={idx} position={[area.lat, area.lon]}>
-          <Popup>
-            {area.info} <br /> Local de risco elevado.
-          </Popup>
-        </Marker>
-      ))}
     </MapContainer>
   );
 };
