@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import images from "../../assets/images"
 import "./teste.css";
-import api from '../../../config/axios.js'
+import { api } from '../../../config/axios.js'
 import SignUpDriver from "../driver/Sign_up/sign-up-driver";
 
 const Teste = () => {
@@ -24,19 +24,19 @@ const Teste = () => {
                     vehiclePlate: "",
                     vehicleBrand: "",
                     vehicleModel: "",  
-                    vehicleColor: "",          // user.vehicleColor
-                    typesAdaptations: "", // user.typesAdaptations
-                    totalCapacity: "",  // user.totalCapacity
-                    descriptionAdaptations: "" // user.descriptionAdaptations
+                    vehicleColor: "",
+                    typesAdaptations: "",
+                    totalCapacity: "",
+                    descriptionAdaptations: ""
                 }
-                setUser(User); // Atualiza o estado com os dados recebidos
+                setUser(User);
             } catch (error) {
                 setError("Failed to fetch user data"); 
             } finally {
                 setLoading(false); 
             }
         };
-        fetchUserData(); // Chama a função para buscar os dados
+        fetchUserData();
     }, []);
     
     if (loading) return <label>Loading...</label>;

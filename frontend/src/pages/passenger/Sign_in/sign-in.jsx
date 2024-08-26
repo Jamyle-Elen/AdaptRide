@@ -2,8 +2,7 @@ import React from 'react'
 import images from '../../../assets/images'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import axios from 'axios'
-import api from '../../../../../frontend/config/axios.js'
+import { api } from '../../../../../frontend/config/axios.js'
 import './sign-in.css'
 
 
@@ -15,7 +14,7 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         try {
             const response = await api.post('/login/passenger', data);
-            navigate('/profile-passenger');
+            navigate('/');
         } catch (error) {
             console.error("Erro ao fazer login:", error);
         }
