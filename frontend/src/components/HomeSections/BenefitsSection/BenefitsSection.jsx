@@ -16,9 +16,12 @@ const BenefitsSection = () => {
                 <div className="description">
                     <p>SAFE é um mecanismo de defesa para lugares onde requer uma atenção extra na hora de dirigir.</p>
                     <p>Ele é ativado assim que entrar em áreas de riscos.</p>
-                    <abbr title="Indisponivel">
+                    <Link to="/safearea">
                         <p>Saiba mais</p>
-                    </abbr>
+                    </Link>
+                    {/* <abbr title="Indisponivel">
+                        <p>Saiba mais</p>
+                    </abbr> */}
                     <Link to="/sign-up/driver" className="description-button"><button>Quero ser motorista</button></Link>
                 </div>
             </div>
