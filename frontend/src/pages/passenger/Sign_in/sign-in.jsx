@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { api } from '../../../../../frontend/config/axios.js'
 import './sign-in.css'
+import { errorToast } from '../../../utils/toastUtils.jsx';
 
 
 const SignIn = () => {
@@ -14,9 +15,14 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         try {
             const response = await api.post('/login/passenger', data);
-            navigate('/');
+            const { token, user } = response.data;
+            
+            localStorage.setItem('authToken', token);
+            localStorage.setItem('user', JSON.stringify(user));
+            navigate(`/teste`);
         } catch (error) {
             console.error("Erro ao fazer login:", error);
+            errorToast('Falha ao realizar login, tente novamente');
         }
     };
 
