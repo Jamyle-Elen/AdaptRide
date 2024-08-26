@@ -68,3 +68,37 @@ export const loginPassenger = async (req, res) => {
     return res.status(500).json({ message: "Erro ao tentar logar" })
   }
 }
+
+export const getPassengerInfo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const passenger = await Passenger.findOne({
+      where: { id },
+      attributes: [
+        "name",
+        "cpf",
+        "email",
+        "phone",
+        "date",
+        "password",
+        "emergencyContact",
+        "contactName",
+        "disability",
+        "assistanceLevel",
+        "specialEquipment"
+      ],
+    });
+
+    if (!passenger)
+      return res.status(404).json({ error: "Passageiro não encontrado." });
+
+    res.status(200).json(passenger);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        error: "Ocorreu um erro ao buscar as informações do passageiro.",
+        error,
+      });
+  }
+};
