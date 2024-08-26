@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import images from "../../../assets/images.js";
 // É ele o que vai fazer a requisição HTTP do front para o back
-import { ap } from "../../../../../frontend/config/axios.js";
+import { api } from "../../../../../frontend/config/axios.js";
 // yup é a biblioteca que valida os dados do form
 
 // InputMask é pra formatar os dados do form (Ex: 000.000.000-00 que é o CPF)
