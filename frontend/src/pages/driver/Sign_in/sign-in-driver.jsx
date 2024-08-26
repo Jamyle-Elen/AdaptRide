@@ -2,7 +2,7 @@ import React from "react";
 import images from "../../../assets/images.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import api from "../../../../../frontend/config/axios.js";
+import { api } from "../../../../../frontend/config/axios.js";
 import "./sign-in-driver.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,12 +20,17 @@ const SignInDriver = () => {
   const onSubmit = async (data) => {
     try {
       const response = await api.post("/login/driver", data);
-      sucessToast(`Login realizado com sucesso!`)
-      navigate("/profile");
+      const userData = response.data;
+      sucessToast("Login realizado com sucesso!");
+      navigate("/dashboard/driver", { state: userData });
     } catch (error) {
-      errorToast('Tente novamente em alguns minutos!')
-      reset()
-      console.error("Erro ao fazer login:", error);
+      if (error.response && error.response.data && error.response.data.message) {
+        errorToast(error.response.data.message);
+      } else {
+        errorToast("Falha ao realizar login, tente novamente!");
+      }
+      reset();
+      console.error("Erro ao fazer login:", error.response ? error.response.data : error.message);
     }
   };
 
