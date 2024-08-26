@@ -14,22 +14,23 @@ const Teste = () => {
 
         const fetchUserData = async () => {
             try {
-                const User = {
-                    name: "",
-                    cpf: "",
-                    email: "",
-                    phone: "",
-                    dateBirth: "",
-                    numCNH: "",
-                    vehiclePlate: "",
-                    vehicleBrand: "",
-                    vehicleModel: "",  
-                    vehicleColor: "",
-                    typesAdaptations: "",
-                    totalCapacity: "",
-                    descriptionAdaptations: ""
-                }
-                setUser(User);
+                // const User = {
+                //     name: "",
+                //     cpf: "",
+                //     email: "",
+                //     phone: "",
+                //     dateBirth: "",
+                //     numCNH: "",
+                //     vehiclePlate: "",
+                //     vehicleBrand: "",
+                //     vehicleModel: "",  
+                //     vehicleColor: "",
+                //     typesAdaptations: "",
+                //     totalCapacity: "",
+                //     descriptionAdaptations: ""
+                // }
+                const response = await api.get(`/dashboard/passenger/:${id}`);
+                setUser(response.data);
             } catch (error) {
                 setError("Failed to fetch user data"); 
             } finally {
@@ -37,7 +38,7 @@ const Teste = () => {
             }
         };
         fetchUserData();
-    }, []);
+    }, [id]);
     
     if (loading) return <label>Loading...</label>;
     if (error) return <label>Error: {error}</label>;
