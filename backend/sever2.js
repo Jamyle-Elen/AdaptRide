@@ -13,11 +13,8 @@ const PORT = 3001;
 app.use(express.json());
 app.use(cors());
 
-const findDrivers = async (lat, lon) => {
-  let precision = 12;
-  const searchZoom = 3;
-
-  const getDrivers = async (geohash) => {
+const requestRide = async (startLocation, destinationLocation) => {
+  const getNearbyDrivers = async (geohash) => {
     const neighbors = ngeohash.neighbors(geohash);
     neighbors.push(geohash);
 
@@ -35,57 +32,77 @@ const findDrivers = async (lat, lon) => {
     return results.flat();
   };
 
-  let hash = ngeohash.encode(lat, lon, precision);
+  const findDrivers = async (lat, lon) => {
+    let precision = 12;
+    const searchZoom = 3;
+    let hash = ngeohash.encode(lat, lon, precision);
 
-  while (precision >= searchZoom) {
-    const results = await getDrivers(hash);
+    while (precision >= searchZoom) {
+      const drivers = await getNearbyDrivers(hash);
 
-    if (results.length > 0) {
-      console.log(
-        "Motoristas encontrados:",
-        results.map((driver) => driver.id)
-      );
-      return results;
+      if (drivers.length > 0) {
+        console.log('Motoristas encontrados:', drivers.map(driver => driver.id));
+        return drivers;
+      }
+
+      precision--;
+      hash = hash.substring(0, precision);
     }
 
-    precision--;
-    hash = hash.substring(0, precision);
+    return null;
+  };
+
+  const callDriver = async (driverId) => {
+    return Math.random() < 0.5;
+  };
+
+  const startLat = startLocation.latitude;
+  const startLon = startLocation.longitude;
+  const destLat = destinationLocation.latitude;
+  const destLon = destinationLocation.longitude;
+  const drivers = await findDrivers(startLat, startLon);
+
+  if (!drivers || drivers.length === 0) {
+    console.log('Nenhum motorista encontrado.');
+    return { status: 'fail', message: 'Nenhum motorista disponível.' };
   }
+  
+  for (const driver of drivers) {
+    const accepted = await callDriver(driver.id);
 
-  return null;
-};
-
-const teste = async (startLocation, destinationLocation) => {
-  try {
-    const results = await findDrivers(
-      startLocation.latitude,
-      startLocation.longitude
-    );
-
-    if (!results || results.length === 0) {
-      console.log("Nenhum motorista encontrado");
-      return "Nenhum motorista encontrado";
+    if (accepted) {
+      console.log(`Motorista ${driver.id} aceitou a corrida.`);
+      
+      const ride = await Ride.create({
+        startLocation: `${startLat},${startLon}`,
+        destinationLocation: `${destLat},${destLon}`,
+        idDriver: driver.id,
+        statusRide: 'Accepted'
+      });
+      
+      return { status: 'success', message: `Corrida solicitada com o motorista: ${driver.id}`, ride };
+    } else {
+      console.log(`Motorista ${driver.id} rejeitou a corrida.`);
     }
-
-    const [driver] = results;
-    console.log(driver);
-    const rideRequest = await Ride.create({
-      idDriver: driver.id,
-      startLocation: `${startLocation.latitude},${startLocation.longitude}`,
-      destinationLocation: `${destinationLocation.latitude},${destinationLocation.longitude}`,
-    });
-    console.log(rideRequest);
-    return rideRequest;
-  } catch (error) {
-    console.error("Erro ao criar solicitação de corrida:", error.message);
-    return error.message;
   }
-};
 
+  console.log('Nenhum motorista aceitou a corrida.');
+  return { status: 'fail', message: 'Nenhum motorista aceitou a corrida.' };
+};
 app.post("/rides", async (req, res) => {
   const { startLocation, destinationLocation } = req.body;
-  res.status(200).json(await teste(startLocation, destinationLocation));
+
+  try {
+    const result = await requestRide(startLocation, destinationLocation);
+    
+    res.status(result.status === 'success' ? 200 : 504).json(result);
+    
+  } catch (error) {
+    console.error('Erro ao solicitar corrida:', error);
+    res.status(500).json({ message: 'Erro ao solicitar corrida.' });
+  }
 });
+
 
 app.get("/check-ride/:driverId", (req, res) => {
   const driverId = req.params.driverId;
