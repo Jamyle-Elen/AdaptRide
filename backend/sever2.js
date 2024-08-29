@@ -3,6 +3,7 @@ import ngeohash from "ngeohash";
 import { Op } from "sequelize";
 import cors from "cors";
 import { url } from "../frontend/config/axios.js";
+import { Server as SocketIOServer } from "socket.io";
 import Driver from "../backend/models/Driver.Model.js";
 import Ride from "../backend/models/Ride.Model.js";
 // import { getDistance } from 'geolib'
@@ -11,7 +12,57 @@ const app = express();
 const PORT = 3001;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+  }
+));
+
+const server =app.listen(PORT, () => {
+  console.log(`running in http://localhost:${PORT}`);
+});
+
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  }
+})
+
+io.on("connection", (socket) => {
+  console.log("New partner connected", socket.id);
+
+  socket.on('acceptRide', async ({rideId, driverId}) => {
+    try {
+      const ride = await Ride.findByPk(rideId);
+      if (ride && ride.statusRide === 'Pending') {
+        ride.statusRide = 'Accepted';
+        ride.driverId = driverId;
+        await ride.save();
+        io.emit('rideAccepted', {rideId, driverId});
+        console.log(`Motorista ${driverId} aceitou a corrida ${rideId}`);
+      }
+    } catch (error) {
+      console.error('Erro ao aceitar corrida:', error);
+    }
+  })
+
+  socket.on('declineRide', async ({ rideId, driverId }) => {
+    try {
+      const ride = await Ride.findByPk(rideId);
+      if (ride && ride.statusRide === 'Pending') {
+        ride.statusRide = 'Declined';
+        await ride.save();
+        io.emit('rideDeclined', { rideId, driverId });
+        console.log(`Motorista ${driverId} recusou a corrida ${rideId}`);
+      }
+    } catch (error) {
+      console.error('Erro ao recusar corrida:', error);
+    }
+  });
+});
 
 const requestRide = async (startLocation, destinationLocation) => {
   const getNearbyDrivers = async (geohash) => {
@@ -49,12 +100,13 @@ const requestRide = async (startLocation, destinationLocation) => {
       hash = hash.substring(0, precision);
     }
 
-    return null;
+    // neturn null;
+    return [];
   };
 
-  const callDriver = async (driverId) => {
-    return Math.random() < 0.5;
-  };
+  // const callDriver = async (driverId) => {
+  //   return Math.random() < 0.5;
+  // };
 
   const startLat = startLocation.latitude;
   const startLon = startLocation.longitude;
@@ -66,29 +118,33 @@ const requestRide = async (startLocation, destinationLocation) => {
     console.log('Nenhum motorista encontrado.');
     return { status: 'fail', message: 'Nenhum motorista disponível.' };
   }
-  
-  for (const driver of drivers) {
-    const accepted = await callDriver(driver.id);
 
-    if (accepted) {
-      console.log(`Motorista ${driver.id} aceitou a corrida.`);
-      
-      const ride = await Ride.create({
-        startLocation: `${startLat},${startLon}`,
-        destinationLocation: `${destLat},${destLon}`,
-        idDriver: driver.id,
-        statusRide: 'Accepted'
+  for(const driver of drivers) {
+    const ride = await Ride.create({
+      startLocation: `${startLat},${startLon}`,
+      destinationLocation: `${destLat},${destLon}`,
+      idDriver: driver.id,
+      statusRide: 'Pending'
+    })
+    io.emit('rideRequest', {driverId: driver.id, rideId: ride.id, startLocation, destinationLocation});
+
+    const result = await new Promise((resolve) => {
+      const timeout = setTimeout(() => resolve(null), 20000); // 20 segundos para aceitar
+      io.once('rideAccepted', () => {
+        clearTimeout(timeout);
+        resolve(ride);
       });
-      
-      return { status: 'success', message: `Corrida solicitada com o motorista: ${driver.id}`, ride };
-    } else {
-      console.log(`Motorista ${driver.id} rejeitou a corrida.`);
-    }
-  }
+      io.once('rideDeclined', () => {
+        clearTimeout(timeout);
+        resolve(null);
+      });
+    });
 
-  console.log('Nenhum motorista aceitou a corrida.');
+    if (result) return result;
+  }
   return { status: 'fail', message: 'Nenhum motorista aceitou a corrida.' };
-};
+}
+
 app.post("/rides", async (req, res) => {
   const { startLocation, destinationLocation } = req.body;
 
@@ -202,11 +258,3 @@ app.post("/:id/declined", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-app.listen(PORT, () => {
-  console.log(`running in http://localhost:${PORT}`);
-});
-// 289c1475-a72e-4642-ac0a-7f5f12ecffb9
-// 289c1475-a72e-4642-ac0a-7f5f12ecffb9
-
-// dessa forma, a funcao de obter motorista fara a busca de vizinhos tbm
