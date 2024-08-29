@@ -1,26 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import images from "../../../assets/images";
 import "./herosection.css";
 import { Link, useNavigate } from "react-router-dom";
 import ReactInputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import { sucessToast, errorToast, rideAcceptToast } from "../../../utils/toastUtils";
-import {api, url} from "../../../../config/axios.js";
-// import "../../../pages/homepage/homepage.css";
+import { api, url } from "../../../../config/axios.js";
 import { TailSpin } from "react-loader-spinner";
-
-
-// usar o geohash pegar o moto mais proximo, criar uma tabela pra colocar o id, loc e status (livre e ocupado)
-// colocar o id (nao pega do db ainda)
-
+import { io } from "socket.io-client";
 
 const HeroSection = () => {
   const [startLocation, setStartLocation] = useState(null);
-  const [destinationLocation, setDestinationLocation] = useState({ latitude:"", longitude: "" });
+  const [destinationLocation, setDestinationLocation] = useState({ latitude: "", longitude: "" });
   const [geolocationActive, setGeolocationActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  
+  const socket = io("http://localhost:3001");
+
+  useEffect(() => {
+    socket.on("rideAccepted", (data) => {
+      console.log("Motorista aceitou a corrida", data);
+      rideAcceptToast("Corrida aceita pelo motorista!");
+      navigate("/race-request");
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [socket, navigate]);
 
   const handleGeolocation = () => {
     if (navigator.geolocation) {
@@ -38,35 +45,29 @@ const HeroSection = () => {
       console.log("Localização indisponível");
     }
   };
-  // const navigate = useNavigate();
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors } = useForm()
-  // }
 
   const handleClearLocation = () => {
-    setStartLocation({latitude: "", longitude: ""});
+    setStartLocation({ latitude: "", longitude: "" });
     setGeolocationActive(false);
-  }
-  
+  };
+
   const handleRequestRide = async () => {
     setLoading(true);
-    const token= localStorage.getItem('authToken')
+    const token = localStorage.getItem("authToken");
     if (!token) {
-      localStorage.setItem('rideRequest', JSON.stringify({
-        startLocation,
-        destinationLocation
-      }))
-      navigate('/race-request')
-      setLoading(false)
-      return
+      localStorage.setItem(
+        "rideRequest",
+        JSON.stringify({
+          startLocation,
+          destinationLocation,
+        })
+      );
+      navigate("/race-request");
+      setLoading(false);
+      return;
     }
 
-
     const data = {
-      // passengerId: "360ee361-ebfe-4723-af1a-32fd58029f40", // comentei e ya realmente ta indo
-      // // idDRIVER: '7a41bd7e-9a52-4867-bf0c-80b33a86a888',
       startLocation: {
         latitude: parseFloat(startLocation.latitude),
         longitude: parseFloat(startLocation.longitude),
@@ -77,21 +78,23 @@ const HeroSection = () => {
       },
     };
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       const response = await url.post("/rides", data);
       console.log("Corrida solicitada com sucesso!");
       rideAcceptToast("Motorista solicitado!");
-      navigate("/race-request")
+      socket.emit("rideRequested", data);
+      navigate("/race-request");
     } catch (error) {
       console.error("Erro ao solicitar corrida", error);
-      errorToast('Erro ao solicitar corrida', error)
+      errorToast("Erro ao solicitar corrida", error);
     } finally {
       setLoading(false);
     }
   };
+
   const handleSubmit = (e) => {
-    e.preventDefault()
-    handleRequestRide()
+    e.preventDefault();
+    handleRequestRide();
   };
   return (
     <div className="homepage">
@@ -104,7 +107,6 @@ const HeroSection = () => {
             <p>Viagens Confortáveis, solicite agora.</p>
           </div>
           {loading ? (
-            // Exibe o spinner quando o loading for true
             <div className="loading-container">
               <TailSpin
                 height="70"
