@@ -125,7 +125,7 @@
     background-color: #ffffff;
 }
 
-/* RESPONSIVIIDADE */
+/* RESPONSIVIDADE */
 
 @media (max-width: 1280px) {    
     .firstColumn {
@@ -169,6 +169,12 @@
     }
 }
 
+@media (max-width: 500px) {
+    .QrCodeAppInfo {
+        display: none;
+    }
+}
+
 @media (max-width: 425px) {
     .footer {
         flex-wrap: wrap;
@@ -176,9 +182,5 @@
         gap: 2rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
-    }
-
-    .QrCodeAppInfo {
-        display: none;
     }
 }

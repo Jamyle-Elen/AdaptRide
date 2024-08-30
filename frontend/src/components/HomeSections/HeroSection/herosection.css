@@ -68,6 +68,13 @@
     border: red solid 1px;
 }
 
+.ride-request-form {
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
 .hero-image {
     flex: 1;
     display: flex;

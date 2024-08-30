@@ -51,10 +51,10 @@ const NavBar = () => {
           </Link>
           <ul className="list">
             <li>
-              <Link to="/sign-in/driver" className="list-item">Dirigir</Link>
+              <Link to="/sign-in/driver" className="list-item" id="list-item-drive">Dirigir</Link>
             </li>
             <li>
-              <Link to="/aboutpage" className="list-item">Sobre</Link>
+              <Link to="/aboutpage" className="list-item" id="list-item-about">Sobre</Link>
             </li>
           </ul>
         </div>
@@ -82,7 +82,7 @@ const NavBar = () => {
             <div className="auth-options">
               <ul className="list">
                 <li>
-                  <Link to="/help" className="list-item">Ajuda</Link>
+                  <Link to="/help" className="list-item" id="list-item-help">Ajuda</Link>
                 </li>
                 <li>
                   <Link to="/sign-in" className="list-item">Login</Link>

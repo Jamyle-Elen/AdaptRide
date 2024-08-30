@@ -197,7 +197,7 @@ figcaption {
 
 @media (max-width: 425px) {
     .about-us-section {
-        height: auto;
+        height: 85vh;
         flex-direction: column;
     }
 

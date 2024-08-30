@@ -61,23 +61,19 @@
     color: var(--text-color);
 }
 
-.list .list-help Link {
+/* .list .list-help Link {
     background-color: var(--bg-color);
     color: var(--text-color);
-}
-
-#list-two {
-    gap: 20px;
-}
+} */
 
 ul {
     gap: 20px;
     align-items: center;
 }
 
-ul:hover {
+/* ul:hover {
     color: var(--bg-color);
-}
+} */
 
 button {
     font-size: 16px;
@@ -113,7 +109,7 @@ button:hover {
     border-radius: 30px;
 }
 
-/* RESPONSIVIIDADE */
+/* RESPONSIVIDADE */
 
 @media (max-width: 1280px) {
     .menu-content {
@@ -133,28 +129,40 @@ button:hover {
     }
 }
 
-
 @media (max-width: 970px) {
     .menu-content {
         padding: 0 1rem;
     }
 }
 
+@media (max-width: 600px) {
+    #list-item-about {
+        display: none;
+    }
 
-@media (max-width: 768px) {
-    .list .solicitar-corrida {
+    #list-item-help {
         display: none;
     }
 }
 
+@media (max-width: 500px) {
+    #list-item-drive {
+        display: none;
+    }
+}
 
 @media (max-width: 425px) {
-    .list-item {
+    .class1 img {
+        width: 8rem;
+    }
+
+    #list-item-drive {
         display: none;
     }
 
-    .list-help {
-        display: none;
+    .sign-up-btn {
+        height: 2.5rem;
+        width: 7rem;
     }
 }
 
@@ -164,17 +172,19 @@ button:hover {
     }
 
     .class1 img {
-        width: 7rem;
+        width: 6rem;
     }
 
-    .list-item {
-        display: none;
+    .sign-up-btn {
+        height: 2.5rem;
+        width: 6rem;
     }
 
-    .list-help {
-        display: none;
+    button {
+        font-size: 12px;
+        font-weight: 700;
+        padding: 7px 12px;
     }
-
 }
 
 @media (max-width: 320px) {
