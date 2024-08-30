@@ -32,7 +32,7 @@
     flex-direction: column;
 }
 
-.benefits-content figurecaption {
+.benefits-content figcaption {
     font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
