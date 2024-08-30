@@ -24,6 +24,16 @@
     gap: 2rem;
 }
 
+.sign-in-arrow{
+    background-color: transparent;
+}
+
+.sign-in-arrow i{
+    margin-left: -13rem;
+    font-size: 3.2rem;
+    color: #3D4A6A;
+}
+
 .sign-in-text {
     display: flex;
     flex-direction: column;
