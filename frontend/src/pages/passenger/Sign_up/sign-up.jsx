@@ -45,7 +45,7 @@ const SignUp = () => {
       sucessToast("Cadastrado com sucesso!");
       // verificar se o tempo ta legal ou ta mt longo
       await new Promise((resolve) => setTimeout(resolve, 500));
-      navigate("/sign-in/driver");
+      navigate("/sign-in");
       reset();
 
       // volta para a tela de login
