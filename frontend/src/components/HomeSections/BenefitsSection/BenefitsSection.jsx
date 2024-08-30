@@ -8,9 +8,9 @@ const BenefitsSection = () => {
         <section className="benefits-section">
             <div className="benefits-content">
                 <figure>
-                    <figurecaption>
+                    <figcaption>
                         SAFE
-                    </figurecaption>
+                    </figcaption>
                     <img className="car-safe" src={images.car3Adapt} alt="car image" />
                 </figure>
                 <div className="description">
@@ -19,9 +19,6 @@ const BenefitsSection = () => {
                     <Link to="/safealert">
                         <p>Saiba mais</p>
                     </Link>
-                    {/* <abbr title="Indisponivel">
-                        <p>Saiba mais</p>
-                    </abbr> */}
                     <Link to="/sign-up/driver" className="description-button"><button>Quero ser motorista</button></Link>
                 </div>
             </div>
