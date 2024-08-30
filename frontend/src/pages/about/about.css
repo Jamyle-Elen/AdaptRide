@@ -1,25 +1,37 @@
+
 .aboutPage {
     background-color: #E9E9E9;
-    width: 100vw;
-    height: 90vh; 
+    min-height: 100vh;
+    max-width:100vw ;
+    display:grid;
+    grid-template-rows: 0.01fr 0.01fr;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    overflow-x: hidden;
+
 }
 
 .page{
+
     background-color: transparent;
-    display: flex;
+    display: grid;
+    grid-template-columns: 0.8fr;
+    grid-template-rows: 1fr ;
     justify-content:center; 
     align-items: center; 
-    max-width: max-content;
+    max-width: 90vw;
     padding: 0 10% 0 10%;
-    gap: 1rem;
+    gap: 2rem;
     width: 100%;
+    margin: auto;
     
 }
 
 .aboutPage_text{
     background-color: #3D4A6A;
     height: 25rem;
-    width: 40rem;
+    width: 20rem;
     border: 0;
     border-radius: 15px;
     border-bottom-left-radius: 0;
@@ -47,6 +59,7 @@
     height: 100%;      
     width: 100%;
     background-color: transparent;
+    grid-column: span 2;
 }
 
 .aboutPage_img img {
@@ -61,3 +74,20 @@
     bottom: center; 
 }
 
+
+/* Respansividade */
+
+@media (max-width: 700px) {
+    .aboutPage_text {
+        width: 15rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .page {
+       
+        grid-template-columns: 1fr; 
+        grid-template-rows: 4fr 1fr;
+        
+    }
+}
