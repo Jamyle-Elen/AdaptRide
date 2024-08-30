@@ -33,10 +33,11 @@
 }
 
 .benefits-content figcaption {
+    background-color: transparent;
+    color: var(--first-section-color);
+    text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
-    text-align: center;
-    color: var(--first-section-color);
 }
 
 .car-safe {
@@ -64,6 +65,7 @@
     width: 13rem;
     border-radius: 10px;
     cursor: pointer;
+    text-align: center;
 }
 
 .description button:hover {
@@ -76,19 +78,6 @@
     justify-content: center;
     align-items: center;
 }
-
-/* .card {
-    background: var(--first-section-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    width: 8rem;
-    height: 7rem;
-    transition: .2s ease-in;
-} */
 
 .def-icon {
     width: 8rem;
@@ -169,7 +158,7 @@
         height: auto;
     }
 
-    .description-button {
+    .description-button button {
         height: 2rem;
         width: 10rem;
     }
@@ -181,6 +170,13 @@
 
     .benefits {
         width: 13rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .description-button button {
+        height: 3rem;
+        width: 7rem;
     }
 }
 
@@ -200,6 +196,11 @@
 
     .description-button {
         align-self: center;
+    }
+
+    .description-button button {
+        height: 2rem;
+        width: 10rem;
     }
 
     .benefits {

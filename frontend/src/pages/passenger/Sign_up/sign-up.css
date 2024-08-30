@@ -12,6 +12,17 @@
     justify-content: center;
 }
 
+.sign-up-back-home {
+    background-color: transparent;
+    margin-left: -10rem;
+    margin-top: -5rem;
+}
+
+.sign-up-back-home i{
+    font-size: 3.2rem;
+    color: #E9E9E9;
+}
+
 .sign_in_area {
     padding: 4rem 3rem;
     background-color: #3D4A6A;

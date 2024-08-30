@@ -6,7 +6,6 @@ import { api } from '../../../../../frontend/config/axios.js'
 import './sign-in.css'
 import { errorToast, sucessToast } from '../../../utils/toastUtils.jsx';
 
-
 const SignIn = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -32,6 +31,9 @@ const SignIn = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <section className="section">
                         <div className="sign-in">
+                            <div className="sign-in-arrow">
+                                <Link to="/"><i className="bx bx-chevron-left"></i></Link>
+                            </div>
                             <div className="sign-in-text">
                                 <h2>Login</h2>
                                 <p>Insira seus dados</p>
