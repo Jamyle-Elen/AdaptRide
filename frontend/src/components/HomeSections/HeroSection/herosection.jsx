@@ -54,7 +54,7 @@ const HeroSection = () => {
   const handleRequestRide = async () => {
     setLoading(true);
     const token = localStorage.getItem("authToken");
-    if (!token) {
+    if (token) {
       localStorage.setItem(
         "rideRequest",
         JSON.stringify({
