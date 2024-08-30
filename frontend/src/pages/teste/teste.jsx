@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import images from "../../assets/images"
 import "./teste.css";
-import { api } from '../../../config/axios.js'
-import SignUpDriver from "../driver/Sign_up/sign-up-driver";
+// import api from '../../../config/axios.jsx'
+// import SignUpDriver from "../driver/Sign_up/sign-up-driver";
+import SideBar from '../../components/sideBar/sideBar.jsx';
 
 const Teste = () => {
     const { id } = useParams();
@@ -45,10 +46,7 @@ const Teste = () => {
     if (!user) return <label>No user data available</label>;
     return (
         <main className="profile-driver">
-            <nav className="navbar">
-                <Link to="/history"><i className='bx bx-time-five'></i></Link>
-                <Link to="/"><abbr title="Sair"><i className='bx bx-log-out'></i></abbr></Link>
-            </nav>
+            <SideBar/>
             <section className="info-profile-driver">
                 <section className='driver'> 
                 <figure>

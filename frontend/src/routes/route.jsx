@@ -5,6 +5,7 @@ import NotFound from "../pages/NotFound/notfound.jsx";
 import AboutPage from "../pages/about/about.jsx";
 import Help from "../pages/help/help.jsx"
 import History from '../pages/history/history.jsx';
+import SideBar from "../components/sideBar/sideBar.jsx";
 // Passageiro
 import SignIn from "../pages/passenger/Sign_in/sign-in.jsx";
 import SignUp from "../pages/passenger/Sign_up/sign-up.jsx";
@@ -29,8 +30,10 @@ const Router = () => {
           <Route path= "/history" element={<History/>}/>
           <Route path="/sign-in/driver" element={<SignInDriver />} />
           <Route path="/sign-up/driver" element={<SignUpDriver />} />
-          {/* <Route path="/profile-passenger" element={<ProfilePassenger />} /> */}
+          <Route path="/profile-passenger" element={<ProfilePassenger />} />
+          <Route path="/historyPassenger" element={<HistoryPassenger />} />
           <Route path="/race-request" element={<RaceRequest />} />
+          <Route path="/sideBar" element={<SideBar/>} />
           {/* <Route path="/profile/:id" element={<ProfilePassenger/>} /> */}
           <Route path="*" element={<NotFound />} />
           <Route path="/teste" element={<Teste/>} />
