@@ -9,9 +9,8 @@ const socket = io("http://localhost:3001");
 const DriverDashboard = () => {
   const [rideData, setRideData] = useState();
   const [displayModal, setDisplayModal] = useState(false);
-  const driverId = "2b80304a-6f45-49e6-97e5-cdbb54a17b7b"
+  const driverId = "464daea6-ecdb-46e0-a51e-f06f2ee3b215"
   // const driverId = "d776a1c9-cfc0-437a-9cd1-ad7d483100e2"; // id dinamico, de acordo com o motorista que realizar o login
-
   const handleDisplayModal = () => setDisplayModal(true);
   const handleCloseModal = () => setDisplayModal(false);
 
