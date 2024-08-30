@@ -21,8 +21,10 @@ const SignInDriver = () => {
     try {
       const response = await api.post("/login/driver", data);
       const userData = response.data;
+      const id = response.data.id;
+      console.log(response.data)
       sucessToast("Login realizado com sucesso!");
-      navigate("/dashboard/driver", { state: userData });
+      navigate(`/teste/${id}`, { state: userData });
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         errorToast(error.response.data.message);

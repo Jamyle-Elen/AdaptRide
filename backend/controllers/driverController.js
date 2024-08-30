@@ -96,7 +96,7 @@ export const loginDriver = async (req, res) => {
       return res.status(400).json({ message: "Senha incorreta" });
     }
 
-    res.status(200).json({ message: "Login bem sucedido!", driver });
+    res.status(200).json({ message: "Login bem sucedido!", id: driver.id });
   } catch (error) {
     console.error("Erro ao tentar logar:", error.message);
     res.status(500).json({ message: "Erro ao tentar logar" });

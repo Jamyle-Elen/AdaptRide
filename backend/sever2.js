@@ -3,6 +3,7 @@ import ngeohash from "ngeohash";
 import { Op } from "sequelize";
 import cors from "cors";
 import { url } from "../frontend/config/axios.js";
+import { Server as SocketIOServer } from "socket.io";
 import Driver from "../backend/models/Driver.Model.js";
 import Ride from "../backend/models/Ride.Model.js";
 // import { getDistance } from 'geolib'
@@ -11,13 +12,60 @@ const app = express();
 const PORT = 3001;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+  }
+));
 
-const findDrivers = async (lat, lon) => {
-  let precision = 12;
-  const searchZoom = 3;
+const server =app.listen(PORT, () => {
+  console.log(`running in http://localhost:${PORT}`);
+});
 
-  const getDrivers = async (geohash) => {
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  }
+})
+
+io.on("connection", (socket) => {
+  console.log("New partner connected", socket.id);
+
+  socket.on('acceptRide', async ({rideId, driverId}) => {
+    try {
+      const ride = await Ride.findByPk(rideId);
+      if (ride && ride.statusRide === 'Pending') {
+        ride.statusRide = 'Accepted';
+        ride.driverId = driverId;
+        await ride.save();
+        io.emit('rideAccepted', {rideId, driverId});
+        console.log(`Motorista ${driverId} aceitou a corrida ${rideId}`);
+      }
+    } catch (error) {
+      console.error('Erro ao aceitar corrida:', error);
+    }
+  })
+
+  socket.on('declineRide', async ({ rideId, driverId }) => {
+    try {
+      const ride = await Ride.findByPk(rideId);
+      if (ride && ride.statusRide === 'Pending') {
+        ride.statusRide = 'Declined';
+        await ride.save();
+        io.emit('rideDeclined', { rideId, driverId });
+        console.log(`Motorista ${driverId} recusou a corrida ${rideId}`);
+      }
+    } catch (error) {
+      console.error('Erro ao recusar corrida:', error);
+    }
+  });
+});
+
+const requestRide = async (startLocation, destinationLocation) => {
+  const getNearbyDrivers = async (geohash) => {
     const neighbors = ngeohash.neighbors(geohash);
     neighbors.push(geohash);
 
@@ -35,57 +83,82 @@ const findDrivers = async (lat, lon) => {
     return results.flat();
   };
 
-  let hash = ngeohash.encode(lat, lon, precision);
+  const findDrivers = async (lat, lon) => {
+    let precision = 12;
+    const searchZoom = 3;
+    let hash = ngeohash.encode(lat, lon, precision);
 
-  while (precision >= searchZoom) {
-    const results = await getDrivers(hash);
+    while (precision >= searchZoom) {
+      const drivers = await getNearbyDrivers(hash);
 
-    if (results.length > 0) {
-      console.log(
-        "Motoristas encontrados:",
-        results.map((driver) => driver.id)
-      );
-      return results;
+      if (drivers.length > 0) {
+        console.log('Motoristas encontrados:', drivers.map(driver => driver.id));
+        return drivers;
+      }
+
+      precision--;
+      hash = hash.substring(0, precision);
     }
 
-    precision--;
-    hash = hash.substring(0, precision);
+    // neturn null;
+    return [];
+  };
+
+  // const callDriver = async (driverId) => {
+  //   return Math.random() < 0.5;
+  // };
+
+  const startLat = startLocation.latitude;
+  const startLon = startLocation.longitude;
+  const destLat = destinationLocation.latitude;
+  const destLon = destinationLocation.longitude;
+  const drivers = await findDrivers(startLat, startLon);
+
+  if (!drivers || drivers.length === 0) {
+    console.log('Nenhum motorista encontrado.');
+    return { status: 'fail', message: 'Nenhum motorista disponível.' };
   }
 
-  return null;
-};
-
-const teste = async (startLocation, destinationLocation) => {
-  try {
-    const results = await findDrivers(
-      startLocation.latitude,
-      startLocation.longitude
-    );
-
-    if (!results || results.length === 0) {
-      console.log("Nenhum motorista encontrado");
-      return "Nenhum motorista encontrado";
-    }
-
-    const [driver] = results;
-    console.log(driver);
-    const rideRequest = await Ride.create({
+  for(const driver of drivers) {
+    const ride = await Ride.create({
+      startLocation: `${startLat},${startLon}`,
+      destinationLocation: `${destLat},${destLon}`,
       idDriver: driver.id,
-      startLocation: `${startLocation.latitude},${startLocation.longitude}`,
-      destinationLocation: `${destinationLocation.latitude},${destinationLocation.longitude}`,
+      statusRide: 'Pending'
+    })
+    io.emit('rideRequest', {driverId: driver.id, rideId: ride.id, startLocation, destinationLocation});
+
+    const result = await new Promise((resolve) => {
+      const timeout = setTimeout(() => resolve(null), 20000); // 20 segundos para aceitar
+      io.once('rideAccepted', () => {
+        clearTimeout(timeout);
+        resolve(ride);
+      });
+      io.once('rideDeclined', () => {
+        clearTimeout(timeout);
+        resolve(null);
+      });
     });
-    console.log(rideRequest);
-    return rideRequest;
-  } catch (error) {
-    console.error("Erro ao criar solicitação de corrida:", error.message);
-    return error.message;
+
+    if (result) return result;
   }
-};
+  return { status: 'fail', message: 'Nenhum motorista aceitou a corrida.' };
+}
 
 app.post("/rides", async (req, res) => {
   const { startLocation, destinationLocation } = req.body;
-  res.status(200).json(await teste(startLocation, destinationLocation));
+
+  try {
+    const result = await requestRide(startLocation, destinationLocation);
+    
+    res.status(result.status === 'success' ? 200 : 504).json(result);
+    
+  } catch (error) {
+    console.error('Erro ao solicitar corrida:', error);
+    res.status(500).json({ message: 'Erro ao solicitar corrida.' });
+  }
 });
+
 
 app.get("/check-ride/:driverId", (req, res) => {
   const driverId = req.params.driverId;
@@ -185,11 +258,3 @@ app.post("/:id/declined", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-app.listen(PORT, () => {
-  console.log(`running in http://localhost:${PORT}`);
-});
-// 289c1475-a72e-4642-ac0a-7f5f12ecffb9
-// 289c1475-a72e-4642-ac0a-7f5f12ecffb9
-
-// dessa forma, a funcao de obter motorista fara a busca de vizinhos tbm

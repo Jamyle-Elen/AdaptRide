@@ -16,6 +16,7 @@ import SignUpDriver from "../pages/driver/Sign_up/sign-up-driver.jsx";
 import RaceRequest from "../pages/RaceRequest/raceRequest.jsx";
 import Teste from "../pages/teste/teste.jsx";
 import SafeAlert from "../pages/SafeAlert/index.jsx";
+import DriverDashboard from "../pages/driver/Dashboard/Dashboard.jsx";
 
 const Router = () => {
   return (
@@ -38,6 +39,8 @@ const Router = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="/teste" element={<Teste/>} />
           <Route path="/safealert" element={<SafeAlert />} />
+          <Route path="/teste/:id" element={<Teste/>} />
+          <Route path="/dashboard/driver" element={<DriverDashboard/>} />
         </Routes>
       </BrowserRouter>
     </>

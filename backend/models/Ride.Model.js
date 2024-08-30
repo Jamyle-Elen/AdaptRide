@@ -44,7 +44,7 @@ const Ride = db.define('Ride', {
   statusRide: {
     type: DataTypes.ENUM('Pending', 'Accepted','Cancelled','inProgress', 'Declined', 'Conclued'),
     allowNull: false,
-    defaultValue: 'Accepted',
+    defaultValue: 'Pending',
   },
 }, {
   timestamps: true,
