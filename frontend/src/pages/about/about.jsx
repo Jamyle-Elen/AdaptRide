@@ -6,8 +6,9 @@ import NavBar from "../../components/NavBar/navbar.jsx";
 const AboutPage = () => {
   return (
     <>
-    <NavBar />
+    
     <main className="aboutPage">
+    <NavBar />
       <section className="page">
         <div className="aboutPage_text">
           <h2>Quem somos nós?</h2>
@@ -16,11 +17,6 @@ const AboutPage = () => {
             qualidade de vida de brasileiros portadores de deficiência.
           </p>
         </div>
-        <div className="aboutPage_img">
-          <img src={images.about} alt="about image" />
-          <img className="aboutPage_img2" src={images.logoAdapt2} alt="about image2" />
-        </div>
-
         <div className="aboutPage_text">
           <h2>O que fazemos?</h2>
           <p>
@@ -32,6 +28,10 @@ const AboutPage = () => {
               e ajudando a transformar a mobilidade para todos.
             </p>
           </p>
+        </div>
+        <div className="aboutPage_img">
+          <img src={images.about} alt="about image" />
+          <img className="aboutPage_img2" src={images.logoAdapt2} alt="about image2" />
         </div>
       </section>
     </main>

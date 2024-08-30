@@ -130,3 +130,67 @@
     width: 10rem;
     cursor: pointer;
 }
+
+@media (max-width: 900px) {
+    .section .sign-in {
+        padding: 1rem 2rem;
+        width: 65%;
+    }
+}
+
+@media (max-width: 800px) {
+    .main {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section .sign-in {
+        width: 100%;
+    }
+
+    .section .sign-up-area {
+        padding: 2rem;
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .section .sign-in {
+        width: 25rem;
+    }
+
+    .sign-in-input #email, #password {
+        width: 20rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .section .sign-in {
+        width: 20rem;
+    }
+
+    .sign-in-input #email, #password {
+        width: 15rem;
+    }
+
+    .sign-in-arrow i{
+        margin-left: -8.5rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .main {
+        padding: 0 2rem;
+    }
+
+    .section .sign-in {
+        width: 18rem;
+    }
+}

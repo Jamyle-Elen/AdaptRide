@@ -42,6 +42,9 @@ const SignInDriver = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <section className="section">
             <div className="sign-in">
+              <div className="sign-in-arrow">
+                <Link to="/"><i className="bx bx-chevron-left"></i></Link>
+              </div>
               <div className="sign-in-text">
                 <h2>Login</h2>
                 <p>Insira seus dados</p>
@@ -84,7 +87,7 @@ const SignInDriver = () => {
               </Link>
             </div>
           </section>
-          <ToastContainer/>
+          <ToastContainer />
         </form>
       </main>
     </>

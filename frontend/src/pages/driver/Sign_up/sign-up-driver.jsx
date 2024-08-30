@@ -75,6 +75,7 @@ const SignUpDriver = () => {
     <main className="main">
       <section className="section">
         <div className="sign_in_area">
+        <Link className='sign-up-back-home' to="/"><i className="bx bx-chevron-left"></i></Link>
           <img src={images.logoAdapt} alt="Logo Adapt" />
           <div className="sign_in_text">
             <h2>Olá, <span>motorista!</span> Que bom ver você novamente.</h2>
