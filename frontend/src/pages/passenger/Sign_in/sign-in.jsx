@@ -39,19 +39,19 @@ const SignIn = () => {
                                 <p>Insira seus dados</p>
                             </div>
                             <div className="sign-in-input">
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    id="email" 
-                                    placeholder="E-mail" 
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="E-mail"
                                     {...register("email")}
                                 />
                                 {errors.email && <span className="error-message">{errors.email.message}</span>}
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    id="password" 
-                                    placeholder="Senha" 
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    placeholder="Senha"
                                     {...register("password")}
                                 />
                                 {errors.password && <span className="error-message">{errors.password.message}</span>}
