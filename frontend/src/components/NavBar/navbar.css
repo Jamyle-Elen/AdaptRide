@@ -49,6 +49,11 @@
     color: var(--text-color);
 }
 
+.auth-options {
+    display: flex;
+    gap: 1.5rem;
+}
+
 .list {
     background-color: var(--bg-color);
     display: flex;
