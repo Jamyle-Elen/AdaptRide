@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import images from "../../assets/images"
 import "./teste.css";
-import sideBar from '../../components/sideBar/sideBar.jsx';
-import api from '../../../config/axios.jsx'
-import SignUpDriver from "../driver/Sign_up/sign-up-driver";
+// import api from '../../../config/axios.jsx'
+// import SignUpDriver from "../driver/Sign_up/sign-up-driver";
 import SideBar from '../../components/sideBar/sideBar.jsx';
 
 const Teste = () => {
