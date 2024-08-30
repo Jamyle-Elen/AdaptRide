@@ -2,37 +2,51 @@ import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import io from "socket.io-client";
 import CustomMap from "../../../components/Maps/Geocode.jsx";
+import { api, url } from "../../../../config/axios.js";
 
 const socket = io("http://localhost:3001");
 
 const DriverDashboard = () => {
   const [rideData, setRideData] = useState();
   const [displayModal, setDisplayModal] = useState(false);
-  const driverId = "d776a1c9-cfc0-437a-9cd1-ad7d483100e2";
+  // const [driverId, setDriverId] = useState(null)
+  const driverId = "d776a1c9-cfc0-437a-9cd1-ad7d483100e2"; // id dinamico, de acordo com o motorista que realizar o login
 
   const handleDisplayModal = () => setDisplayModal(true);
   const handleCloseModal = () => setDisplayModal(false);
 
   useEffect(() => {
-    socket.on(
-      "rideRequest",
-      ({
-        driverId: requestedDriverId,
-        rideId,
-        startLocation,
-        destinationLocation,
-      }) => {
-        if (requestedDriverId === driverId) {
-          setRideData({ rideId, startLocation, destinationLocation });
-          handleDisplayModal();
-        }
+    const fetchDriverId = async () => {
+      try {
+        const response = await api.get(`/login/driver/`);
+        setDriverId(response.data.id);
+      } catch (error) {
+        console.error("Erro ao buscar o ID do motorista:", error);
       }
-    );
+    }
 
-    return () => {
-      socket.off("rideRequest");
-    };
-  }, []);
+    fetchDriverId()
+
+    if(driverId) {
+      socket.on(
+        "rideRequest",
+        ({
+          driverId: requestedDriverId,
+          rideId,
+          startLocation,
+          destinationLocation,
+        }) => {
+          if (requestedDriverId === driverId) {
+            setRideData({ rideId, startLocation, destinationLocation });
+            handleDisplayModal();
+          }
+        })
+
+      return () => {
+        socket.off("rideRequest");
+      };
+    }
+    }, [driverId]);
 
   const handleAcceptRide = () => {
     socket.emit("acceptRide", { rideId: rideData.rideId, driverId });
@@ -45,6 +59,7 @@ const DriverDashboard = () => {
     console.log("Corrida recusada");
     handleCloseModal();
   };
+  const driverLocation = [-23.533773, -46.625290];
 
   return (
     <div className="dashboard-container">
@@ -55,6 +70,7 @@ const DriverDashboard = () => {
           rideData.destinationLocation.lat,
           rideData.destinationLocation.lon,
         ]}
+        driverLocation={driverLocation}
       />
       ) : (
         <div className="map-placeholder">teste</div>
