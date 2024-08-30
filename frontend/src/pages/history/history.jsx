@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
-import "./history.css";
-import api from "../../../config/axios.jsx";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SideBar from './../../components/sideBar/sideBar.jsx';
+import './history.css';
 import images from "../../assets/images.js";
-import NavBar from "../../components/NavBar/navbar.jsx";
-import SideBar from "../../components/sideBar/sideBar.jsx";
-const RideHistory = () => {
-  const [rides, setRides] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
+
+// const RideHistory = () => {
+//   const [rides, setRides] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const navigate = useNavigate();
+
+
   // useEffect(() => {
   //     const fetchRideHistory = async () => {
   //         try {
@@ -31,122 +35,97 @@ const RideHistory = () => {
   //     <Link to = "/"><i className="ride-link" class='bx bx-car'></i></Link>
   //   <div/>
 
-  const [showDetails, setShowDetails] = useState([false, false]); // Estado para controlar a exibição dos detalhes para cada corrida
+ // Componente RideDetails que renderiza os detalhes da corrida dinamicamente
+ const rideData = [
+  { data: "10/05/2023", destiny: "São Paulo", price: "R$ 50,00", origin: "Brasília", driver: "João", passenger: "Maria", time: "10:00" },
+  { data: "15/05/2023", destiny: "Rio de Janeiro", price: "R$ 80,00", origin: "Brasília", driver: "João", passenger: "Maria", time: "10:00" },
+  { data: "20/05/2023", destiny: "Curitiba", price: "R$ 100,00", origin: "Brasília", driver: "João", passenger: "Maria", time: "10:00" },
+];
+const RideDetails = ({ ride, userType = 'driver' }) => (
+  <tr>
+    <td colSpan="3">
+      <div className="more-info">
+        {/* Exibe o nome do passageiro se for um motorista, ou do motorista se for um passageiro */}
+        <p>{userType === 'driver' ? `Passageiro: ${ride.passenger}` : `Motorista: ${ride.driver}`}</p>
+        <p>Horário: {ride.time}</p>
+        <p>De: {ride.origin}</p>
+        <p>Para: {ride.destiny}</p>
+      </div>
+    </td>
+  </tr>
+);
 
-  const list = [];
-  const ride = [
-    { valor: 50, data: '12/12/12', horario: '12:20', origem: 'Curado IV', destino: 'Igarassu' },
-   
- 
-  ];
+// Componente RideItem que renderiza uma corrida na lista
+const RideItem = ({ ride, i, showDetails, toggleDetails, userType }) => (
+  <React.Fragment key={i}>
+    <tr>
+      <td>
+        <img src={images.carAdapt} alt="Carro adaptado" />
+      </td>
+      <td className="ride-item">
+        <div className="ride-info">
+          <div>
+            <strong>Data: {ride.data}</strong>
+          </div>
+          <div>
+            <strong>Destino: {ride.destiny}</strong>
+          </div>
+          <div>
+            <strong>Valor: R$ {ride.price}</strong>
+          </div>
+        </div>
+      </td>
+      <td>
+        <button onClick={() => toggleDetails(i)}>
+          {showDetails[i] ? 'Ocultar Detalhes' : 'Mostrar Detalhes'}
+        </button>
+      </td>
+    </tr>
+    {showDetails[i] && <RideDetails ride={ride} userType={userType} />}
+  </React.Fragment>
+);
+
+// Componente principal RideHistory
+const RideHistory = ({ userType }) => {
+  const [rides, setRides] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showDetails, setShowDetails] = useState([false, false, false]); // Estado para controlar a exibição dos detalhes
+  const navigate = useNavigate();
+
 
   const toggleDetails = (index) => {
-    const updatedShowDetails = [...showDetails];
-    updatedShowDetails[index] = !updatedShowDetails[index];
-    setShowDetails(updatedShowDetails);
+    setShowDetails((prevDetails) =>
+      prevDetails.map((show, i) => (i === index ? !show : show))
+    );
   };
-  
-    for (let i = 0; i < 1; i++){
-      list.push(
-        <tr key={i}>
-          <div className="ride-item">
-        <td>
-          <img src={images.carAdapt} alt="" />
-        </td>
-        <td>
-          <div className="ride-info">
-            <div className="ride-details">
-                <label><strong>Data: {ride[i].data}</strong></label>
-                <label><strong>Horário: {ride[i].horario}</strong></label>
-              </div>
-              <div>
-                <label><strong>De: {ride[i].origem} </strong></label>
-                <label><strong>Para: {ride[i].destino}</strong></label>
-              </div>
-              <div>
-                <label><strong>Valor: R$ {ride[i].valor}</strong></label>
-            </div>
-          </div>
-        </td>
-        <td>
-          <button onClick={() => toggleDetails(i)}>
-            {showDetails[i] ? 'Ocultar Detalhes' : 'Mostrar Detalhes'}
-          </button>
-        </td>
-        {showDetails[i] && (
-          <td colSpan="3">
-            <div className="more-info">
-              <p>Data e horário: {ride[i].data} às {ride[i].horario}</p>
-              <p>Origem: {ride[i].origem}</p>
-              <p>Destino: {ride[i].destino}</p>
-              <p>Valor: R$ {ride[i].valor}</p>
-              <p>Outras informações: ...</p>
-            </div>
-          </td>
-        )}
-      </div>
-      </tr>
-      ) 
-    }
 
-    return (
-      <>
-      <SideBar/>
+  
+
+  return (
+    <>
+      <SideBar />
       <div className="ride-history-page">
         <section className="ride-history-section">
-          <h1>Atividade</h1>
           <h2 className="title">Corridas</h2>
           <table className="ride-list">
             <tbody>
-              {ride.map((corrida, i) => (
-                <React.Fragment key={i}>
-                  <tr>
-                    <td>
-                      <img src={images.carAdapt} alt="Carro adaptado" />
-                    </td>
-                    <td className="ride-item">
-                      <div className="ride-info">
-                        <div>
-                          <strong>Data: {ride.data}</strong>
-                        </div>
-                        <div>
-                          <strong>Destino: {ride.destiny}</strong>
-                        </div>
-                        <div>
-                          <strong>Valor: R$ {ride.valor}</strong>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <button onClick={() => toggleDetails(i)}>
-                        {showDetails[i] ? 'Ocultar Detalhes' : 'Mostrar Detalhes'}
-                      </button>
-                    </td>
-                  </tr>
-                  {showDetails[i] && (
-                    <tr>
-                      <td colSpan="3">
-                        <div className="more-info">
-                          <p>Passageiro: {ride.driver}</p>
-                          <p>horário: {ride.time}</p>
-                          <p>De: {ride.destiny}</p>
-                          <p>Para: {ride.destiny}</p>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
+              {rideData.map((ride, i) => (
+                <RideItem
+                  key={i}
+                  ride={ride}
+                  i={i}
+                  showDetails={showDetails}
+                  toggleDetails={toggleDetails}
+                  userType={userType}
+                />
               ))}
             </tbody>
           </table>
         </section>
-      </div></>
-    );
-  };
-
-const handleViewDetails = (rideId) => {
-  // Redireciona para uma página de detalhes da corrida ou abre um modal
-  console.log(`Viewing details for ride ${rideId}`);
+      </div>
+    </>
+  );
 };
 
 export default RideHistory;

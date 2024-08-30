@@ -42,6 +42,9 @@
   border: solid #4B5878;
   
 }
+.ride-info {
+  text-align: center;
+}
 
 /* Estilos para a imagem */
 .ride-history-page img {
