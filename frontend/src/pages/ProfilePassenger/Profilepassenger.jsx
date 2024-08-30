@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import images from "../../assets/images"
 import "./Profilepassenger.css";
-import api from '../../../config/axios.jsx'
+import { api } from '../../../config/axios.js'
 import SignUpDriver from "../driver/Sign_up/sign-up-driver";
 
 const Passenger = () => {
