@@ -94,6 +94,20 @@ button:hover {
     border: var(--text-color) solid 1px;
 }
 
+.user-dropdown {
+    /* border: red solid 1px; */
+    background-color: var(--bg-color);
+}
+
+.user-info {
+    background-color: transparent;
+}
+
+.profile-pic {
+    max-width: 3rem;
+    border-radius: 30px;
+}
+
 /* RESPONSIVIIDADE */
 
 @media (max-width: 1280px) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../NavBar/navbar.css';
 import images from "../../assets/images.js";
+import { sucessToast } from "../../utils/toastUtils.jsx";
 
 const NavBar = () => {
   const [user, setUser] = useState(null);
@@ -13,19 +14,17 @@ const NavBar = () => {
 
     console.log("userFromStorage:", userFromStorage);
 
-    if (userFromStorage && typeof userFromStorage === 'string') {
+    if (userFromStorage && userFromStorage !== 'undefined') {
       try {
         const loggedInUser = JSON.parse(userFromStorage);
-        if (loggedInUser && typeof loggedInUser === 'object') {
+        if (loggedInUser) {
           setUser(loggedInUser);
-        } else {
-          console.error("Usuário parseado é inválido:", loggedInUser);
         }
       } catch (error) {
         console.error("Erro ao parsear o JSON do usuário:", error);
       }
     } else {
-      console.log("Nenhum usuário encontrado ou valor inválido no localStorage");
+      console.log("Nenhum usuário encontrado no localStorageee");
     }
   }, []);
 
@@ -33,7 +32,9 @@ const NavBar = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("authToken");
     setUser(null);
-    navigate("/sign-in");
+    navigate("/");
+    window.location.reload();
+    sucessToast("Logout efetuado com sucesso");
   };
 
   const toggleDropdown = () => {
@@ -63,7 +64,7 @@ const NavBar = () => {
             <div className="user-dropdown">
               <span className="user-info" onClick={toggleDropdown}>
                 <img
-                  src={images.defaultProfilePic}
+                  src={images.contact}
                   alt="Profile"
                   className="profile-pic"
                 />
@@ -72,7 +73,7 @@ const NavBar = () => {
 
               {dropdownVisible && (
                 <div className="dropdown-menu">
-                  <button onClick={() => navigate("/profile")}>Perfil</button>
+                  <button onClick={() => navigate(`/teste/${user.id}`)}>Perfil</button>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
               )}
