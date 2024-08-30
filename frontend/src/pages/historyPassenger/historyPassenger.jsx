@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./historyPassenger.css";
 import images from "../../assets/images.js";
-import api from "../../../config/axios.jsx";
+// import api from "../../../config/axios.jsx";
 
 const RideHistory = () => {
   const [rides, setRides] = useState([]);
