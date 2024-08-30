@@ -1,90 +1,63 @@
 .aboutPage {
     background-color: #E9E9E9;
     width: 100vw;
-    height: 100vh; /* Opcional: faz com que o contêiner ocupe toda a altura da viewport */
-    
+    height: 90vh; 
 }
 
 .page{
     background-color: transparent;
     display: flex;
-    justify-content:center;  /* Alinha os nichos à direita */
-    align-items: center; /* Centraliza os nichos verticalmente */
+    justify-content:center; 
+    align-items: center; 
     max-width: max-content;
-    /* padding: 2rem 4rem 0rem 8rem; */
-    padding: 0 2% 0 30%;
-    gap: 7rem;
-    width: 100vw;
-    height: 100vh; /* Opcional: faz com que o contêiner ocupe toda a altura da viewport */
+    padding: 0 10% 0 10%;
+    gap: 1rem;
+    width: 100%;
     
 }
 
-.aboutPage_text1{
+.aboutPage_text{
     background-color: #3D4A6A;
     height: 25rem;
-    width: 20rem;
+    width: 40rem;
     border: 0;
     border-radius: 15px;
     border-bottom-left-radius: 0;
     padding: 25px;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 8px 2px #3D4A6A;
     color: #fff;
 }
 
-.aboutPage_text1 h2{
-    background-color: transparent;
-    font-size: 2rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.aboutPage_text1 p{
+.aboutPage_text p{
     background-color: transparent;
     font-size: 1.1rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-
-.aboutPage_img img{
-    background-color: transparent;
-    width: 20rem;
-    left: 50;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-
-}
-
-
-.aboutPage_text2{
-    background-color: #3D4A6A;
-    height: 25rem;
-    width: 20rem;
-    border: 0;
-    border-radius: 15px;
-    border-bottom-left-radius: 0;
-    padding: 20px;
+.aboutPage_img {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 8px 2px #3D4A6A;
-    color: #fff;
+    justify-content: flex-end; 
+    align-items: center; 
+    height: 100%;      
+    width: 100%;
+    background-color: transparent;
 }
 
-.aboutPage_text2 h2{
+.aboutPage_img img {
     background-color: transparent;
-    font-size: 2rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
- }
- 
- .aboutPage_text2 p{
-    background-color: transparent;
-     font-size: 1.1rem;
-     font-family: Georgia, 'Times New Roman', Times, serif;
- }
+    width: 20rem;
+    border-radius: 15px;
+}
+
+.aboutPage_img .aboutPage_img2 {
+    height: 5rem;      
+    width: 8rem;
+    bottom: center; 
+}
+
