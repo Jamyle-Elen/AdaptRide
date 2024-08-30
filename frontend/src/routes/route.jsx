@@ -17,6 +17,8 @@ import RaceRequest from "../pages/RaceRequest/raceRequest.jsx";
 import Teste from "../pages/teste/teste.jsx";
 import SafeAlert from "../pages/SafeAlert/index.jsx";
 import DriverDashboard from "../pages/driver/Dashboard/Dashboard.jsx";
+import ProfilePassenger from '../pages/ProfilePassenger/Profilepassenger.jsx';
+import HistoryPassenger from '../pages/historyPassenger/historyPassenger.jsx';
 
 const Router = () => {
   return (
