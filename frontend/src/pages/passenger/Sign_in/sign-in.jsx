@@ -14,11 +14,15 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         try {
             const response = await api.post('/login/passenger', data);
-            const userData = response.data;
-            localStorage.setItem("user", JSON.stringify(userData))
-            console.log(userData.name)
+            const userData = response.data.passenger
+          
+            localStorage.clear();
+            localStorage.setItem("user", JSON.stringify(userData));
+            localStorage.setItem("authToken", JSON.stringify(userData.id));
+            
+           
             navigate(`/`);
-            sucessToast('Bem vindo(a)');
+            sucessToast(`Bem vindo(a)!`);
         } catch (error) {
             console.error("Erro ao fazer login:", error);
             errorToast('Falha ao realizar login, tente novamente');
