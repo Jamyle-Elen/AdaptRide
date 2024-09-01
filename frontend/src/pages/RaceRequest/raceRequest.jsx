@@ -2,12 +2,38 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import images from "../../assets/images.js";
 import "./raceRequest.css";
+import {api, url} from '../../../config/axios.js'
 import MapsOpenStreetMap from '../../components/Maps/Geocode.jsx'
 
 const RaceRequest = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const handleCardClick = () => {
+  const handleCardClick = async () => {
     setIsButtonActive(true);
+    const passengerId = JSON.parse(localStorage.getItem('user'));
+
+    const rideRequest = {
+      Route: JSON.parse(localStorage.getItem('rideRequest')),
+      PassengerId: passengerId.id
+    };
+    
+   
+    
+  
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await url.post("/rides", rideRequest.Route);
+      
+      console.log("Corrida solicitada com sucesso!");
+      // rideAcceptToast("Motorista solicitado!");
+      socket.emit("rideRequested", data);
+      // navigate("/race-request");
+    } catch (error) {
+      console.error("Erro ao solicitar corrida", error);
+      // errorToast("Erro ao solicitar corrida", error);
+    } finally {
+      setLoading(false);
+    }
+    
   };
 
   return (
@@ -60,14 +86,16 @@ const RaceRequest = () => {
         <div className="more-info"><i className='bx bx-car'></i></div>
         </div>
       <section className="maps">
-        {/* <div className="placa" id="saida">
-          <p>Saída:</p>
-          <span>Shopping Tacaruna</span>
+
+        <div className="placa" id="saida">
+          <label>Saída:</label>
+          <input autoComplete="on" type="text" />
+          
         </div>
         <div className="placa" id="chegada">
-          <p>Chegada:</p>
-          <span>Marco Zero</span>
-        </div> */}
+          <label>Chegada:</label>
+          <input autoComplete="on" type="text" />
+        </div>
         <MapsOpenStreetMap />
       </section>
     </main>

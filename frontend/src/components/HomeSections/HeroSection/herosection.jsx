@@ -16,12 +16,15 @@ const HeroSection = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const socket = io("http://localhost:3001");
+  
 
   useEffect(() => {
     socket.on("rideAccepted", (data) => {
       console.log("Motorista aceitou a corrida", data);
       rideAcceptToast("Corrida aceita pelo motorista!");
-      navigate("/race-request");
+      if ("rideAccepted") {
+        navigate("/race-request");
+      }
     });
 
     return () => {
@@ -53,48 +56,60 @@ const HeroSection = () => {
 
   const handleRequestRide = async () => {
     setLoading(true);
+    // const user = localStorage.getItem("user");
     const token = localStorage.getItem("authToken");
-    if (!token) {
+    if (token) {
       localStorage.setItem(
-        "rideRequest",
-        JSON.stringify({
-          startLocation,
-          destinationLocation,
-        })
+        "rideRequest",JSON.stringify(
+          {
+            startLocation: {
+              latitude: parseFloat(startLocation.latitude),
+              longitude: parseFloat(startLocation.longitude),
+            },
+            destinationLocation: {
+              latitude: parseFloat(destinationLocation.latitude),
+              longitude: parseFloat(destinationLocation.longitude),
+            },
+          }
+        )
+        
       );
       navigate("/race-request");
       setLoading(false);
       return;
     }
+    navigate("/sign-in");
+    
 
-    const data = {
-      startLocation: {
-        latitude: parseFloat(startLocation.latitude),
-        longitude: parseFloat(startLocation.longitude),
-      },
-      destinationLocation: {
-        latitude: parseFloat(destinationLocation.latitude),
-        longitude: parseFloat(destinationLocation.longitude),
-      },
-    };
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      const response = await url.post("/rides", data);
-      console.log("Corrida solicitada com sucesso!");
-      rideAcceptToast("Motorista solicitado!");
-      socket.emit("rideRequested", data);
-      navigate("/race-request");
-    } catch (error) {
-      console.error("Erro ao solicitar corrida", error);
-      errorToast("Erro ao solicitar corrida", error);
-    } finally {
-      setLoading(false);
-    }
+    // const data = {
+    //   startLocation: {
+    //     latitude: parseFloat(startLocation.latitude),
+    //     longitude: parseFloat(startLocation.longitude),
+    //   },
+    //   destinationLocation: {
+    //     latitude: parseFloat(destinationLocation.latitude),
+    //     longitude: parseFloat(destinationLocation.longitude),
+    //   },
+    // };
+    // try {
+    //   await new Promise((resolve) => setTimeout(resolve, 2000));
+    //   const response = await url.post("/rides", data);
+    //   console.log("Corrida solicitada com sucesso!");
+    //   rideAcceptToast("Motorista solicitado!");
+    //   socket.emit("rideRequested", data);
+    //   navigate("/race-request");
+    // } catch (error) {
+    //   console.error("Erro ao solicitar corrida", error);
+    //   errorToast("Erro ao solicitar corrida", error);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    handleRequestRide();
+      e.preventDefault();
+      handleRequestRide();
+
   };
   return (
     <div className="homepage">
@@ -133,7 +148,7 @@ const HeroSection = () => {
                 />
                 <i
                   className={`bx ${geolocationActive ? "bx-x" : "bx-target-lock"}`}
-                  style={{ color: "#3D4A6A", cursor: "pointer" }}
+                  style={{ color: "#ffffff", cursor: "pointer" }}
                   onClick={geolocationActive ? handleClearLocation : handleGeolocation}
                 ></i>
               </div>
@@ -150,6 +165,10 @@ const HeroSection = () => {
                   placeholder="Para onde você quer ir?"
                   required
                 />
+                <i
+                  className="bx bx-target-lock"
+                  style={{ color: "#ffffff", cursor: "pointer" }}
+                ></i>
               </div>
               <button type="submit">Solicitar</button>
             </form>

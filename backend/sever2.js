@@ -1,65 +1,64 @@
+// backend/server.js
+
 import express from "express";
 import ngeohash from "ngeohash";
 import { Op } from "sequelize";
 import cors from "cors";
-import { url } from "../frontend/config/axios.js";
-import { Server as SocketIOServer } from "socket.io";
-import Driver from "../backend/models/Driver.Model.js";
-import Ride from "../backend/models/Ride.Model.js";
-// import { getDistance } from 'geolib'
+import Driver from "./models/Driver.Model.js";
+import Ride from "./models/Ride.Model.js";
+import { Server } from "socket.io";
 
 const app = express();
 const PORT = 3001;
 
 app.use(express.json());
-app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-  }
-));
+app.use(cors());
 
-const server =app.listen(PORT, () => {
-  console.log(`running in http://localhost:${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
 
-const io = new SocketIOServer(server, {
+const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: '*',
+    methods: ['GET', 'POST'],
     credentials: true
   }
-})
+});
 
-io.on("connection", (socket) => {
-  console.log("New partner connected", socket.id);
+const driverSockets = {};
 
-  socket.on('acceptRide', async ({rideId, driverId}) => {
-    try {
-      const ride = await Ride.findByPk(rideId);
-      if (ride && ride.statusRide === 'Pending') {
-        ride.statusRide = 'Accepted';
-        ride.driverId = driverId;
-        await ride.save();
-        io.emit('rideAccepted', {rideId, driverId});
-        console.log(`Motorista ${driverId} aceitou a corrida ${rideId}`);
+let acceptedRide = false;
+
+
+
+
+io.on('connection', (socket) => {
+  console.log('New client connected:', socket.id);
+
+  socket.on('joinDriver', ({ driverId }) => {
+    driverSockets[driverId] = socket.id;
+    console.log(`Driver ${driverId} connected with socket ID ${socket.id}`);
+  });
+
+  socket.on('rideAccepted', ({ rideId, driverId }) => {
+    console.log(`Driver ${driverId} accepted ride ${rideId}`);
+    acceptedRide = true;
+  });
+
+  socket.on('rideDeclined', ({ rideId, driverId }) => {
+    console.log(`Driver ${driverId} declined ride ${rideId}`);
+    acceptedRide = false;
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+    for (let driverId in driverSockets) {
+      if (driverSockets[driverId] === socket.id) {
+        delete driverSockets[driverId];
+        console.log(`Driver ${driverId} disconnected`);
+        break;
       }
-    } catch (error) {
-      console.error('Erro ao aceitar corrida:', error);
-    }
-  })
-
-  socket.on('declineRide', async ({ rideId, driverId }) => {
-    try {
-      const ride = await Ride.findByPk(rideId);
-      if (ride && ride.statusRide === 'Pending') {
-        ride.statusRide = 'Declined';
-        await ride.save();
-        io.emit('rideDeclined', { rideId, driverId });
-        console.log(`Motorista ${driverId} recusou a corrida ${rideId}`);
-      }
-    } catch (error) {
-      console.error('Erro ao recusar corrida:', error);
     }
   });
 });
@@ -85,14 +84,14 @@ const requestRide = async (startLocation, destinationLocation) => {
 
   const findDrivers = async (lat, lon) => {
     let precision = 12;
-    const searchZoom = 3;
+    const searchZoom = 2;
     let hash = ngeohash.encode(lat, lon, precision);
 
     while (precision >= searchZoom) {
       const drivers = await getNearbyDrivers(hash);
 
       if (drivers.length > 0) {
-        console.log('Motoristas encontrados:', drivers.map(driver => driver.id));
+        console.log('Drivers found:', drivers.map(driver => driver.id));
         return drivers;
       }
 
@@ -100,161 +99,85 @@ const requestRide = async (startLocation, destinationLocation) => {
       hash = hash.substring(0, precision);
     }
 
-    // neturn null;
-    return [];
+    return null;
   };
 
-  // const callDriver = async (driverId) => {
-  //   return Math.random() < 0.5;
-  // };
+  const callDriver = async (driverId, rideId) => {
+    const driverSocketId = driverSockets[driverId];
+    if (!driverSocketId) {
+      console.log(`Driver ${driverId} is not connected.`);
+      return false;
+    }
+  
+    return new Promise((resolve) => {
+      io.to(driverSocketId).emit('rideRequest', { rideId, startLocation, destinationLocation });
+  
+      const timeout = setTimeout(() => {
+        console.log(`Timeout expired for ride request ${rideId}`);
+        
+       
+        if (acceptedRide){
+          
+          resolve(true);
+        }
+        else{
+          
+          resolve(false);
+        }
+        resolve(false); 
+      }, 10000);
+    
+    });
+  };
 
   const startLat = startLocation.latitude;
   const startLon = startLocation.longitude;
   const destLat = destinationLocation.latitude;
   const destLon = destinationLocation.longitude;
+
   const drivers = await findDrivers(startLat, startLon);
 
   if (!drivers || drivers.length === 0) {
-    console.log('Nenhum motorista encontrado.');
-    return { status: 'fail', message: 'Nenhum motorista disponível.' };
+    console.log('No drivers found.');
+    return { status: 'fail', message: 'No drivers available.' };
   }
 
-  for(const driver of drivers) {
+  for (const driver of drivers) {
     const ride = await Ride.create({
       startLocation: `${startLat},${startLon}`,
       destinationLocation: `${destLat},${destLon}`,
       idDriver: driver.id,
       statusRide: 'Pending'
-    })
-    io.emit('rideRequest', {driverId: driver.id, rideId: ride.id, startLocation, destinationLocation});
-
-    const result = await new Promise((resolve) => {
-      const timeout = setTimeout(() => resolve(null), 20000); // 20 segundos para aceitar
-      io.once('rideAccepted', () => {
-        clearTimeout(timeout);
-        resolve(ride);
-      });
-      io.once('rideDeclined', () => {
-        clearTimeout(timeout);
-        resolve(null);
-      });
     });
 
-    if (result) return result;
+    console.log(`Requesting ride ${ride.id} to driver ${driver.id}`);
+
+    const accepted = await callDriver(driver.id, ride.id);
+
+    if (accepted) {
+      console.log(`Driver ${driver.id} accepted the ride.`);
+      ride.statusRide = 'Accepted';
+      await ride.save();
+      return { status: 'success', message: `Ride requested with driver: ${driver.id}`, ride };
+    }
+
+    console.log(`Driver ${driver.id} declined the ride.`);
+    ride.statusRide = 'Declined';
+    await ride.save();
   }
-  return { status: 'fail', message: 'Nenhum motorista aceitou a corrida.' };
-}
+
+  console.log('No driver accepted the ride.');
+  return { status: 'fail', message: 'No driver accepted the ride.' };
+};
 
 app.post("/rides", async (req, res) => {
   const { startLocation, destinationLocation } = req.body;
 
   try {
     const result = await requestRide(startLocation, destinationLocation);
-    
     res.status(result.status === 'success' ? 200 : 504).json(result);
-    
   } catch (error) {
-    console.error('Erro ao solicitar corrida:', error);
-    res.status(500).json({ message: 'Erro ao solicitar corrida.' });
-  }
-});
-
-
-app.get("/check-ride/:driverId", (req, res) => {
-  const driverId = req.params.driverId;
-
-  (async function checkRide() {
-    try {
-      while (true) {
-        const pendingRides = await Ride.findAll({
-          where: {
-            idDriver: driverId,
-            statusRide: "Pending",
-          },
-        });
-
-        if (pendingRides.length > 0) {
-          console.log("Nova corrida solicitada:", pendingRides);
-          res.json(pendingRides);
-          break;
-        } else {
-          console.log("Nenhuma corrida pendente encontrada. Aguardando...");
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-        }
-      }
-    } catch (error) {
-      console.error("Erro ao buscar corridas pendentes:", error);
-      res.status(500).json({ error: "Erro ao buscar corridas pendentes" });
-    }
-  })();
-});
-
-app.get("/:id", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const rideRequests = await Ride.findAll({
-      where: { idDriver: id, statusRide: "Pending" },
-    });
-
-    if (rideRequests.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "Nenhuma solicitação de corrida encontrada" });
-    }
-
-    res.status(200).json(rideRequests);
-  } catch (error) {
-    console.error("Erro ao buscar solicitações de corrida:", error.message);
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// aceitar corrida
-app.post("/:id/accept", async (req, res) => {
-  const { id } = req.params;
-  const { idDriver } = req.body;
-  try {
-    const ride = await Ride.findByPk(id);
-
-    if (!ride) {
-      return res.status(404).json({ message: "Corrida não encontrada" });
-    }
-
-    if (ride.statusRide !== "Pending") {
-      return res.status(400).json({ message: "Corrida não pode ser aceita" });
-    }
-
-    ride.idDriver = idDriver;
-    ride.statusRide = "Accepted";
-    await ride.save();
-
-    res.status(200).json({ message: "Corrida aceita" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-app.post("/:id/declined", async (req, res) => {
-  const { id } = req.params;
-  const { idDriver } = req.body;
-
-  try {
-    const ride = await Ride.findByPk(id);
-
-    if (!ride) {
-      return res.status(404).json({ message: "Corrida não encontrada" });
-    }
-
-    if (ride.statusRide !== "Pending") {
-      return res.status(400).json({ message: "Corrida não pode ser aceita" });
-    }
-
-    ride.statusRide = "Declined";
-    await ride.save();
-
-    res.status(200).json({ message: "Corrida recusada com sucesso", ride });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error requesting ride:', error);
+    res.status(500).json({ message: 'Error requesting ride.' });
   }
 });

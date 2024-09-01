@@ -7,7 +7,6 @@ import { Op } from "sequelize";
 import geolib from "geolib";
 import geohash from "ngeohash";
 
-// definir o id do passageiro dps
 export const createRide = async (req, res) => {
   try {
     const { passengerId, startLocation, destinationLocation } = req.body;
@@ -71,29 +70,6 @@ export const declineRide = async (req, res) => {
   }
 }
 
-export const cancelRide = async(req, res) => {
-  const {id} = req.params.id
-
-  try {
-    const ride = await Ride.findByPk(id);
-
-    if (!ride) {
-      return res.status(404).json({ message: "Ride not found" });
-    }
-
-    if (ride.statusRide !== "Pending" && ride.statusRide !== "Accepted") {
-      return res.status(400).json({ message: "Ride cannot be canceled" });
-    }
-
-    ride.statusRide = "Cancelled";
-    await ride.save();
-
-    res.status(200).json({ message: "Ride cancelled successfully", ride });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
-
 export const requestRides = async (req, res) => {
   try {
     const { passengerId, startLocation, destinationLocation } = req.body;
@@ -105,7 +81,7 @@ export const requestRides = async (req, res) => {
           passengerId,
           startLocation,
           destinationLocation,
-        });
+        }, error);
     }
 
     const passenger = await Passenger.findByPk(passengerId);
@@ -218,7 +194,7 @@ export const getCoordinates = async (req, res) => {
   }
 };
 
-export const acceptRidess = async (req, res) => {
+export const acceptRides = async (req, res) => {
   try {
     const { rideId, driverId } = req.body;
     const ride = await Ride.findByPk(rideId);
