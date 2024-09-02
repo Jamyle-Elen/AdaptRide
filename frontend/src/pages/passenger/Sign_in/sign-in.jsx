@@ -1,4 +1,3 @@
-import React from 'react'
 import images from '../../../assets/images'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
@@ -16,9 +15,9 @@ const SignIn = () => {
             const response = await api.post('/login/passenger', data);
             const userData = response.data.passenger
           
-            localStorage.clear();
-            localStorage.setItem("user", JSON.stringify(userData));
-            localStorage.setItem("authToken", JSON.stringify(userData.id));
+            sessionStorage.clear();
+            sessionStorage.setItem("user", JSON.stringify(userData));
+            sessionStorage.setItem("authToken", JSON.stringify(userData.id));
             
            
             navigate(`/`);

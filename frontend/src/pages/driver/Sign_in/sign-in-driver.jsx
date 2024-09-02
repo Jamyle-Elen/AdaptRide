@@ -20,11 +20,14 @@ const SignInDriver = () => {
   const onSubmit = async (data) => {
     try {
       const response = await api.post("/login/driver", data);
-      const userData = response.data;
-      const id = response.data.id;
+      const userData = response.data.driver;
+      const id = response.data.driver.id;
+      sessionStorage.setItem("user", JSON.stringify(userData)); 
+      sessionStorage.setItem("authTokenDriver", JSON.stringify(id));
       console.log(response.data)
       sucessToast("Login realizado com sucesso!");
-      navigate(`/teste/${id}`, { state: userData });
+      navigate('/')
+      // navigate(`/teste/${id}`, { state: userData });
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         errorToast(error.response.data.message);

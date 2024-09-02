@@ -1,6 +1,7 @@
 // frontend/src/components/DriverDashboard.jsx
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import { io } from "socket.io-client";
 import CustomMap from "../../../components/Maps/Geocode.jsx";
@@ -13,8 +14,10 @@ const DriverDashboard = () => {
   const [newRide, setNewRide] = useState(false);
   const [driverId, setDriverId] = useState(null);
 
+  const defID = JSON.parse(sessionStorage.getItem("authTokenDriver"));
   useEffect(() => {
-    const defID = prompt("Insira o ID do motorista");
+    
+
     if (defID) {
       setDriverId(defID);
       sessionStorage.setItem("driverId", defID);
@@ -93,11 +96,21 @@ const DriverDashboard = () => {
           </div>
         </div>
       )}
-
+      {!rideData && (
+        <>
       <div className="driver-status">
-        <p>Motorista está <span className="online-status">Online</span></p>
-        <p>Aguardando nova solicitação de corrida...</p>
+      <nav><Link to={`/profile/driver/${defID}`}><i className="bx bx-chevron-left"></i></Link></nav>
+
+        <div className="status">
+          <p>Você está online</p>
+          <p>Aguardando nova solicitação de corrida...</p>
+        </div>
       </div>
+        <CustomMap
+        startLocation={[-7.887258, -34.914304]}
+      />
+      </>
+      )}
 
       {rideData && (
         <CustomMap

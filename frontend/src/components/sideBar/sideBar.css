@@ -11,16 +11,22 @@
     position: fixed;
     display: flex;
     flex-direction: column;
+    width: 4rem;
+    align-items: center;
 }
 .sidebar i{
     font-size: 2.2rem;
     color: white;
     padding:  0.5rem;
+    margin-left: .2rem;
+}
 
+.sidebar i:hover {
+    border-radius: 40px;
+    background-color: #353a49;
 }
 
 .bx-log-out{
-    
     position: absolute;
     bottom: 0;
 }
