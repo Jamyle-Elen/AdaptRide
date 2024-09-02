@@ -36,6 +36,8 @@ import images from "../../assets/images.js";
   //   <div/>
 
  // Componente RideDetails que renderiza os detalhes da corrida dinamicamente
+
+
  const rideData = [
   { data: "10/05/2023", destiny: "São Paulo", price: "R$ 50,00", origin: "Brasília", driver: "João", passenger: "Maria", time: "10:00" },
   { data: "15/05/2023", destiny: "Rio de Janeiro", price: "R$ 80,00", origin: "Brasília", driver: "João", passenger: "Maria", time: "10:00" },
@@ -104,11 +106,12 @@ const RideHistory = ({ userType }) => {
 
   return (
     <>
-      <SideBar />
       <div className="ride-history-page">
+        <SideBar />
         <section className="ride-history-section">
-          <h2 className="title">Corridas</h2>
-          <table className="ride-list">
+          <div className='ride-history-content'>
+          <h2 className="title-ride">Corridas</h2>
+          <table className="ride-table">
             <tbody>
               {rideData.map((ride, i) => (
                 <RideItem
@@ -122,6 +125,7 @@ const RideHistory = ({ userType }) => {
               ))}
             </tbody>
           </table>
+          </div>
         </section>
       </div>
     </>
