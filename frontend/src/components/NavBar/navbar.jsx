@@ -15,7 +15,7 @@ const NavBar = () => {
 
     console.log("userFromStorage:", userFromStorage);
 
-    if (userFromStorage && userFromStorage) {
+    if (userFromStorage && userFromStorage !== "undefined") {
       try {
         const loggedInUser = JSON.parse(userFromStorage);
         if (loggedInUser) {
@@ -53,8 +53,9 @@ const NavBar = () => {
           </Link>
           <ul className="list">
             <li>
+              {/* arrumar isso aqui depois, pq mesmo nao sendo motorista ta redirecionando para o dashboard */}
               {user ? (
-                <Link to={`/teste/${tokenDriver}`} className="list-item" id="list-item-drive">Dirigir</Link>
+                <Link to="/dashboard/driver" className="list-item" id="list-item-drive">Dirigir</Link>
               ) : (
               <Link to="/sign-in/driver" className="list-item" id="list-item-drive">Dirigir</Link>
               )}
