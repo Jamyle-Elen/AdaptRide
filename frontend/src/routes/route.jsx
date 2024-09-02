@@ -15,7 +15,7 @@ import HistoryPassenger from "../pages/historyPassenger/historyPassenger.jsx"
 import SignInDriver from "../pages/driver/Sign_in/sign-in-driver.jsx";
 import SignUpDriver from "../pages/driver/Sign_up/sign-up-driver.jsx";
 import RaceRequest from "../pages/RaceRequest/raceRequest.jsx";
-import Teste from "../pages/teste/teste.jsx";
+import ProfileDriver from "../pages/driver/ProfileDriver/ProfileDriver.jsx";
 import SafeAlert from "../pages/SafeAlert/index.jsx";
 import DriverDashboard from "../pages/driver/Dashboard/Dashboard.jsx";
 
@@ -38,9 +38,9 @@ const Router = () => {
           <Route path="/sideBar" element={<SideBar/>} />
           {/* <Route path="/profile/:id" element={<ProfilePassenger/>} /> */}
           <Route path="*" element={<NotFound />} />
-          <Route path="/teste" element={<Teste/>} />
+          {/* <Route path="/teste" element={<Teste/>} /> */}
           <Route path="/safealert" element={<SafeAlert />} />
-          <Route path="/teste/:id" element={<Teste/>} />
+          <Route path="/profile/driver/:id" element={<ProfileDriver/>} />
           <Route path="/dashboard/driver" element={<DriverDashboard/>} />
         </Routes>
       </BrowserRouter>
