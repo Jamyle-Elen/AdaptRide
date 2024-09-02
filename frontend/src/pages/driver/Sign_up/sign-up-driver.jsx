@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import images from "../../../assets/images.js";
 // É ele o que vai fazer a requisição HTTP do front para o back
-import api from "../../../../../frontend/config/axios.jsx";
+import { api } from "../../../../../frontend/config/axios.js";
 // yup é a biblioteca que valida os dados do form
 
 // InputMask é pra formatar os dados do form (Ex: 000.000.000-00 que é o CPF)
@@ -75,6 +75,7 @@ const SignUpDriver = () => {
     <main className="main">
       <section className="section">
         <div className="sign_in_area">
+        <Link className='sign-up-back-home' to="/"><i className="bx bx-chevron-left"></i></Link>
           <img src={images.logoAdapt} alt="Logo Adapt" />
           <div className="sign_in_text">
             <h2>Olá, <span>motorista!</span> Que bom ver você novamente.</h2>

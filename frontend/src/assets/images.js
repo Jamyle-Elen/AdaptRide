@@ -8,7 +8,6 @@ import profileAdapt from './images/profile-adapt.png'
 import qrcodeApp from './images/QrCodeApp.png'
 import qrcodeParceiro from './images/QrCodeParceiro.png'
 import shortly from './images/shortly.png'
-import maps from './images/maps.png'
 import notFound from './images/NotFound.png'
 import about from './images/about.png'
 import imageHelp from './images/image-help.png'
@@ -20,6 +19,7 @@ import def4Icon from './images/def4-icon.png'
 import def5Icon from './images/def5-icon.png'
 import def6Icon from './images/def6-icon.png'
 import logoAdapt2 from './images/logoAdapt2.png'
+import contact from './images/contact.png'
 
 const images = {
     carAdapt,
@@ -32,7 +32,6 @@ const images = {
     qrcodeApp,
     qrcodeParceiro,
     shortly,
-    maps,
     notFound,
     about,
     imageHelp,
@@ -44,6 +43,7 @@ const images = {
     def5Icon,
     def6Icon,
     logoAdapt2,
+    contact,
 }
 
 export default images;

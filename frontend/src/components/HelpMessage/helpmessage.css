@@ -4,11 +4,12 @@
     box-sizing: border-box;
     background-color: #E9E9E9;
     width: 100vw;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    gap: 3rem;
 }
 
 .help-page{
@@ -24,19 +25,14 @@
     text-align: center;
     padding-top: 4rem;
     gap: 2rem;
-
+    width: 40rem;
 }
 
-.image-help img{  
-    background-color: #E9E9E9;
-    width: 62.5rem;
-}
 
 .help-text-center h1{
     background-color: transparent;
     color: #050F2A;
     font-size: 3rem;
-    
 }
 
 .help-text-center p{
@@ -52,7 +48,7 @@
     /* border: 1px solid red; */
     gap: 0.5rem;
     background-color: #D9D9D9;
-    padding: 24px;
+    padding: 1.5rem;
     border-radius: 1rem;
 }
 
@@ -65,7 +61,280 @@
 .help-mail p{
     background-color: transparent;
     color: #050F2A;
-    font-size: 32px;
+    font-size: 2rem;
 }
 
+.image-help img{  
+    background-color: #E9E9E9;
+    width: 62.5rem;
+}
+
+/* -------Responsividade--------- */
+
+@media (max-width: 1280px) {  
+
+    .image-help img{
+        width: 55rem;
+    }
+}
+
+@media (max-width: 1150px) {
+    
+    .image-help img{
+        width: 50rem;
+    }
+}
+
+@media (max-width: 960px) {
+
+    .help-text-center h1{
+        font-size: 2.8rem;
+    }
+    
+    .help-text-center p{
+        font-size: 1.4rem;
+    }
+
+    .help-mail {
+        padding: 1rem;
+    }
+    
+    .image-help img{
+        width: 45rem;
+    }
+}
+
+@media (max-width: 845px) {
+    
+    .image-help img{
+        width: 35rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .help-text-center h1{
+        font-size: 2.5rem;
+    }
+    
+    .help-text-center p{
+        font-size: 1.2rem;
+    }
+
+    .image-help img{
+        width: 33rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .help-text-center h1{
+        font-size: 2.5rem;
+    }
+    
+    .help-text-center p{
+        font-size: 1.2rem;
+    }
+    
+    .image-help img{
+        width: 33rem;
+    }
+}
+
+@media (max-width: 668px) {
+
+    .help-text-center h1{
+        font-size: 2.2rem;
+    }
+    
+    .help-text-center p{
+        width: 35rem;
+        font-size: 1.1rem;
+    }
+    
+    .help-mail {
+        height: 4rem;
+    }
+
+    .help-mail img{
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+
+    .help-mail p{
+        font-size: 1.5rem;
+    }
+
+    .image-help img{
+        width: 29rem;
+    }
+}
+
+@media (max-width: 610px) {
+
+    .help-text-center{
+        width: 35rem;
+    }
+
+    .help-text-center h1{
+        font-size: 2.1rem;
+    }
+    
+    .help-text-center p{
+        width: 29rem;
+    }
+    
+    .help-mail {
+        height: 3rem;
+    }
+
+    .help-mail img{
+        height: 2rem;
+        width: 2rem;
+    }
+
+    .help-mail p{
+        font-size: 1.4rem;
+    }
+
+    .image-help img{
+        width: 27rem;
+    }
+}
+
+@media (max-width: 535px) {
+
+    .help-text-center{
+        width: 30rem;
+    }   
+
+    .help-text-center h1{
+        font-size: 1.9rem;
+    }
+    
+    .help-text-center p{
+        width: 25rem;
+    }
+
+    .image-help img{
+        width: 23rem;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .help-text-center h1{
+        font-size: 1.7rem;
+    }
+
+    .help-text-center p{
+        width: 21rem;
+    }
+
+    .image-help img{
+        width: 22rem;
+    }
+}
+
+@media (max-width: 485px) {
+    .help-text-center{
+        width: 25rem;
+    } 
+
+}
+
+
+@media (max-width: 450px) {  
+
+    .help-text-center h1{
+        font-size: 1.4rem;
+    }
+
+    .help-text-center p{
+        width: 20rem;
+    }
+
+    .help-mail {
+        height: 2.5rem;
+    }
+
+    .help-mail img{
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    .help-mail p{
+        font-size: 1.2rem;
+    }
+
+    .image-help img{
+        width: 21rem;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .help-text-center h1{
+        font-size: 1.3rem;
+    }
+
+    .help-text-center p{
+        width: 18rem;
+    }
+
+    .help-mail {
+        height: 2.2rem;
+    }
+
+    .help-mail img{
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+
+    .help-mail p{
+        font-size: 1.1rem;
+    }
+
+    .image-help img{
+        width: 19rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .help-text-center{
+        width: 20rem;
+    } 
+}
+
+@media (max-width: 375px) {
+
+    .help-text-center h1{
+        font-size: 1.2rem;
+    }           
+
+    .help-text-center p{
+        width: 16rem;
+    }
+
+    .image-help img{        
+        width: 17rem;
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    .help-text-center h1{
+        font-size: 1.1rem;
+    }           
+
+    .help-text-center p{
+        width: 14rem;
+    }
+
+    .image-help img{        
+        width: 14rem;
+    }
+
+}
 

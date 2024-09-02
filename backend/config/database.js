@@ -2,8 +2,6 @@ import { Sequelize } from "sequelize";
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
 
-dotenv.config()
-
 const db = new Sequelize({
   dialect: "sqlite",
   storage: "./db/banco.db",
@@ -11,7 +9,7 @@ const db = new Sequelize({
 
 const syncDatabase = async () => {
   try {
-    await db.sync({ force: true });
+    await db.sync();
     console.log('Database sincronizada!');
   } catch (error) {
     console.error('Erro de sicronizacão:', error);

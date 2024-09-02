@@ -8,17 +8,17 @@ const BenefitsSection = () => {
         <section className="benefits-section">
             <div className="benefits-content">
                 <figure>
-                    <figurecaption>
+                    <figcaption>
                         SAFE
-                    </figurecaption>
+                    </figcaption>
                     <img className="car-safe" src={images.car3Adapt} alt="car image" />
                 </figure>
                 <div className="description">
                     <p>SAFE é um mecanismo de defesa para lugares onde requer uma atenção extra na hora de dirigir.</p>
                     <p>Ele é ativado assim que entrar em áreas de riscos.</p>
-                    <abbr title="Indisponivel">
+                    <Link to="/safealert">
                         <p>Saiba mais</p>
-                    </abbr>
+                    </Link>
                     <Link to="/sign-up/driver" className="description-button"><button>Quero ser motorista</button></Link>
                 </div>
             </div>

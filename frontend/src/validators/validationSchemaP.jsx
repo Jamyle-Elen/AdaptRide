@@ -7,7 +7,7 @@ export const validateSchema = yup.object().shape({
   name: yup
     .string()
     .min(3)
-    .matches(/^\S+\s\S+$/, "Nome muito curto")
+    .matches(/^\S+(\s\S+)+$/, "Seu nome é muito curto")
     .required("Nome é obrigatório"),
 
   cpf: yup
@@ -50,8 +50,12 @@ export const validateSchema = yup.object().shape({
     contactName: yup
     .string()
     .min(3)
-    .matches(/^\S+\s\S+$/, "Nome muito curto")
+    .matches(/^\S+(\s\S+)+$/, "Nome do contato muito curto")
     .required("Nome é do contato de emergência é obrigatório"),
+
+    disability: yup
+    .string()
+    .required("Deficiência é obrigatória"),
 
   descriptionAdaptations: yup
   .string(),

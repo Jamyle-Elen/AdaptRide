@@ -25,11 +25,16 @@ main {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: var(--bg-color);
     height: 4.25rem;
+    display: flex;
     margin-bottom: 40px;
+    align-items: center;
+    gap: 6rem;
 }
 
 .menu i {
-    font-size: 30px;
+    font-size: 3rem;
+    color: #fff;
+    margin-left: 1rem;
 }
 
 .menu img {
@@ -80,8 +85,10 @@ main {
     font-weight: 800;
 }
 
-.description {
+.descriptionRequest {
     font-size: 12px;
+    margin-bottom: 4px;
+    width: max-content;
     font-weight: 100;
     color: #282F41;
 }
@@ -131,22 +138,32 @@ main {
     transform: scale(1.02);
     background-color: #E9E9E9;
     border: #3D4A6A solid 1px;
-
 }
 
+.card-raceRequest:focus {
+    border: #3D4A6A solid 1px;
+}
+
+.race-request-btn.active {
+    background-color: #060825;
+    color: #E9E9E9;
+}
+
+
 .maps {
-    border: red solid 1px;
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    background-image: url(mps.png);
+
 }
 
 .placa {
     margin-top: 30px;
-    background-color: #836464;
+    background: #D9D9D9;
     padding: 10px 15px;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
@@ -156,7 +173,8 @@ main {
     align-items: center;
     font-size: 1rem;
     width: 20rem;
-    height: 2.5rem;
+    height: 3rem;
+    border: #3D4A6A solid 1px;
 }
 
 #saida {

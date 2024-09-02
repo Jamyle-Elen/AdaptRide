@@ -2,10 +2,9 @@ import React from 'react'
 import images from '../../../assets/images'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import axios from 'axios'
-import api from '../../../../../frontend/config/axios.jsx'
+import { api } from '../../../../../frontend/config/axios.js'
 import './sign-in.css'
-
+import { errorToast, sucessToast } from '../../../utils/toastUtils.jsx';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -15,9 +14,14 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         try {
             const response = await api.post('/login/passenger', data);
-            navigate('/profile-passenger');
+            const userData = response.data;
+            localStorage.setItem("user", JSON.stringify(userData))
+            console.log(userData.name)
+            navigate(`/`);
+            sucessToast('Bem vindo(a)');
         } catch (error) {
             console.error("Erro ao fazer login:", error);
+            errorToast('Falha ao realizar login, tente novamente');
         }
     };
 
@@ -27,24 +31,27 @@ const SignIn = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <section className="section">
                         <div className="sign-in">
+                            <div className="sign-in-arrow">
+                                <Link to="/"><i className="bx bx-chevron-left"></i></Link>
+                            </div>
                             <div className="sign-in-text">
                                 <h2>Login</h2>
                                 <p>Insira seus dados</p>
                             </div>
                             <div className="sign-in-input">
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    id="email" 
-                                    placeholder="E-mail" 
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="E-mail"
                                     {...register("email")}
                                 />
                                 {errors.email && <span className="error-message">{errors.email.message}</span>}
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    id="password" 
-                                    placeholder="Senha" 
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    placeholder="Senha"
                                     {...register("password")}
                                 />
                                 {errors.password && <span className="error-message">{errors.password.message}</span>}

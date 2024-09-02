@@ -6,7 +6,7 @@ import db from '../config/database.js';
 
 const Ride = db.define('Ride', {
   id: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     primaryKey: true,
     defaultValue: uuidv4,
     unique: true,
@@ -27,19 +27,25 @@ const Ride = db.define('Ride', {
       key: 'id'
     }
   },
-  // statusRide: {
-  //   type: DataTypes.ENUM('Pending', 'Accepted', 'Declined'),
-  //   allowNull: false,
-  //   defaultValue: 'Pending',
-  // },
-  // origin: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  // },
-  // destination: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false
-  // },
+  startLocation: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [2, 255]
+    }
+  },
+  destinationLocation: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [2, 255]
+    }
+  },
+  statusRide: {
+    type: DataTypes.ENUM('Pending', 'Accepted','Cancelled','inProgress', 'Declined', 'Conclued'),
+    allowNull: false,
+    defaultValue: 'Pending',
+  },
 }, {
   timestamps: true,
 })

@@ -1,0 +1,23 @@
+.safe-alert-map {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+
+.address-input-map {
+    color: #050F2A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    gap: 1rem;
+}
+
+#map {
+    height: 80%;
+    width: 80%;
+}

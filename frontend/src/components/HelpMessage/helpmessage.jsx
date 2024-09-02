@@ -3,7 +3,7 @@ import images from "../../assets/images";
 
 const HelpMessage = () => {
   return (
-    <div className="help">
+    <section className="help">
       <div className="help-page">
         <div className="help-text-center">
           <h1>Bem-vindo ao Suporte AdaptRide</h1>
@@ -22,7 +22,7 @@ const HelpMessage = () => {
       <div className="image-help">
         <img src={images.imageHelp} alt="image-help" />
       </div>
-    </div>
+    </section>
   );
 };
 

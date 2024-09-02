@@ -1,9 +1,8 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import images from "../../../assets/images";
-import api from "../../../../../frontend/config/axios.jsx";
+import { api } from "../../../../../frontend/config/axios.js";
 import InputMask from "react-input-mask";
 import "./sign-up.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -46,7 +45,7 @@ const SignUp = () => {
       sucessToast("Cadastrado com sucesso!");
       // verificar se o tempo ta legal ou ta mt longo
       await new Promise((resolve) => setTimeout(resolve, 500));
-      navigate("/sign-in/driver");
+      navigate("/sign-in");
       reset();
 
       // volta para a tela de login
@@ -67,8 +66,9 @@ const SignUp = () => {
 
   return (
     <main className="main">
-      <section className="section">
+      <section className="section">                    
         <div className="sign_in_area">
+          <Link className='sign-up-back-home' to="/"><i className="bx bx-chevron-left"></i></Link>
           <img src={images.logoAdapt} alt="Logo Adapt" />
           <div className="sign_in_text">
             <h2>
@@ -181,10 +181,10 @@ info medicas importantes
                   />
 
                   <select
-                    name="vehicleBrand"
-                    id="vehicleBrand"
-                    {...register("vehicleBrand", { required: true })}
-                    className={errors.vehicleBrand ? "input-error" : ""}
+                    name="disability"
+                    id="disability"
+                    {...register("disability", { required: true })}
+                    className={errors.disability ? "input-error" : ""}
                   >
                     <option value="">Selecione sua Deficiência</option>
                     <option value="Nenhuma">Nenhuma</option>
@@ -202,9 +202,10 @@ info medicas importantes
                   </select>
 
                   <select
-                    name="vehiassistanceLevel"
-                    {...register("vehiassistanceLevel", { required: true })}
-                    className={errors.vehiassistanceLevel ? "input-error" : ""}
+                    name="assistanceLevel"
+                    id="assistanceLevel"
+                    {...register("assistanceLevel", { required: true })}
+                    className={errors.assistanceLevel ? "input-error" : ""}
                   >
                     <option value="">Selecione seu Nivel de Assistência</option>
                     <option value="Nenhuma">Nenhuma</option>
