@@ -1,0 +1,94 @@
+
+:root{
+    --pg-profile-color: green;
+    --nv-i-color:var(--bg-color)
+}
+
+.profile-driver {
+    display: grid;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    grid-template-columns: 3.75rem 1fr; 
+}
+
+.info-profile-driver {
+    padding: 2rem; 
+    border-radius: 0.625rem;
+    grid-column: 2;
+    height: 100%;
+    display: grid;
+    gap: 2.5rem 0.625rem; 
+    grid-template-columns: 1fr 5fr;
+}
+
+.driver {
+    background-color: white;
+    padding: 3.125rem;
+    border-radius: 0.5rem;
+    border-bottom: 0;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.profile-img { 
+    border-radius: 50%;
+    width: 8.75rem;
+    height: 8.75rem;
+    
+}
+
+.personal-info {
+    display: flex; 
+    flex-direction: column;
+    background-color: white;
+    border-radius: 1rem;
+    grid-column: 2;
+    grid-row: 1;
+    gap: 0.725rem 0;
+    overflow: hidden; 
+    margin: 2 0 2 0;
+    padding: 1rem 2rem;
+    justify-content: space-evenly;
+   
+}
+
+.personal-info label {
+    font-size: 1rem;
+    color: #090909;   
+}
+
+.dados{
+    font-size: 1.6rem;
+}
+
+.vehicle-info {
+    display: flex; 
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.625rem; 
+    grid-column: span 2;
+    grid-row: 2;
+    gap: 0.625rem 0; 
+    overflow: hidden;
+    justify-content: space-evenly;
+}
+.vehicle-info label {
+    font-size: 1rem;
+    color: #0a0606;
+    padding-left:  2rem;
+    padding-bottom: 1rem;
+}
+
+.title {
+    text-align: center; 
+    padding: 2rem;
+    background-color: #41444D;
+    width: 100%;
+}
+
+.title .title-veiculo{
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
