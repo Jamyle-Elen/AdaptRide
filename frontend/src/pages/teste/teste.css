@@ -7,10 +7,10 @@
 
 /* Fundo geral */
 .profile-driver {
-    display: grid; /* Faz o conteúdo ficar em linha */
-    background-color: var(--bg-color); /* Background geral da página */ 
+    display: grid;
+    background-color: var(--bg-color);
     min-height: 100vh;
-    grid-template-columns: 3.75rem 1fr; /* 60px => 3.75rem */
+    grid-template-columns: 3.75rem 1fr; 
 }
 
 /* Seção de informações do perfil do motorista */
@@ -26,19 +26,19 @@
 
 /* Seção da imagem do perfil do motorista */
 .driver {
-    background-color: white; /* Cor de fundo do contêiner */
-    padding: 3.125rem; /* 50px => 3.125rem */
-    border-radius: 0.5rem; /* 8px => 0.5rem */
-    border-bottom: 0; /* Removido o espaçamento inválido */
+    background-color: white; 
+    padding: 3.125rem; 
+    border-radius: 0.5rem; 
+    border-bottom: 0; 
     grid-column: 1;
     grid-row: 1;
 }
 
 /* imagem do perfil */
 .profile-img { 
-    border-radius: 50%; /* Arredonda a imagem */
-    width: 8.75rem; /* 140px => 8.75rem */
-    height: 8.75rem; /* 140px => 8.75rem */
+    border-radius: 50%; 
+    width: 8.75rem; 
+    height: 8.75rem; 
     
 }
 
@@ -54,17 +54,16 @@
     margin: 2 0 2 0;
     padding: 1rem 2rem;
     justify-content: space-evenly;
-   
 }
 
 /* Informação pessoal */
 .personal-info label {
-    font-size: 1rem; /* 16px => 1rem */
+    font-size: 1rem;
     color: #090909;   
 }
 
-.dados{
-    font-size: 1.6rem; /* 24px => 1.5rem */ 
+.data{
+    font-size: 1.6rem; 
 }
 
 /* Informação do veículo */
@@ -80,12 +79,12 @@
     justify-content: space-evenly;
 }
 .vehicle-info label {
-    font-size: 1rem; /* 16px => 1rem */
+    font-size: 1rem; 
     color: #0a0606;
     padding-left:  2rem;
     padding-bottom: 1rem;
 }
-
+ 
 .title {
     text-align: center; 
     padding: 2rem;
@@ -95,7 +94,7 @@
 
 .title .title-veiculo{
     color: white;
-    font-size: 1.2rem; /* 24px => 1.5rem */
+    font-size: 1.2rem; 
     font-weight: bold;
 }
 
