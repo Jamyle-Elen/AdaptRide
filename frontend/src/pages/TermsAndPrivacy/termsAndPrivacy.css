@@ -1,0 +1,52 @@
+.terms-privacy-container {
+    padding: 2rem;
+    margin: 1rem;
+    max-width: 80%;
+    font-family: Arial, sans-serif;
+  }
+
+  i{
+    font-size: 2.5rem;
+  }
+
+  .header {
+    display: flex;
+    gap: 2rem;
+  }
+
+
+  .terms-privacy-container h1{
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    color: #3D4A6A;
+    margin-bottom: 1.5rem;
+  }
+
+  .content-itens {
+    display: flex;
+    justify-content: left;
+  }
+
+  .content h2{
+    text-align: left;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    color: #3D4A6A;
+  }
+  
+  .content h3 {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    color: #3D4A6A;
+  }
+  
+  .content p {
+    margin-top: 0.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  
+  

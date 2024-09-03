@@ -6,11 +6,13 @@ import AboutPage from "../pages/about/about.jsx";
 import Help from "../pages/help/help.jsx"
 import History from '../pages/history/history.jsx';
 import SideBar from "../components/sideBar/sideBar.jsx";
+import TermsAndPrivacy from "../pages/TermsAndPrivacy/termsAndPrivacy.jsx";
+
 // Passageiro
 import SignIn from "../pages/passenger/Sign_in/sign-in.jsx";
 import SignUp from "../pages/passenger/Sign_up/sign-up.jsx";
-import ProfilePassenger from "../pages/profilePassenger/profilePassenger.jsx";
-import HistoryPassenger from "../pages/historyPassenger/historyPassenger.jsx"
+// import ProfilePassenger from "../pages/ProfilePassenger/Profilepassenger.jsx";
+// import HistoryPassenger from "../pages/historyPassenger/historyPassenger.jsx"
 // Parceiro
 import SignInDriver from "../pages/driver/Sign_in/sign-in-driver.jsx";
 import SignUpDriver from "../pages/driver/Sign_up/sign-up-driver.jsx";
@@ -32,8 +34,8 @@ const Router = () => {
           <Route path= "/history" element={<History/>}/>
           <Route path="/sign-in/driver" element={<SignInDriver />} />
           <Route path="/sign-up/driver" element={<SignUpDriver />} />
-          <Route path="/profile-passenger" element={<ProfilePassenger />} />
-          <Route path="/historyPassenger" element={<HistoryPassenger />} />
+          {/* <Route path="/profile-passenger" element={<ProfilePassenger />} /> */}
+          {/* <Route path="/historyPassenger" element={<HistoryPassenger />} /> */}
           <Route path="/race-request" element={<RaceRequest />} />
           <Route path="/sideBar" element={<SideBar/>} />
           {/* <Route path="/profile/:id" element={<ProfilePassenger/>} /> */}
@@ -42,6 +44,7 @@ const Router = () => {
           <Route path="/safealert" element={<SafeAlert />} />
           <Route path="/teste/:id" element={<Teste/>} />
           <Route path="/dashboard/driver" element={<DriverDashboard/>} />
+          <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
         </Routes>
       </BrowserRouter>
     </>
