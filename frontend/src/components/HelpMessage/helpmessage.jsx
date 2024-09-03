@@ -1,10 +1,14 @@
 import "./helpmessage.css";
 import images from "../../assets/images";
+import { Link } from "react-router-dom";
 
 const HelpMessage = () => {
   return (
     <section className="help">
       <div className="help-page">
+      <div className="helppage-arrow">
+          <Link to="/"><i className="bx bx-chevron-left"></i></Link>
+      </div>
         <div className="help-text-center">
           <h1>Bem-vindo ao Suporte AdaptRide</h1>
           <p>
