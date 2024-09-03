@@ -54,12 +54,14 @@ const HeroSection = () => {
     setGeolocationActive(false);
   };
 
+  const tokenDriver = sessionStorage.getItem("authTokenDriver");
+
   const handleRequestRide = async () => {
-    setLoading(true);
-    // const user = localStorage.getItem("user");
-    const token = localStorage.getItem("authToken");
+    // setLoading(true);
+    // const user = sessionStorage.getItem("user");
+    const token = sessionStorage.getItem("authToken");
     if (token) {
-      localStorage.setItem(
+      sessionStorage.setItem(
         "rideRequest",JSON.stringify(
           {
             startLocation: {
@@ -121,7 +123,7 @@ const HeroSection = () => {
             </h1>
             <p>Viagens Confortáveis, solicite agora.</p>
           </div>
-          {loading ? (
+          {/* {loading ? (
             <div className="loading-container">
               <TailSpin
                 height="70"
@@ -131,7 +133,7 @@ const HeroSection = () => {
               />
               <p>Procurando motorista...</p>
             </div>
-          ) : (
+          ) : ( */}
             <form onSubmit={handleSubmit} className="ride-request-form">
               <div className="input-container">
                 <input
@@ -168,7 +170,7 @@ const HeroSection = () => {
               </div>
               <button type="submit">Solicitar</button>
             </form>
-          )}
+          {/* )} */}
         </section>
         <img className="car-adapt" src={images.carAdapt} alt="Carro adaptado" />
       </div>

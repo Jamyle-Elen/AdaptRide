@@ -7,14 +7,19 @@ import MapsOpenStreetMap from '../../components/Maps/Geocode.jsx'
 
 const RaceRequest = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
+  const [openModalPayment, setOpenModalPayment] = useState(false);
+
   const handleCardClick = async () => {
     setIsButtonActive(true);
-    const passengerId = JSON.parse(localStorage.getItem('user'));
+    const passengerId = JSON.parse(sessionStorage.getItem('user'));
 
     const rideRequest = {
-      Route: JSON.parse(localStorage.getItem('rideRequest')),
+      Route: JSON.parse(sessionStorage.getItem('rideRequest')),
       PassengerId: passengerId.id
     };
+    // const handlePayment = async () => {
+    
+    // }
     
    
     
@@ -80,7 +85,7 @@ const RaceRequest = () => {
             className={`race-request-btn ${isButtonActive ? "active" : ""}`}
             aria-label="Confirmar solicitação de corrida adaptada"
           >
-            Confirmar
+            Ir para pagamento
           </button>
         </div>
         <div className="more-info"><i className='bx bx-car'></i></div>
