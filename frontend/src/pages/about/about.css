@@ -25,6 +25,16 @@
     margin: auto;
     /* border: 1px solid red; */
   }
+
+  .aboutpage-arrow {
+    width: auto;
+    margin-left: 1.5rem;
+  }
+
+  .aboutpage-arrow .bx-chevron-left {
+    color: #3d4a6a;
+    font-size: 4rem;
+  }
   
   .aboutPage-text, .aboutPage-text2 {
     background-color: #3d4a6a;
@@ -123,13 +133,14 @@
       width: 8rem;
     }
   
+  }
   @media (max-width: 375px) {
     .aboutPage-text, .aboutPage-text2 {
       width: 15rem;
+      height: auto;
     }
   
     .aboutPage-img img {
       width: 16rem;
     }
-  }
   }
