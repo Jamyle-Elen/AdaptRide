@@ -1,9 +1,9 @@
-import images from '../../../assets/images'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { api } from '../../../../../frontend/config/axios.js'
-import './sign-in.css'
-import { errorToast, sucessToast } from '../../../utils/toastUtils.jsx';
+import { api } from "../../../../../frontend/config/axios.js";
+import { errorToast, sucessToast } from "../../../utils/toastUtils.jsx";
+import images from "../../../assets/images";
+import "./sign-in.css";
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -30,18 +30,18 @@ const SignIn = () => {
 
     return (
         <>
-            <main className="main">
+            <main className="main-log-passenger">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <section className="section">
-                        <div className="sign-in">
+                    <section className="section-log-passenger">
+                        <div className="sign-in-log-passenger">
                             <div className="sign-in-arrow">
                                 <Link to="/"><i className="bx bx-chevron-left"></i></Link>
                             </div>
-                            <div className="sign-in-text">
+                            <div className="sign-in-text-log-passenger">
                                 <h2>Login</h2>
                                 <p>Insira seus dados</p>
                             </div>
-                            <div className="sign-in-input">
+                            <div className="sign-in-input-log-passenger">
                                 <input
                                     type="email"
                                     name="email"
@@ -60,16 +60,16 @@ const SignIn = () => {
                                 {errors.password && <span className="error-message">{errors.password.message}</span>}
                                 <Link to="/forgot-password"><p>Esqueci minha senha</p></Link>
                             </div>
-                            <button type="submit" className="profile-passenger">Entrar</button>
+                            <button type="submit" className="profile-passenger-log">Entrar</button>
                         </div>
-                        <div className="sign-up-area">
+                        <div className="sign-up-area-log-passenger">
                             <img src={images.logoAdapt} alt="Logo Adapt" />
-                            <div className="sign-up-text">
+                            <div className="sign-up-text-log-passenger">
                                 <h2>Ainda não possui conta?</h2>
                                 <p>Crie sua conta</p>
                             </div>
                             <Link to="/sign-up">
-                                <button className="sign-up-area-button">Cadastrar</button>
+                                <button className="sign-up-area-button-log-passenger">Cadastrar</button>
                             </Link>
                         </div>
                     </section>
