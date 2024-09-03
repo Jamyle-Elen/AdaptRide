@@ -34,7 +34,7 @@ const Router = () => {
           {/* <Route path= "/history" element={<History/>}/> */}
           <Route path="/sign-in/driver" element={<SignInDriver />} />
           <Route path="/sign-up/driver" element={<SignUpDriver />} />
-          <Route path="/profile-passenger" element={<ProfilePassenger />} />
+          <Route path="/profile/passenger/:id" element={<ProfilePassenger />} />
           {/* <Route path="/historyPassenger" element={<HistoryPassenger />} /> */}
           <Route path="/race-request" element={<RaceRequest />} />
           <Route path="/sideBar" element={<SideBar/>} />
@@ -43,6 +43,7 @@ const Router = () => {
           {/* <Route path="/teste" element={<Teste/>} /> */}
           <Route path="/safealert" element={<SafeAlert />} />
           <Route path="/profile/driver/:id" element={<ProfileDriver/>} />
+          <Route path="/profile-driver" element={<ProfileDriver/>} />
           <Route path="/dashboard/driver" element={<DriverDashboard/>} />
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
         </Routes>
