@@ -150,7 +150,7 @@ const HeroSection = () => {
                 />
                 <i
                   className={`bx ${geolocationActive ? "bx-x" : "bx-target-lock"}`}
-                  style={{ color: "#3D4A6A", cursor: "pointer" }}
+                  style={{ fontSize: "26px", color: "#3D4A6A", cursor: "pointer" }}
                   onClick={geolocationActive ? handleClearLocation : handleGeolocation}
                 ></i>
               </div>
