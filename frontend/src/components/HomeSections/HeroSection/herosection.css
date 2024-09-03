@@ -201,8 +201,14 @@
     .car-adapt {
         display: none;
     }
+
+    .input-container input {
+        width: 19.5rem; 
+    }
 }
 
 @media (max-width: 320px) {
-    
+    .input-container input {
+        width: 18.5rem; 
+    }
 }

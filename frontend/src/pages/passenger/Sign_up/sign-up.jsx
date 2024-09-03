@@ -65,28 +65,28 @@ const SignUp = () => {
   };
 
   return (
-    <main className="main">
-      <section className="section">                    
-        <div className="sign_in_area">
-          <Link className='sign-up-back-home' to="/"><i className="bx bx-chevron-left"></i></Link>
+    <main className="main-passenger">
+      <section className="section-passenger">                    
+        <div className="sign-in-area-passenger">
+          <Link className="sign-up-back-home" to="/"><i className="bx bx-chevron-left"></i></Link>
           <img src={images.logoAdapt} alt="Logo Adapt" />
-          <div className="sign_in_text">
+          <div className="sign-in-text-passenger">
             <h2>
               Olá, <span>passageiro!</span> Que bom ver você novamente.
             </h2>
             <p>Acesse sua conta</p>
           </div>
           <Link to="/sign-in">
-            <button className="sign_in_area_button">Entrar</button>
+            <button className="sign-in-area-button">Entrar</button>
           </Link>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="sign_up">
-            <div className="sign_up_text">
+          <div className="sign-up-passenger">
+            <div className="sign-up-text-passenger">
               <h2>Crie sua conta</h2>
               <p>Preencha seus dados</p>
             </div>
-            <div className="sign_up_input">
+            <div className="sign-up-input-passenger">
               {step === 1 && (
                 <>
                   <input

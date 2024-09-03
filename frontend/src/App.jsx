@@ -1,5 +1,4 @@
 
-import './App.css'
 import Router from './routes/route.jsx'
 import 'boxicons/css/boxicons.min.css';
 import { ToastContainer } from 'react-toastify';
