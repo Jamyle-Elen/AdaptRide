@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import { io } from "socket.io-client";
-import CustomMap from "../../../components/Maps/Geocode.jsx";
+import MapComponent from '../../SafeAlert'
+import SideBar from "../../../components/sideBar/sideBar.jsx";
 
 const socket = io("http://localhost:3001");
 
@@ -77,6 +78,7 @@ const DriverDashboard = () => {
 
   return (
     <div className="dashboard">
+      <SideBar />
       {rideData && displayModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -106,18 +108,16 @@ const DriverDashboard = () => {
           <p>Aguardando nova solicitação de corrida...</p>
         </div>
       </div>
-        <CustomMap
+        {/* <CustomMap
         startLocation={[-7.887258, -34.914304]}
-      />
+      /> */}
+      <MapComponent className="map"/>
       </>
       )}
 
       {rideData && (
-        <CustomMap
-          startLocation={[rideData.startLocation.latitude, rideData.startLocation.longitude]}
-          destinationLocation={[rideData.destinationLocation.latitude, rideData.destinationLocation.longitude]}
-          driverLocation={driverLocation}
-        />
+              <MapComponent className="map"/>
+
       )}
     </div>
   );

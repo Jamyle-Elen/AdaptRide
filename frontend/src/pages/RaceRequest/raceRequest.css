@@ -149,6 +149,34 @@ main {
     color: #E9E9E9;
 }
 
+.payments {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+    padding: 20px 0;
+  }
+  
+  .payment {
+    width: 16px;
+    height: 16px;
+    transform: scale(0.8);
+    margin-right: 8px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .payment:checked {
+    background-color: #7bc23a;
+  }
+  
+  .payment:focus {
+    outline: none;
+    box-shadow: 0 0 3px #aaa;
+  }
+  
 
 .maps {
     width: 100vw;
@@ -158,6 +186,7 @@ main {
     justify-items: center;
     align-items: center;
     background-image: url(mps.png);
+    position: relative;
 
 }
 
@@ -175,6 +204,8 @@ main {
     width: 20rem;
     height: 3rem;
     border: #3D4A6A solid 1px;
+    position: absolute;
+    z-index: 1000;
 }
 
 #saida {

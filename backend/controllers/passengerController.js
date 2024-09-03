@@ -115,3 +115,5 @@ export const getPassengerInfo = async (req, res) => {
       });
   }
 };
+
+// export const getDetailsMotorista = async (req, res) => {

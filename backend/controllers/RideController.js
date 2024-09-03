@@ -72,19 +72,19 @@ export const declineRide = async (req, res) => {
 
 export const requestRides = async (req, res) => {
   try {
-    const { passengerId, startLocation, destinationLocation } = req.body;
-    if (!passengerId || !startLocation || !destinationLocation) {
+    const { startLocation, destinationLocation } = req.body;
+    if (!startLocation || !destinationLocation) {
       return res
         .status(400)
         .json({
           message: "Todos os campos são necessários",
-          passengerId,
+
           startLocation,
           destinationLocation,
         }, error);
     }
-
-    const passenger = await Passenger.findByPk(passengerId);
+    // const passenger = await Passenger.findByPk(passengerId);
+    const passenger = await Passenger.findByPk(passenger.id);
     if (!passenger) {
       return res.status(404).json({ message: "Passageiro não encontrado" });
     }
@@ -136,7 +136,7 @@ export const requestRides = async (req, res) => {
 
     const newRide = await Ride.create({
       id: uuidv4(),
-      passengerId: passengerId,
+      passengerId: passenger.id,
       startLocation: `${startLocation.latitude},${startLocation.longitude}`,
       destinationLocation: `${destinationLocation.latitude},${destinationLocation.longitude}`,
       driverId: driver.id,
