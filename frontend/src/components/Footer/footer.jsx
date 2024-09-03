@@ -2,7 +2,6 @@ import React from "react";
 import "./footer.css";
 import images from "../../assets/images";
 import { Link } from "react-router-dom";
-
 function Footer() {
   return (
     <>
@@ -20,16 +19,6 @@ function Footer() {
                   Quem somos?
                 </Link>
               </li>
-              {/* <li>
-              <Link className="footer-List" to="/">
-                O que fazemos
-              </Link>
-            </li>
-            <li>
-              <Link className="footer-List" to="/">
-                Onde vamos
-              </Link>
-            </li> */}
             </ul>
           </div>
         </div>
@@ -47,9 +36,6 @@ function Footer() {
           <h3>Seja parceiro</h3>
           <p>Apoie esta causa, seja parceiro</p>
         </div>
-        {/* <div className="Arrow">
-        <img src={images.arrowAdapt} alt="Arrow" />
-      </div> */}
       </footer>
       <div className="sub-footer">
       </div>
