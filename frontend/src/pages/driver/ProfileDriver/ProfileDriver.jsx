@@ -47,8 +47,8 @@ const ProfileDriver = () => {
                 </section>
 
                 <section className="personal-info" title="Informação Pessoal">
-                    <label><strong className='dados'>Dados Pessoais</strong></label>
-                    <label><strong>Name:</strong> {user.name}</label>
+                    <label><strong className='data'>Dados Pessoais</strong></label>
+                    <label><strong>Name:</strong>{user.name}</label>
                     <label><strong>Cpf:</strong> {user.cpf}</label>
                     <label><strong>Email:</strong> {user.email}</label>
                     <label><strong>Telefone:</strong> {user.phone}</label>

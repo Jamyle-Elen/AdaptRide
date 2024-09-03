@@ -4,7 +4,7 @@
     --rigthSide-cad-color: #282F41;
 }
 
-.main {
+.main-driver {
     background-color: var(--main-cad-color);
     height: 100vh;
     display: flex;
@@ -16,16 +16,17 @@ form {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.section {
+.section-driver {
     background-color: var(--main-cad-color);
     display: flex;
     justify-content: center;
 }
 
-.sign_in_area {
+.sign-in-area-driver {
     padding: 4rem 3rem;
     background-color: var(--rigthSide-cad-color);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 30%;
@@ -33,41 +34,41 @@ form {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.sign_in_area img {
+.sign-in-area-driver img {
     background-color: var(--rigthSide-cad-color);
     width: 8rem;
 }
 
-.sign_in_text {
+.sign-in-text-driver {
     background-color: var(--rigthSide-cad-color);
     font-family: var(--rigthSide-cad-color);
     color: #fff;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     align-items: start;
     gap: 5px;
 }
 
-.sign_in_text h2 {
+.sign-in-text-driver h2 {
     background-color: var(--rigthSide-cad-color);
-    /* text-align: justify; */
     text-wrap: wrap;
     font-size: 1.2rem;
     font-weight: 400;
 }
 
-.sign_in_text h2 span {
+.sign-in-text-driver h2 span {
+    background-color: transparent;
     color: #A1C7F4;
     font-weight: 700;
 }
 
-.sign_in_text p {
+.sign-in-text-driver p {
     background-color: var(--rigthSide-cad-color);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: lighter;
 }
 
-.sign_in_area_button {
+.sign-in-area-button-driver {
     border: 2px solid var(--main-cad-color);
     background: #3D4A6A;
     background: linear-gradient(to right,#282F41, #D9D9D9 90%);
@@ -78,14 +79,13 @@ form {
     cursor: pointer;
 }
 
-
-/* ========== */
-.sign_up {
+.sign-up-driver {
     padding: 2rem 5rem;
     background-color: var(--second-cad-color);
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
@@ -95,7 +95,7 @@ input {
     color: var(--rigthSide-cad-color);
 }
 
-.sign_up_text {
+.sign-up-text-driver {
     background-color: var(--second-cad-color);
     display: flex;
     flex-direction: column;
@@ -103,23 +103,23 @@ input {
     align-items: center;
 }
 
-.sign_up_text h2, .sign_up_text p {
+.sign-up-text-driver h2, .sign-up-text-driver p {
     background-color: var(--second-cad-color);
 }
 
-.sign_up_text h2 {
+.sign-up-text-driver h2 {
     color: var(--rigthSide-cad-color);
     font-weight: 700;
     font-size: 1.7rem;
 }
 
-.sign_up_text p {
+.sign-up-text-driver p {
     color: var(--rigthSide-cad-color);
     font-size: 0.9rem;
     font-weight: 600;
 }
 
-.sign_up_input {
+.sign-up-input-driver {
     background-color: var(--second-cad-color);
     display: flex;
     flex-direction: column;
@@ -127,7 +127,7 @@ input {
     gap: 10px;
 }
 
-.sign_up_input input {
+.sign-up-input-driver input {
     background: var(--main-cad-color);
     color: #7a7a7a;
     border: none;
@@ -137,8 +137,7 @@ input {
     width: 25rem;
 }
 
-.sign_up button {
-    /* background-color: #3D4A6A; */
+.sign-up-driver button {
     background: linear-gradient(to right,#282F41, #D9D9D9 90%);
     font-size: 1rem;
     font-weight: 400;
@@ -166,7 +165,7 @@ textarea {
     border: none;
 }
 
-.sign_up_input .input-error {
+.sign-up-input-driver .input-error {
     border: rgb(116, 62, 62) solid 1px;
 }
 
@@ -176,4 +175,82 @@ textarea {
 
 .bxs-chevron-right, .bx-chevron-left {
     background-color: transparent;
+}
+
+
+@media (max-width: 900px) {
+    .sign-up-driver {
+        padding: 2rem 4rem;
+    }
+
+    .sign-in-area-driver {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .sign-up-driver {
+        padding: 2rem 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-driver {
+        height: 100vh;
+        padding: 1.5rem 0;
+    }
+
+    .section-driver {
+        flex-direction: column-reverse;
+        height: 100%; 
+        width: 90%;
+    }
+
+    .sign-up-driver {
+        padding: 1rem;
+    }
+
+    .sign-in-area-driver {
+        padding: 1rem;
+        width: 100%;
+        height: 20rem;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .sign-up-input-driver {
+        width: 100%;
+        align-items: center;
+    }
+    
+    .sign-up-input-driver input {
+        width: 90%;
+    }
+
+    .sign-up-input-driver #password, #vehicleBrand, #vehicleYear, #vehicleColor, #typesAdaptations, #totalCapacity, #descriptionAdaptations {
+        width: 90%;
+    }
+
+    .sign-up-driver button {
+        width: 10rem;
+    }
+
+    .sign-in-area-button-driver {
+        width: 9rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .sign-up-driver {
+        padding: 1rem 0;
+    }
+
+    .sign-up-driver button {
+        width: 9rem;
+    }
+
+    .sign-in-area-button-driver {
+        width: 8rem;
+    }
 }

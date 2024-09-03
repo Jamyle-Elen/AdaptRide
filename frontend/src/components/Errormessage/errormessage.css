@@ -26,3 +26,120 @@
 .imageError img {
   width: 26rem;
 }
+
+/* Responsividade */
+
+@media (max-width: 1280px) {
+  .Title-NotFound h1 {
+    font-size: 3.5rem;
+  }
+
+  .Title-NotFound p {
+    font-size: 1.2rem;
+  }
+
+  .imageError img {
+    width: 24rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .Title-NotFound h1 {
+    font-size: 3rem;
+  }
+
+  .Title-NotFound p {
+    font-size: 1rem;
+  }
+
+  .imageError img {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .Title-NotFound h1 {
+    font-size: 2.8rem;
+  }
+
+  .Title-NotFound p {
+    font-size: 0.9rem;
+  }
+
+  .imageError img {
+    width: 18rem;
+  }
+}
+
+@media (max-width: 880px) {
+  .Title-NotFound h1 {
+    font-size: 2.4rem;
+  }
+
+  .Title-NotFound p {
+    font-size: 0.8rem;
+  }
+
+  .imageError img {
+    width: 16rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .Title-NotFound h1 {
+    font-size: 2.2rem;
+  }
+
+  .imageError img {
+    width: 14rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .notfound {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Title-NotFound h1 {
+    font-size: 2rem;
+  }
+
+  .imageError img {
+    width: 16rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .imageError img {
+    width: 15rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .Title-NotFound h1 {
+    font-size: 1.8rem;
+  }
+
+  .Title-NotFound p {
+    font-size: 0.7rem;
+  }
+
+  .imageError img {
+    width: 14rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .Title-NotFound h1 {
+    font-size: 1.7rem;
+  }
+
+  .Title-NotFound p {
+    font-size: 0.6rem;
+  }
+
+  .imageError img {
+    width: 13rem;
+  }
+}

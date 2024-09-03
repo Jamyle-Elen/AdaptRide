@@ -150,7 +150,7 @@ const HeroSection = () => {
                 />
                 <i
                   className={`bx ${geolocationActive ? "bx-x" : "bx-target-lock"}`}
-                  style={{ color: "#ffffff", cursor: "pointer" }}
+                  style={{ color: "#3D4A6A", cursor: "pointer" }}
                   onClick={geolocationActive ? handleClearLocation : handleGeolocation}
                 ></i>
               </div>
@@ -167,10 +167,6 @@ const HeroSection = () => {
                   placeholder="Para onde você quer ir?"
                   required
                 />
-                <i
-                  className="bx bx-target-lock"
-                  style={{ color: "#ffffff", cursor: "pointer" }}
-                ></i>
               </div>
               <button type="submit">Solicitar</button>
             </form>

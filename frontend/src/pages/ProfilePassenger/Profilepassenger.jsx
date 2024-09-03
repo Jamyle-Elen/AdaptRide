@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'; 
 import { useParams, Link } from 'react-router-dom';
 import images from "../../assets/images"
-import "./Profilepassenger.css";
-// import api from '../../../config/axios.jsx'
+import "./profilePassenger.css";
+import SideBar from '../../components/sideBar/sideBar.jsx';
+import { api } from '../../../config/axios.jsx'
 import SignUpDriver from "../driver/Sign_up/sign-up-driver";
 
 const Passenger = () => {
@@ -51,22 +52,17 @@ const Passenger = () => {
     if (!user) return <label>No user data available</label>;
     
     return (
-        <main className="profile-driver">
-            <nav className="navbar">
-                <Link to="/history"><i className='bx bx-time-five'></i></Link>
-                <Link to="/"><abbr title="Sair"><i className='bx bx-log-out'></i></abbr></Link>
-                <Link to="/"><i className='bx bx-home-alt-2'></i></Link>
-            </nav>
-            <section className="info-profile-driver">
-                <section className='driver'> 
+        <main className="profile-passenger-page">
+            <SideBar/>
+            <section className="info-profile-passenger">
+                <section className='passenger'> 
                     <figure>
-                        <img className='profile-img' src={image} alt="Profile"/>
-                        <input type="file" onChange={handleImageChange} />
+                        <img className='profile-img-passenger' src={image} alt="Profile"/>
                     </figure>
                 </section>
 
-                <section className="personal-info" title="Informação Pessoal">
-                    <label><strong className='dados'>Dados Pessoais</strong></label>
+                <section className="personal-info-passenger" title="Informação Pessoal">
+                    <label><strong className='personal-data-passenger'>Dados Pessoais</strong></label>
                     <label><strong>Name:</strong>{user.name}</label>
                     <label><strong>Cpf:</strong> {user.cpf}</label>
                     <label><strong>Email:</strong> {user.email}</label>
@@ -75,12 +71,12 @@ const Passenger = () => {
                 </section>
 
                 <section className="accessibility-info" title="Acessibilidade do passageiro">
-                    <div className='title'>
-                        <label><strong className='title-veiculo'>Acessibilidade</strong></label>
+                    <div className='title-accessibility-passenger'>
+                        <label><strong className='accessibility-passenger'>Acessibilidade</strong></label>
                     </div>
                     <label><strong>Deficiência:</strong> {user.passengerDisability}</label>
-                    <label><strong>Doença:</strong> {user.passengerIllness}</label> 
                     <label><strong>Alergia:</strong> {user.passengerAllergy}</label> 
+                    <label><strong>Informações adcionais :</strong> {user.additionalInformation}</label>
                 </section>
             </section>
         </main>

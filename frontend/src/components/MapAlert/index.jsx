@@ -1,25 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-draw';
-import 'leaflet-draw/dist/leaflet.draw.css';
-import 'leaflet-routing-machine';
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-import './index.css';
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import L from "leaflet";
+import LControlGeocoder from "leaflet-control-geocoder";
+import "leaflet/dist/leaflet.css";
+import "leaflet-draw";
+import "leaflet-draw/dist/leaflet.draw.css";
+import "leaflet-routing-machine";
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
+
+import "./index.css";
 
 const MapComponent = () => {
+
+  // Endereços de início e fim
   const [startAddress, setStartAddress] = useState('');
   const [endAddress, setEndAddress] = useState('');
+
+  // Estados para armazenar as sugestões 
   const [startSuggestions, setStartSuggestions] = useState([]);
   const [endSuggestions, setEndSuggestions] = useState([]);
   const [routingControl, setRoutingControl] = useState(null);
   const [routeReady, setRouteReady] = useState(false);
 
+  // armazena a referência do controle de roteamento
+  const routingControlRef = useRef(null);
+
+  // Posição inicial do mapa
   const initialPosition = {
-    lat: -8.080933,
-    lng: -34.984686,
+    lat: -8.057787, 
+    lng: -34.882613,
   };
 
   const reverseGeocode = async (lat, lon) => {
@@ -38,12 +49,14 @@ const MapComponent = () => {
 
     useEffect(() => {
       if (map && startAddress && endAddress && routeReady) {
+        // instanciando o roteamento
         const router = L.Routing.osrmv1();
 
         const geocodeAddress = async (address) => {
           const response = await axios.get('https://nominatim.openstreetmap.org/search', {
             params: { q: address, format: 'json', limit: 1 },
           });
+
           const result = response.data[0];
           return [parseFloat(result.lat), parseFloat(result.lon)];
         };
@@ -53,9 +66,10 @@ const MapComponent = () => {
             geocodeAddress(startAddress),
             geocodeAddress(endAddress),
           ]);
-
-          if (routingControl) {
-            map.removeControl(routingControl);
+          
+          // Remove o controle de roteamento anterior, se existir
+          if (routingControlRef.current) {
+            map.removeControl(routingControlRef.current);
           }
 
           const newRoutingControl = L.Routing.control({
@@ -65,9 +79,11 @@ const MapComponent = () => {
             ],
             router: router,
             routeWhileDragging: true,
+            geocoder: LControlGeocoder.nominatim()
           }).addTo(map);
 
-          setRoutingControl(newRoutingControl);
+          // Armazena o controle de roteamento atual no ref
+          routingControlRef.current = newRoutingControl;
           map.fitBounds(newRoutingControl.getBounds());
         };
 
@@ -96,6 +112,16 @@ const MapComponent = () => {
         });
 
         setSuggestions(simplifiedSuggestions);
+
+                // // Atualiza o estado com as sugestões retornadas pela API. Se o campo de entrada tiver menos de três caracteres, limpa as sugestões.
+                // setSuggestions(response.data);
+
+                // // Após aceitar a sugestão ou colocar o endereço, o marcador será criado 
+                // const lat = response.data.Lat;
+                // const lon = response.data.Lon;
+        
+                // L.marker([lat, lon]).addTo(map)
+
       } catch (error) {
         console.error('Erro ao buscar endereços:', error);
       }
@@ -104,12 +130,19 @@ const MapComponent = () => {
     }
   };
 
+  // const handleSuggestionClick = (address, setAddress, setSuggestions) => {
+  //   setAddress(address);
+  //   setSuggestions([]); // Limpa as sugestões após seleção
+  // };
+
   const handleRouteClick = () => {
+
     setRouteReady(true);
   };
 
   const handleSuggestionClick = (suggestion, setAddress) => {
     setAddress(suggestion.display_name);
+    setRouteReady(true); // Define como true quando a rota está pronta para ser recalculada
   };
 
   return (

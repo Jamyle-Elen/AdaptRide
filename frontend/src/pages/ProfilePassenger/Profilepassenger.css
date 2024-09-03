@@ -6,127 +6,98 @@
 }
 
 /* Fundo geral */
-.profile-driver {
-    display: grid; /* Faz o conteúdo ficar em linha */
-    background-color: var(--bg-color); /* Background geral da página */ 
+.profile-passenger-page {
+    display: grid;
+    background-color: var(--bg-color);
     min-height: 100vh;
-    grid-template-columns: 3.75rem 1fr; /* 60px => 3.75rem */
+    grid-template-columns: 3.75rem 1fr; 
 }
 
-/* Navbar lateral esquerda */
-.navbar {
-    background-color: #282F41;
-    border-radius: 0 0.625rem 0.625rem 0; 
-    box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.2); 
-    height: 100vh; /* Faz a navbar ocupar toda a altura da tela */
-    grid-column: 1;
-    font-size: 3.75rem; /* 60px => 3.75rem */
-    gap: 0.8rem;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
+/* Seção de informações do perfil do passageiro */
+.info-profile-passenger {
+    padding: 2rem; 
+    border-radius: 0.625rem;
+    grid-column: 2;
+    height: 100%;
+    display: grid;
+    gap: 2.5rem 0.625rem; 
+    grid-template-columns: 1fr 5fr;
 }
 
-.bx-log-out{
-    
-    position: absolute;
-    bottom: 0;
-}
-
-.navbar i{
-    font-size: 2.2rem;
-    color: white;
-    padding:  0.5rem;
-
-}
-
-
-/* Seção da imagem do perfil do motorista */
-.driver {
-    background-color: white; /* Cor de fundo do contêiner */
-    padding: 3.125rem; /* 50px => 3.125rem */
-    border-radius: 0.5rem; /* 8px => 0.5rem */
-    border-bottom: 0; /* Removido o espaçamento inválido */
+/* Seção da imagem do perfil do passageiro */
+.passenger {
+    background-color: white; 
+    padding: 3.125rem; 
+    border-radius: 0.5rem; 
+    border-bottom: 0; 
     grid-column: 1;
     grid-row: 1;
 }
 /* imagem do perfil */
-.profile-img { 
-    border-radius: 50%; /* Arredonda a imagem */
-    width: 8.75rem; /* 140px => 8.75rem */
-    height: 8.75rem; /* 140px => 8.75rem */
-    
+.profile-img-passenger { 
+    border-radius: 50%; 
+    width: 8.75rem; 
+    height: 8.75rem; 
 }
 
-/* Seção de informações do perfil do motorista */
-.info-profile-driver {
-    padding: 2rem; 
-    border-radius: 0.625rem; /* 10px => 0.625rem */
-    grid-column: 2;
-    height: 100%;
-    display: grid;
-    gap: 2.5rem 0.625rem; /* 40px => 2.5rem, 10px => 0.625rem */
-    grid-template-columns: 1fr 5fr;
-}
-
-.title {
-    text-align: center; 
-    padding: 2rem;
-    background-color: #41444D;
-    width: 100%;
-}
-
-.title .title-veiculo{
-    color: white;
-    font-size: 1.2rem; /* 24px => 1.5rem */
-    font-weight: bold;
-}
-
-.personal-info {
+.personal-info-passenger {
     display: flex; 
     flex-direction: column;
     background-color: white;
-    border-radius: 1rem; /* 8px => 0.5rem */
+    border-radius: 1rem;
     grid-column: 2;
     grid-row: 1;
     gap: 0.725rem 0;
-    overflow: hidden;
+    overflow: hidden; 
     margin: 2 0 2 0;
     padding: 1rem 2rem;
     justify-content: space-evenly;
-   
-}
-
-.dados{
-    font-size: 1.6rem; /* 24px => 1.5rem */
-    
 }
 
 /* Informação pessoal */
-.personal-info label {
-    font-size: 1rem; /* 16px => 1rem */
-    color: #090909;
-    
+.personal-info-passenger label {
+    font-size: 1rem;
+    color: #090909;   
 }
 
-/* Informação do veículo */
-.accessibility-info{
+.personal-data-passenger{
+    font-size: 1.6rem; 
+    
+}
+.accessibility-info {
     display: flex; 
     flex-direction: column;
     background-color: white;
     border-radius: 0.625rem; 
     grid-column: span 2;
     grid-row: 2;
-    gap: 0.625rem 0; 
+    gap: 3.1rem 0; 
     overflow: hidden;
     justify-content: space-evenly;
+    
 }
 
 .accessibility-info label {
-    font-size: 1rem; /* 16px => 1rem */
+    font-size: 1rem; 
     color: #0a0606;
     padding-left:  2rem;
     padding-bottom: 1rem;
+}
+
+/* Seção de informações do passengeiro */
+.title-accessibility-passenger {
+    text-align: center; 
+    padding: 2.2rem;
+    background-color: #41444D;
+    width: 100%;
+
+    
+}
+
+.title-accessibility-passenger .accessibility-passenger{
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 /* Responsividade */
