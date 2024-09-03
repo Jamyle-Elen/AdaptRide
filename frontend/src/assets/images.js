@@ -20,6 +20,7 @@ import def5Icon from './images/def5-icon.png'
 import def6Icon from './images/def6-icon.png'
 import logoAdapt2 from './images/logoAdapt2.png'
 import contact from './images/contact.png'
+import real from './images/real.png'
 
 const images = {
     carAdapt,
@@ -44,6 +45,7 @@ const images = {
     def6Icon,
     logoAdapt2,
     contact,
+    real
 }
 
 export default images;
