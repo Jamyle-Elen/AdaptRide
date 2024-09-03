@@ -82,6 +82,8 @@ nav i {
     bottom: 0;
     display: flex;
     z-index: 1000;
+    width: 100%;
+    align-items: center;
 }
 
 .modal-header,
@@ -96,9 +98,6 @@ nav i {
     border: none;
     font-size: 18px;
     cursor: pointer;
-}
-
-.modal-body {
 }
 
 .car {

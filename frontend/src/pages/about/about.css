@@ -41,8 +41,8 @@
     align-items: center;
     box-shadow: 0 0 8px 2px #3d4a6a;
     color: #fff;
-    margin-top: ;
-    border: 1px solid red;
+    /* margin-top: ; */
+    /* border: 1px solid red; */
   }
   
   .aboutPage-text p, .aboutPage-text2 p {
@@ -68,7 +68,7 @@
     width: 50rem;
     /* height: 18rem; */
     margin-bottom: -5rem;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* border-radius: 50%; */
     /* box-shadow: 0 0 3px 1px #3d4a6a; */
     /* border: solid red 1px; */
@@ -79,7 +79,7 @@
     width: 10rem;
     bottom: center;
     margin-top: 3rem; 
-    border: 1px solid red;
+    /* border: 1px solid red; */
 
   }
   

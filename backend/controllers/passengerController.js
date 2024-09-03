@@ -23,7 +23,7 @@ export const createPassenger = async (req, res) => {
         });
 
         if (cpfExists) {
-        return res.status(400).json({ message: "Usuário já cadastrado", error });
+        return res.status(400).json({ message: "Usuário já cadastrado" });
         }
 
 
@@ -53,18 +53,22 @@ export const loginPassenger = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    if (!email || !password) {
+      return res.status(402).json({ message: "Email e senha obrigatórias!" });
+    }
+
     const passenger = await Passenger.findOne({
       where: { email },
     });
 
     if (!passenger) {
-      return res.status(400).json({ message: "Passageiro não cadastrado", error });
+      return res.status(400).json({ message: "Passageiro não cadastrado" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, passenger.password);
 
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Email ou senha inválidos!", error });
+      return res.status(400).json({ message: "Email ou senha inválidos!" });
     }
 
     return res.status(200).json({
@@ -103,7 +107,7 @@ export const getPassengerInfo = async (req, res) => {
     });
 
     if (!passenger)
-      return res.status(404).json({ error: "Passageiro não encontrado." });
+      return res.status(404).json({ error: "Passageiro não encontrado.", error });
 
     res.status(200).json(passenger);
   } catch (error) {
