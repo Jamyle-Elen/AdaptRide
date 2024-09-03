@@ -221,7 +221,17 @@ info medicas importantes
                     {...register("specialEquipment")}
                     className={errors.specialEquipment ? "input-error" : ""}
                   />
-
+                  <div className="terms-checkbox">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      onChange={(e) => setTermsAccepted(e.target.checked)}
+                    />
+                    <label htmlFor="terms">
+                      Aceito os{" "}
+                      <Link to="/termsAndPrivacy">Termos de Uso e a Política de Privacidade</Link> 
+                    </label>
+                  </div>
           
                 </>
               )}
