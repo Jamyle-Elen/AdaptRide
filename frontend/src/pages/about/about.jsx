@@ -4,11 +4,16 @@ import images from "../../assets/images.js";
 import NavBar from "../../components/NavBar/navbar.jsx";
 import Footer from "../../components/Footer/footer.jsx";
 
+import { Link } from "react-router-dom";
+
 const AboutPage = () => {
   return (
     <>
     <main className="aboutPage">
       <NavBar/>
+        <div className="aboutpage-arrow">
+          <Link to="/"><i className="bx bx-chevron-left"></i></Link>
+        </div>
       <section className="page">
         <div className="aboutPage-text">
           <h2>Quem somos nós?</h2>
