@@ -234,11 +234,18 @@ const SignUpDriver = () => {
                     <option value="1">1</option>
                     <option value="1">2</option>
                   </select>
-                  <textarea placeholder="Descreva as Adaptações (OPCIONAL)"
-                    name="descriptionAdaptations"
-                    id="descriptionAdaptations"
-                    {...register("descriptionAdaptations")}
-                  ></textarea>
+                 {/* Caixa de seleção para aceitar os termos */}
+                 <div className="terms-checkbox">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      onChange={(e) => setTermsAccepted(e.target.checked)}
+                    />
+                    <label htmlFor="terms">
+                      Aceito os{" "}
+                      <Link to="/termsAndPrivacy">Termos de Uso e a Política de Privacidade</Link> 
+                    </label>
+                  </div>
                 </>
               )}
             </div>

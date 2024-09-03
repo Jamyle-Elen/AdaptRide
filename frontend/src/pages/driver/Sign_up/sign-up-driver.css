@@ -176,6 +176,27 @@ textarea {
 .bxs-chevron-right, .bx-chevron-left {
     background-color: transparent;
 }
+  
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .terms-checkbox input {
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-right: 3px;
+    cursor: pointer;
+  }
+  
+  .terms-checkbox label {
+    font-size: 0.575rem;
+    color: #7a7a7a;
+  }
+  
+
+  
 
 
 @media (max-width: 900px) {
