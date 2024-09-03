@@ -1,20 +1,26 @@
-.main {
-    background-color: #D9D9D9;
+:root {
+    --main-log-color: #D9D9D9;
+    --second-log-color: #E9E9E9;
+    --rightside-color: #3D4A6A;
+}
+
+.main-log-passenger {
+    background-color: var(--main-log-color);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.section {
-    background-color: #D9D9D9;
+.section-log-passenger {
+    background-color: var(--main-log-color);
     display: flex;
     justify-content: center;
 }
 
-.sign-in {
+.sign-in-log-passenger {
     padding: 4rem 5rem;
-    background-color: #E9E9E9;
+    background-color: var(--second-log-color);
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     display: flex;
@@ -31,37 +37,37 @@
 .sign-in-arrow i{
     margin-left: -13rem;
     font-size: 3.2rem;
-    color: #3D4A6A;
+    color: var(--rightside-color);
 }
 
-.sign-in-text {
+.sign-in-text-log-passenger {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.sign-in-text h2 {
-    color: #3D4A6A;
+.sign-in-text-log-passenger h2 {
+    color: var(--rightside-color);
     font-weight: 500;
     font-size: 1.7rem;
 }
 
-.sign-in-text p {
-    color: #3D4A6A;
+.sign-in-text-log-passenger p {
+    color: var(--rightside-color);
     font-size: 0.9rem;
     font-weight: 600;
 }
 
-.sign-in-input {
+.sign-in-input-log-passenger {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 1.5rem;
 }
 
-.sign-in-input input {
-    background: #D9D9D9;
+.sign-in-input-log-passenger input {
+    background: var(--main-log-color);
     border: none;
     outline: none;
     padding-left: 15px;
@@ -69,14 +75,13 @@
     width: 25rem;
 }
 
-.sign-in-input p {
-    color: #3D4A6A;
+.sign-in-input-log-passenger p {
+    color: var(--rightside-color);
     font-size: 0.7rem;
 }
 
-.profile-passenger {
-    /* background-color: #3D4A6A; */
-    background: linear-gradient(to right,#3D4A6A, #D9D9D9 90%);
+.profile-passenger-log {
+    background: linear-gradient(to right,var(--rightside-color), var(--main-log-color) 90%);
     font-size: 1rem;
     font-weight: 400;
     border: none;
@@ -86,9 +91,9 @@
     cursor: pointer;
 }
 
-.sign-up-area {
+.sign-up-area-log-passenger {
     padding: 4rem 3rem;
-    background-color: #3D4A6A;
+    background-color: var(--rightside-color);
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -97,33 +102,32 @@
     gap: 3rem;
 }
 
-.sign-up-area img {
+.sign-up-area-log-passenger img {
     width: 8rem;
 }
 
-.sign-up-text {
+.sign-up-text-log-passenger {
     color: #fff;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.sign-up-text h2 {
+.sign-up-text-log-passenger h2 {
     text-align: justify;
     text-wrap: wrap;
     font-size: 1.2rem;
     font-weight: 400;
 }
 
-.sign-up-text p {
+.sign-up-text-log-passenger p {
     font-size: 0.7rem;
     font-weight: lighter;
 }
 
-.sign-up-area-button {
-    border: 2px solid #D9D9D9;
-    /* background: #3D4A6A; */
-    background: linear-gradient(to right,#3D4A6A, #D9D9D9 90%);
+.sign-up-area-button-log-passenger {
+    border: 2px solid var(--main-log-color);
+    background: linear-gradient(to right,var(--rightside-color), var(--main-log-color) 90%);
     color: #fff;
     border-radius: 5px;
     height: 2.5rem;
@@ -132,65 +136,75 @@
 }
 
 @media (max-width: 900px) {
-    .section .sign-in {
+    .section-log-passenger .sign-in-log-passenger {
         padding: 1rem 2rem;
         width: 65%;
     }
 }
 
 @media (max-width: 800px) {
-    .main {
+    .main-log-passenger {
         padding: 2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .section {
+    .section-log-passenger {
         height: auto;
         flex-direction: column;
         align-items: center;
     }
 
-    .section .sign-in {
+    .section-log-passenger .sign-in-log-passenger {
         width: 100%;
     }
 
-    .section .sign-up-area {
+    .section-log-passenger .sign-up-area-log-passenger {
         padding: 2rem;
         width: 100%;
     }
 }
 
+@media (max-width: 600px) {
+    .sign-in-input-log-passenger #password {
+        width: 100%;
+    }
+}
+
 @media (max-width: 500px) {
-    .section .sign-in {
+    .section-log-passenger .sign-in-log-passenger {
         width: 25rem;
     }
 
-    .sign-in-input #email, #password {
+    .sign-in-input-log-passenger #email, #password {
         width: 20rem;
     }
 }
 
 @media (max-width: 425px) {
-    .section .sign-in {
+    .section-log-passenger .sign-in-log-passenger {
         width: 20rem;
     }
 
-    .sign-in-input #email, #password {
+    .sign-in-input-log-passenger #email, #password {
         width: 15rem;
     }
 
     .sign-in-arrow i{
         margin-left: -8.5rem;
     }
+
+    .profile-passenger-log {
+        width: 10.5rem;
+    }
 }
 
 @media (max-width: 350px) {
-    .main {
-        padding: 0 2rem;
+    .main-log-passenger {
+        padding: 0 1rem;
     }
 
-    .section .sign-in {
+    .section-log-passenger .sign-in-log-passenger {
         width: 18rem;
     }
 }
