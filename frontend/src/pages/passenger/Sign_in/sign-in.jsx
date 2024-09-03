@@ -21,10 +21,15 @@ const SignIn = () => {
             
            
             navigate(`/`);
-            sucessToast(`Bem vindo(a)!`);
+            sucessToast(`Bem vindo(a)! ${userData.name}`);
         } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                const errorMessage = error.response.data.message;
+                errorToast(errorMessage);
+            } else {
+                errorToast('Falha ao realizar login, tente novamente');    
+            }
             console.error("Erro ao fazer login:", error);
-            errorToast('Falha ao realizar login, tente novamente');
         }
     };
 

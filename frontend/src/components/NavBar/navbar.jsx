@@ -80,7 +80,7 @@ const NavBar = () => {
 
               {dropdownVisible && (
                 <div className="dropdown-menu">
-                  <button onClick={() => navigate(`/teste/${user.id}`)}>Perfil</button>
+                  <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
               )}

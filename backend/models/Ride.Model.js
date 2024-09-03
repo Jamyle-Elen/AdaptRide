@@ -11,14 +11,15 @@ const Ride = db.define('Ride', {
     defaultValue: uuidv4,
     unique: true,
   },
-  // idPassenger: {
-  //   // foreignKey: true,
-  //   type: DataTypes.STRING,
-  //   references:{
-  //     model: 'Passenger',
-  //     key: 'id'
-  //   }
-  // },
+  idPassenger: {
+    // foreignKey: true,
+    type: DataTypes.UUID,
+    allowNull: false,
+    references:{
+      model: Passenger,
+      key: 'id'
+    }
+  },
   idDriver: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -49,5 +50,6 @@ const Ride = db.define('Ride', {
 }, {
   timestamps: true,
 })
+
 
 export default Ride;

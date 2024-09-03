@@ -21,8 +21,7 @@ const MapComponent = () => {
   // Estados para armazenar as sugestões 
   const [startSuggestions, setStartSuggestions] = useState([]);
   const [endSuggestions, setEndSuggestions] = useState([]);
-
-  // Estado para controlar quando a rota deve ser recalculada
+  const [routingControl, setRoutingControl] = useState(null);
   const [routeReady, setRouteReady] = useState(false);
 
   // armazena a referência do controle de roteamento
@@ -34,35 +33,38 @@ const MapComponent = () => {
     lng: -34.882613,
   };
 
+  const reverseGeocode = async (lat, lon) => {
+    try {
+      const response = await axios.get('https://nominatim.openstreetmap.org/reverse', {
+        params: { lat, lon, format: 'json' },
+      });
+      return response.data.display_name;
+    } catch (error) {
+      console.error('Erro ao buscar endereço:', error);
+    }
+  };
+
   const MapEvents = () => {
-    // Hook do react-leaflet para obter a instância do mapa
     const map = useMap();
 
-    // Efeito colateral que é executado quando map, startAddress, endAddress, ou routingControl mudam
     useEffect(() => {
       if (map && startAddress && endAddress && routeReady) {
         // instanciando o roteamento
         const router = L.Routing.osrmv1();
 
-        // Função assíncrona que usa axios para obter coordenadas (latitude e longitude) para um endereço.
         const geocodeAddress = async (address) => {
-          const response = await axios.get(`https://nominatim.openstreetmap.org/search`, {
-            params: {
-              q: address,
-              format: 'json',
-              limit: 1
-            }
+          const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+            params: { q: address, format: 'json', limit: 1 },
           });
 
           const result = response.data[0];
           return [parseFloat(result.lat), parseFloat(result.lon)];
         };
 
-        // Função assíncrona que cria um novo controle de roteamento no mapa, com base nas coordenadas de início e fim. Remove o controle anterior, se existir.
         const setRoute = async () => {
           const [startCoords, endCoords] = await Promise.all([
             geocodeAddress(startAddress),
-            geocodeAddress(endAddress)
+            geocodeAddress(endAddress),
           ]);
           
           // Remove o controle de roteamento anterior, se existir
@@ -70,11 +72,10 @@ const MapComponent = () => {
             map.removeControl(routingControlRef.current);
           }
 
-          // Adiciona o controle de roteamento ao mapa com os pontos de partida e chegada.
           const newRoutingControl = L.Routing.control({
             waypoints: [
               L.latLng(startCoords[0], startCoords[1]),
-              L.latLng(endCoords[0], endCoords[1])
+              L.latLng(endCoords[0], endCoords[1]),
             ],
             router: router,
             routeWhileDragging: true,
@@ -87,37 +88,39 @@ const MapComponent = () => {
         };
 
         setRoute();
-        setRouteReady(false); // reseta após traçar a rota
+        setRouteReady(false);
       }
     }, [map, startAddress, endAddress, routeReady]);
 
     return null;
-  }
+  };
 
-  // Atualiza o endereço e, se o valor do campo de entrada tiver mais de dois caracteres, faz uma requisição à API para obter sugestões de autocompletar.
   const handleAddressChange = async (e, setAddress, setSuggestions) => {
     const value = e.target.value;
     setAddress(value);
 
-    if (value.length > 2) { // Inicia a busca após 3 caracteres
+    if (value.length > 2) {
       try {
         const response = await axios.get('https://nominatim.openstreetmap.org/search', {
-          params: {
-            q: value,
-            format: 'json',
-            addressdetails: 1,
-            limit: 3 // número de sugestões
-          }
+          params: { q: value, format: 'json', addressdetails: 1, limit: 1 },
         });
 
-        // Atualiza o estado com as sugestões retornadas pela API. Se o campo de entrada tiver menos de três caracteres, limpa as sugestões.
-        setSuggestions(response.data);
+        const simplifiedSuggestions = response.data.map((item) => {
+          // Extrai apenas as partes desejadas do endereço (cidade e país)
+          const addressParts = item.display_name.split(',').slice(-2).join(', ').trim();
+          return { display_name: addressParts, lat: item.lat, lon: item.lon };
+        });
 
-        // Após aceitar a sugestão ou colocar o endereço, o marcador será criado 
-        const lat = response.data.Lat;
-        const lon = response.data.Lon;
+        setSuggestions(simplifiedSuggestions);
 
-        L.marker([lat, lon]).addTo(map)
+                // // Atualiza o estado com as sugestões retornadas pela API. Se o campo de entrada tiver menos de três caracteres, limpa as sugestões.
+                // setSuggestions(response.data);
+
+                // // Após aceitar a sugestão ou colocar o endereço, o marcador será criado 
+                // const lat = response.data.Lat;
+                // const lon = response.data.Lon;
+        
+                // L.marker([lat, lon]).addTo(map)
 
       } catch (error) {
         console.error('Erro ao buscar endereços:', error);
@@ -127,12 +130,18 @@ const MapComponent = () => {
     }
   };
 
-  const handleSuggestionClick = (address, setAddress, setSuggestions) => {
-    setAddress(address);
-    setSuggestions([]); // Limpa as sugestões após seleção
-  };
+  // const handleSuggestionClick = (address, setAddress, setSuggestions) => {
+  //   setAddress(address);
+  //   setSuggestions([]); // Limpa as sugestões após seleção
+  // };
 
   const handleRouteClick = () => {
+
+    setRouteReady(true);
+  };
+
+  const handleSuggestionClick = (suggestion, setAddress) => {
+    setAddress(suggestion.display_name);
     setRouteReady(true); // Define como true quando a rota está pronta para ser recalculada
   };
 
@@ -149,8 +158,8 @@ const MapComponent = () => {
           <ul>
             {startSuggestions.map((suggestion) => (
               <li
-                key={suggestion.coordinates}
-                onClick={() => handleSuggestionClick(suggestion.display_name, setStartAddress, setStartSuggestions)}
+                key={`${suggestion.lat}-${suggestion.lon}`}
+                onClick={() => handleSuggestionClick(suggestion, setStartAddress)}
               >
                 {suggestion.display_name}
               </li>
@@ -167,23 +176,20 @@ const MapComponent = () => {
           <ul>
             {endSuggestions.map((suggestion) => (
               <li
-                key={suggestion.coordinates}
-                onClick={() => handleSuggestionClick(suggestion.display_name, setEndAddress, setEndSuggestions)}
+                key={`${suggestion.lat}-${suggestion.lon}`}
+                onClick={() => handleSuggestionClick(suggestion, setEndAddress)}
               >
                 {suggestion.display_name}
               </li>
             ))}
           </ul>
         </div>
-        <button
-          className="button-safemap"
-          onClick={handleRouteClick}
-        >
+        <button className="button-safemap" onClick={handleRouteClick}>
           Buscar rota
         </button>
       </div>
-      <div id='map'>
-        <MapContainer center={initialPosition} zoom={12} style={{ height: '70vh', width: '100%' }}>
+      <div id="map">
+        <MapContainer center={initialPosition} zoom={15} style={{ height: '100vh', width: '100%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -195,4 +201,4 @@ const MapComponent = () => {
   );
 };
 
-export default MapComponent
+export default MapComponent;

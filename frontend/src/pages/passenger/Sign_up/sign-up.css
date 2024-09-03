@@ -163,6 +163,9 @@
     gap: 1rem;
 }
 
+.sign-up-input-passenger .input-error {
+    border: rgb(68, 14, 14) solid .5px;
+}
 
 @media (max-width: 900px) {
     .sign-up-back-home {

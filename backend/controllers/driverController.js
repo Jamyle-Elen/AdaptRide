@@ -89,11 +89,11 @@ export const loginDriver = async (req, res) => {
     const { email, password } = req.body;
     const driver = await Driver.findOne({ where: { email } });
     if (!driver) {
-      return res.status(400).json({ message: "Motorista não cadastrado", error });
+      return res.status(400).json({ message: "Motorista não cadastrado" });
     }
     const isPasswordValid = await bcrypt.compare(password, driver.password);
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Email ou senha inválidos", error });
+      return res.status(400).json({ message: "Email ou senha inválidos" });
     }
 
     return res.status(200).json({
@@ -104,7 +104,7 @@ export const loginDriver = async (req, res) => {
         name: driver.name,
       }});
   } catch (error) {
-    console.error("Erro ao tentar logar:", error.message);
+    console.error("Erro ao tentar logar:", error);
     res.status(500).json({ message: "Erro ao tentar logar" });
   }
 };

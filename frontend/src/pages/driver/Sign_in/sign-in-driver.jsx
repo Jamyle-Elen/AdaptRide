@@ -35,7 +35,7 @@ const SignInDriver = () => {
         errorToast("Falha ao realizar login, tente novamente!");
       }
       reset();
-      console.error("Erro ao fazer login:", error.response ? error.response.data : error.message);
+      console.error("Erro ao fazer login:", error.response.data.message);
     }
   };
 
@@ -55,14 +55,17 @@ const SignInDriver = () => {
               <div className="sign-in-input-log-driver">
                 <input
                   type="email"
+                  required
                   name="email"
                   id="email"
                   placeholder="E-mail"
                   {...register("email")}
-                  className={errors.email ? "input-error" : ""}
+                  className={errors.email ? "input-error" : ""
+                  }
                 />
                 <input
                   type="password"
+                  required
                   name="password"
                   id="password"
                   placeholder="Senha"
