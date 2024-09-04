@@ -1,32 +1,71 @@
-import React from 'react';
-import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
-import L from 'leaflet';
+import React, { useState, useCallback, useEffect } from "react";
+import { GoogleMap, useJsApiLoader, DirectionsRenderer } from "@react-google-maps/api";
 
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
+const containerStyle = {
+  width: "100%",
+  height: "100vh",
+};
 
-const CustomMap = () => {
-  const initialPosition = [-7.887258, -34.914304];
-  
-  const riskAreas = [
-    { lat: -7.887258, lon: -34.914304, info: "Área perigosa 1" },
-    { lat: -7.891234, lon: -34.915678, info: "Área perigosa 2" },
-  ];
+const MapComponent = ({ origin, destination }) => {
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    libraries: ["places"],
+  });
+
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [map, setMap] = useState(null);
+
+  const handleDirections = useCallback(() => {
+    if (origin && destination && map) {
+      const service = new window.google.maps.DirectionsService();
+      service.route(
+        {
+          origin: new window.google.maps.LatLng(origin.lat, origin.lng),
+          destination: new window.google.maps.LatLng(destination.lat, destination.lng),
+          travelMode: window.google.maps.TravelMode.DRIVING,
+        },
+        (result, status) => {
+          if (status === window.google.maps.DirectionsStatus.OK) {
+            setDirectionsResponse(result);
+          } else {
+            console.error(`Erro ao buscar direções: ${status}`);
+          }
+        }
+      );
+    }
+  }, [origin, destination, map]);
+
+  useEffect(() => {
+    handleDirections();
+  }, [handleDirections]);
+
+  if (loadError) {
+    return <div>Erro ao carregar MAPS: {loadError.message}</div>;
+  }
+
+  if (!isLoaded) {
+    return <div>Carregando...</div>;
+  }
 
   return (
-
-    <MapContainer center={initialPosition} zoom={20} zoomControl={false} style={{ height: '100vh', width: '100%' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-    </MapContainer>
+    <div className="safe-alert-map">
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={origin || { lat: -8.057787, lng: -34.882613 }}
+        zoom={15}
+        onLoad={(map) => setMap(map)}
+      >
+        {directionsResponse && (
+          <DirectionsRenderer
+            directions={directionsResponse}
+            options={{
+              suppressMarkers: false,
+            }}
+          />
+        )}
+      </GoogleMap>
+    </div>
   );
 };
 
-export default CustomMap;
+export default MapComponent;

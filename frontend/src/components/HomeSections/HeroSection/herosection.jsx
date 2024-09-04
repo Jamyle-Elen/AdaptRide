@@ -1,30 +1,91 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useJsApiLoader } from "@react-google-maps/api";
 import images from "../../../assets/images";
 import "./herosection.css";
-import { Link, useNavigate } from "react-router-dom";
-import ReactInputMask from "react-input-mask";
-import { useForm } from "react-hook-form";
-import { sucessToast, errorToast, rideAcceptToast } from "../../../utils/toastUtils";
-import { api, url } from "../../../../config/axios.js";
-import { TailSpin } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
+import { api, url } from "../../../../config/axios.js";
+
+const GOOGLE_MAPS_LIBRARIES = ["places"];
 
 const HeroSection = () => {
-  const [startLocation, setStartLocation] = useState(null);
-  const [destinationLocation, setDestinationLocation] = useState({ latitude: "", longitude: "" });
+  const [startAddress, setStartAddress] = useState("");
+  const [destinationAddress, setDestinationAddress] = useState("");
   const [geolocationActive, setGeolocationActive] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [geocoder, setGeocoder] = useState(null);
+  const [startAutocomplete, setStartAutocomplete] = useState(null);
+  const [destinationAutocomplete, setDestinationAutocomplete] = useState(null);
   const navigate = useNavigate();
   const socket = io("http://localhost:3001");
-  
+
+  const startAutocompleteRef = useRef(null);
+  const destinationAutocompleteRef = useRef(null);
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    libraries: GOOGLE_MAPS_LIBRARIES,
+  });
+
+  const geocodeAddress = async (address) => {
+    try {
+      const response = await api.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          address: address,
+          key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+        },
+      });
+      console.log('Geocode API Response:', response.data);
+      const data = response.data;
+      if (data.results[0]) {
+        return data.results[0].geometry.location;
+      }
+      return null;
+    } catch (error) {
+      console.error('Erro ao obter coordenadas', error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      const geocoderInstance = new window.google.maps.Geocoder();
+      setGeocoder(geocoderInstance);
+
+      const startAutoCompleteInstance = new window.google.maps.places.Autocomplete(
+        startAutocompleteRef.current,
+        { types: ["address"] }
+      );
+
+      const destinationAutoCompleteInstance = new window.google.maps.places.Autocomplete(
+        destinationAutocompleteRef.current,
+        { types: ["address"] }
+      );
+
+      startAutoCompleteInstance.addListener("place_changed", () => {
+        const place = startAutoCompleteInstance.getPlace();
+        if (place.formatted_address) {
+          setStartAddress(place.formatted_address);
+        }
+      });
+
+      destinationAutoCompleteInstance.addListener("place_changed", () => {
+        const place = destinationAutoCompleteInstance.getPlace();
+        if (place.formatted_address) {
+          setDestinationAddress(place.formatted_address);
+        }
+      });
+
+      setStartAutocomplete(startAutoCompleteInstance);
+      setDestinationAutocomplete(destinationAutoCompleteInstance);
+    }
+  }, [isLoaded]);
 
   useEffect(() => {
     socket.on("rideAccepted", (data) => {
       console.log("Motorista aceitou a corrida", data);
       rideAcceptToast("Corrida aceita pelo motorista!");
-      if ("rideAccepted") {
-        navigate("/race-request");
-      }
+      navigate("/race-request");
     });
 
     return () => {
@@ -37,7 +98,7 @@ const HeroSection = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setStartLocation({ latitude: latitude.toFixed(6), longitude: longitude.toFixed(6) });
+          getAddressFromCoordinates(latitude, longitude, setStartAddress);
           setGeolocationActive(true);
         },
         (error) => {
@@ -50,69 +111,42 @@ const HeroSection = () => {
   };
 
   const handleClearLocation = () => {
-    setStartLocation({ latitude: "", longitude: "" });
+    setStartAddress("");
     setGeolocationActive(false);
   };
 
-  const tokenDriver = sessionStorage.getItem("authTokenDriver");
-
   const handleRequestRide = async () => {
-    // setLoading(true);
-    // const user = sessionStorage.getItem("user");
     const token = sessionStorage.getItem("authToken");
     if (token) {
+      const startLocation = await geocodeAddress(startAddress);
+      const destinationLocation = await geocodeAddress(destinationAddress);
       sessionStorage.setItem(
-        "rideRequest",JSON.stringify(
-          {
-            startLocation: {
-              latitude: parseFloat(startLocation.latitude),
-              longitude: parseFloat(startLocation.longitude),
-            },
-            destinationLocation: {
-              latitude: parseFloat(destinationLocation.latitude),
-              longitude: parseFloat(destinationLocation.longitude),
-            },
-          }
-        )
-        
+        "rideRequest",
+        JSON.stringify({
+          startLocation: startLocation,
+          destinationLocation: destinationLocation,
+        })
       );
       navigate("/race-request");
       setLoading(false);
       return;
     }
     navigate("/sign-in");
-    
-
-    // const data = {
-    //   startLocation: {
-    //     latitude: parseFloat(startLocation.latitude),
-    //     longitude: parseFloat(startLocation.longitude),
-    //   },
-    //   destinationLocation: {
-    //     latitude: parseFloat(destinationLocation.latitude),
-    //     longitude: parseFloat(destinationLocation.longitude),
-    //   },
-    // };
-    // try {
-    //   await new Promise((resolve) => setTimeout(resolve, 2000));
-    //   const response = await url.post("/rides", data);
-    //   console.log("Corrida solicitada com sucesso!");
-    //   rideAcceptToast("Motorista solicitado!");
-    //   socket.emit("rideRequested", data);
-    //   navigate("/race-request");
-    // } catch (error) {
-    //   console.error("Erro ao solicitar corrida", error);
-    //   errorToast("Erro ao solicitar corrida", error);
-    // } finally {
-    //   setLoading(false);
-    // }
   };
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      handleRequestRide();
-
+    e.preventDefault();
+    handleRequestRide();
   };
+
+  if (loadError) {
+    return <div>Erro ao carregar a API do Google Maps</div>;
+  }
+
+  if (!isLoaded) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <div className="homepage">
       <div className="hero-section">
@@ -123,54 +157,38 @@ const HeroSection = () => {
             </h1>
             <p>Viagens Confortáveis, solicite agora.</p>
           </div>
-          {/* {loading ? (
-            <div className="loading-container">
-              <TailSpin
-                height="70"
-                width="70"
-                color="#4A90E2"
-                ariaLabel="loading"
+          <form onSubmit={handleSubmit} className="ride-request-form">
+            <div className="input-container">
+              <input
+                id="start-location"
+                ref={startAutocompleteRef}
+                value={startAddress}
+                onChange={(e) => setStartAddress(e.target.value)}
+                aria-label="Onde você está?"
+                type="text"
+                placeholder="Onde você está?"
+                required
               />
-              <p>Procurando motorista...</p>
+              <i
+                className={`bx ${geolocationActive ? "bx-x" : "bx-target-lock"}`}
+                style={{ fontSize: "26px", color: "#3D4A6A", cursor: "pointer" }}
+                onClick={geolocationActive ? handleClearLocation : handleGeolocation}
+              ></i>
             </div>
-          ) : ( */}
-            <form onSubmit={handleSubmit} className="ride-request-form">
-              <div className="input-container">
-                <input
-                  id="start-location"
-                  value={startLocation ? `${startLocation.latitude}, ${startLocation.longitude}` : ""}
-                  onChange={(e) => {
-                    const [latitude, longitude] = e.target.value.split(",").map((coord) => coord.trim());
-                    setStartLocation({ latitude, longitude });
-                  }}
-                  aria-label="Onde você está?"
-                  type="text"
-                  placeholder="Onde você está?"
-                  required
-                />
-                <i
-                  className={`bx ${geolocationActive ? "bx-x" : "bx-target-lock"}`}
-                  style={{ fontSize: "26px", color: "#3D4A6A", cursor: "pointer" }}
-                  onClick={geolocationActive ? handleClearLocation : handleGeolocation}
-                ></i>
-              </div>
-              <div className="input-container">
-                <input
-                  id="destination-location"
-                  value={`${destinationLocation.latitude}, ${destinationLocation.longitude}`}
-                  onChange={(e) => {
-                    const [latitude, longitude] = e.target.value.split(",").map((coord) => coord.trim());
-                    setDestinationLocation({ latitude, longitude });
-                  }}
-                  aria-label="Para onde você quer ir?"
-                  type="text"
-                  placeholder="Para onde você quer ir?"
-                  required
-                />
-              </div>
-              <button type="submit">Solicitar</button>
-            </form>
-          {/* )} */}
+            <div className="input-container">
+              <input
+                id="destination-location"
+                ref={destinationAutocompleteRef}
+                value={destinationAddress}
+                onChange={(e) => setDestinationAddress(e.target.value)}
+                aria-label="Para onde você quer ir?"
+                type="text"
+                placeholder="Para onde você quer ir?"
+                required
+              />
+            </div>
+            <button type="submit">Solicitar</button>
+          </form>
         </section>
         <img className="car-adapt" src={images.carAdapt} alt="Carro adaptado" />
       </div>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import { io } from "socket.io-client";
 import { api } from '../../../../config/axios.js'
-import MapComponent from '../../SafeAlert'
+import MapComponent from "../../../components/Maps/Geocode.jsx";
 import SideBar from "../../../components/sideBar/sideBar.jsx";
 import images from "../../../assets/images.js";
 
@@ -124,7 +124,7 @@ const DriverDashboard = () => {
           </div>
         </div>
         
-      )}{showDetailsRide && (
+      )}{!showDetailsRide && (
       // )}{!rideData && (
         <div className="modal-overlay-ride">
           <div className="modal-ride">
@@ -167,14 +167,14 @@ const DriverDashboard = () => {
         {/* <CustomMap
         startLocation={[-7.887258, -34.914304]}
       /> */}
-      <MapComponent className="map"/>
+      {/* <MapComponent className="map"/> */}
       </>
       )}
 
-      {rideData && (
-              <MapComponent className="map"/>
+      {/* {rideData && (
+              // <MapComponent className="map"/>
 
-      )}
+      )} */}
     </div>
   );
 };
