@@ -2,12 +2,54 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import images from "../../assets/images.js";
 import "./raceRequest.css";
+import {api, url} from '../../../config/axios.js'
 import MapsOpenStreetMap from '../../components/Maps/Geocode.jsx'
+// import Passenger from "../../../../backend/models/Passenger.Model.js";
+// import PaymentModal from "../../components/PaymentModal";
 
 const RaceRequest = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const handleCardClick = () => {
+  // const [openModalPayment, setOpenModalPayment] = useState(false);
+
+  const handleCardClick = async () => {
     setIsButtonActive(true);
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    console.log(user)
+
+    // if (passengerId) {
+    //   setPassengerId(passengerId);
+    //   sessionStorage.setItem("passengerId", passengerId);
+    // }
+
+    const rideRequest = {
+      Route: JSON.parse(sessionStorage.getItem('rideRequest')),
+      Passenger: {
+        PassengerId: user.id,
+        name: user.name,
+      }
+    };
+    // const handlePayment = async () => {
+    
+    // }
+    
+   
+    
+  
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await url.post("/rides", rideRequest);
+      
+      console.log("Corrida solicitada com sucesso!");
+      // rideAcceptToast("Motorista solicitado!");
+      socket.emit("rideRequested", data);
+      // navigate("/race-request");
+    } catch (error) {
+      console.error("Erro ao solicitar corrida", error);
+      // errorToast("Erro ao solicitar corrida", error);
+    } finally {
+      // setLoading(false);
+    }
+    
   };
 
   return (
@@ -49,25 +91,32 @@ const RaceRequest = () => {
               <img src={images.shortly} alt="Serviço indisponível, em breve" />
             </abbr>
           </div>
-
+          <div className="payments">
+            <input className="payment" type="radio" name="payment" id="payment" defaultChecked />
+            <img src={images.real} width={20} height={20} alt="" />
+            <label htmlFor="Dinheiro">Dinheiro</label>
+            </div>
           <button
             className={`race-request-btn ${isButtonActive ? "active" : ""}`}
             aria-label="Confirmar solicitação de corrida adaptada"
           >
-            Confirmar
+            Confirmar viagem
           </button>
         </div>
-        <div className="more-info"><i className='bx bx-car'></i></div>
         </div>
       <section className="maps">
-        {/* <div className="placa" id="saida">
-          <p>Saída:</p>
-          <span>Shopping Tacaruna</span>
+
+        <div className="ride">
+          <div className="placa" id="saida">
+            <label>Saída:</label>
+            <input autoComplete="on" type="text" />
+          
+          </div>
+          <div className="placa" id="chegada">
+            <label>Chegada:</label>
+            <input autoComplete="on" type="text" />
+          </div>
         </div>
-        <div className="placa" id="chegada">
-          <p>Chegada:</p>
-          <span>Marco Zero</span>
-        </div> */}
         <MapsOpenStreetMap />
       </section>
     </main>

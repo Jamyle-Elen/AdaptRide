@@ -1,11 +1,9 @@
 
 :root{
     --pg-profile-color: green;
-    /* --bg-color: #D9D9D9; */
     --nv-i-color:var(--bg-color)
 }
 
-/* Fundo geral */
 .profile-driver {
     display: grid;
     background-color: var(--bg-color);
@@ -13,7 +11,6 @@
     grid-template-columns: 3.75rem 1fr; 
 }
 
-/* Seção de informações do perfil do motorista */
 .info-profile-driver {
     padding: 2rem; 
     border-radius: 0.625rem;
@@ -24,7 +21,6 @@
     grid-template-columns: 1fr 5fr;
 }
 
-/* Seção da imagem do perfil do motorista */
 .driver {
     background-color: white; 
     padding: 3.125rem; 
@@ -34,7 +30,6 @@
     grid-row: 1;
 }
 
-/* imagem do perfil */
 .profile-img { 
     border-radius: 50%; 
     width: 8.75rem; 
@@ -56,7 +51,6 @@
     justify-content: space-evenly;
 }
 
-/* Informação pessoal */
 .personal-info label {
     font-size: 1rem;
     color: #090909;   
@@ -66,7 +60,6 @@
     font-size: 1.6rem; 
 }
 
-/* Informação do veículo */
 .vehicle-info {
     display: flex; 
     flex-direction: column;

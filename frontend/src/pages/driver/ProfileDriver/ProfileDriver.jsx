@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'; 
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import images from "../../assets/images"
-import "./teste.css";
-import SideBar from '../../components/sideBar/sideBar.jsx';
-import { api } from '../../../config/axios.js'
-import SignUpDriver from "../driver/Sign_up/sign-up-driver";
-import { errorToast } from '../../utils/toastUtils.jsx';
+import images from "../../../assets/images.js"
+import "./ProfileDriver.css";
+import SideBar from '../../../components/sideBar/sideBar.jsx';
+import { api } from '../../../../config/axios.js'
+import SignUpDriver from "../../driver/Sign_up/sign-up-driver.jsx";
+import { errorToast } from '../../../utils/toastUtils.jsx';
 
-const Teste = () => {
+const ProfileDriver = () => {
     const { id } = useParams();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true); 
@@ -16,10 +16,12 @@ const Teste = () => {
     useEffect(() => {
 
         const fetchUserData = async () => {
+            const tokenDriver = JSON.parse(sessionStorage.getItem("authTokenDriver"));
             try {
-                const response = await api.get(`/profile/driver/${id}`);
+                const response = await api.get(`/profile/driver/${tokenDriver}`);
                 setUser(response.data);
-                navigate(`/teste/${response.data.id}`);
+                navigate(`/profile/driver/${response.data.id}`);
+
             } catch (error) {
                 errorToast("Falha ao buscar dados do motorista. Tente novamente mais tarde.");
                 if (error.response && error.response.data && error.response.data.message) {
@@ -70,4 +72,4 @@ const Teste = () => {
     );
 };
 
-export default Teste;
+export default ProfileDriver;

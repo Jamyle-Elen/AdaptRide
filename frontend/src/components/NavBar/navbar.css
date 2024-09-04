@@ -96,17 +96,37 @@ button:hover {
 }
 
 .user-dropdown {
-    /* border: red solid 1px; */
     background-color: var(--bg-color);
 }
 
 .user-info {
     background-color: transparent;
+    cursor: pointer;
+    font-size: medium;
 }
 
 .profile-pic {
-    max-width: 3rem;
+    max-width: 2.4rem;
     border-radius: 30px;
+}
+
+.dropdown-menu {
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+}
+
+.dropdown-menu button {
+    height: 1.5rem;
+    width: 4rem;
+    text-align: center;
+    font-size: 0.8rem;
+    background-color: transparent;
+}
+
+.dropdown-menu button:hover {
+    transition: none;
+    border:none;
 }
 
 /* RESPONSIVIDADE */
@@ -132,6 +152,16 @@ button:hover {
 @media (max-width: 970px) {
     .menu-content {
         padding: 0 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-info {
+        font-size: 14px;
+    }
+    
+    .profile-pic {
+        width: 2.2rem;
     }
 }
 
@@ -164,6 +194,18 @@ button:hover {
         height: 2.5rem;
         width: 7rem;
     }
+
+    .user-info {
+        font-size: 13.5px;
+    }
+    
+    .profile-pic {
+        width: 2rem;
+    }
+
+    .dropdown-menu button {
+        font-size: 0.7rem;
+    }
 }
 
 @media (max-width: 375px) {
@@ -184,6 +226,18 @@ button:hover {
         font-size: 12px;
         font-weight: 700;
         padding: 7px 12px;
+    }
+
+    .user-info {
+        font-size: 13px;
+    }
+    
+    .profile-pic {
+        width: 2rem;
+    }
+
+    .dropdown-menu button {
+        font-size: 0.7rem;
     }
 }
 

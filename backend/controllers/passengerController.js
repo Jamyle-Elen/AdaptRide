@@ -45,33 +45,17 @@ export const createPassenger = async (req, res) => {
 
         res.status(201).json(newPassenger);
     } catch (error) {
-    res.status(500).json({ message: "Erro ao tentar cadastrar passageiro", error });
+    res.status(500).json({ message: "Erro ao tentar realizar o cadastro, tente novamente", error });
   }
 };
-
-// export const loginPassenger = async (req, res) => {
-//   try {
-//     const { email, password } = req.body
-
-//     const passenger = await Passenger.findOne({
-//       where: { email }
-//     })
-//       if (!passenger) {
-//         return res.status(400).json({ message: "Passageiro não cadastrado" })
-//       }
-//       const isPassword = await bcrypt.compare(password, passenger.password)
-//         if (!isPassword) {
-//           return res.status(400).json({ message: "Senha incorreta" })
-//         }
-//     return res.status(200).json({ message: "Login bem sucedido!", passenger })
-//   } catch (error) {
-//     return res.status(500).json({ message: "Erro ao tentar logar" })
-//   }
-// }
 
 export const loginPassenger = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(402).json({ message: "Email e senha obrigatórias!" });
+    }
 
     const passenger = await Passenger.findOne({
       where: { email },
@@ -84,7 +68,7 @@ export const loginPassenger = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, passenger.password);
 
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Senha incorreta" });
+      return res.status(400).json({ message: "Email ou senha inválidos!" });
     }
 
     return res.status(200).json({
@@ -92,11 +76,12 @@ export const loginPassenger = async (req, res) => {
       passenger: {
         id: passenger.id,
         email: passenger.email,
+        name: passenger.name,
       },
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Erro ao tentar logar" });
+    return res.status(500).json({ message: "Erro ao tentar fazer login, tente novamente", error });
   }
 };
 
@@ -122,7 +107,7 @@ export const getPassengerInfo = async (req, res) => {
     });
 
     if (!passenger)
-      return res.status(404).json({ error: "Passageiro não encontrado." });
+      return res.status(404).json({ error: "Passageiro não encontrado.", error });
 
     res.status(200).json(passenger);
   } catch (error) {
@@ -134,3 +119,5 @@ export const getPassengerInfo = async (req, res) => {
       });
   }
 };
+
+// export const getDetailsMotorista = async (req, res) => {

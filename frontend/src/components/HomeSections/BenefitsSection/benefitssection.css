@@ -2,7 +2,6 @@
     --main-color: #f3f3f3;
     --first-section-color: #3D4A6A;
     --second-section-color: #D9D9D9;
-
     --text-color: #fff;
 }
 
@@ -17,6 +16,8 @@
     height: auto;
     width: 100vw;
     padding: 3rem 0;
+    top: -40px;
+
 }
 
 .benefits-content {

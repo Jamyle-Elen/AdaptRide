@@ -9,12 +9,13 @@ const NavBar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
 
+  const tokenDriver = JSON.parse(sessionStorage.getItem("authTokenDriver"));
   useEffect(() => {
-    const userFromStorage = localStorage.getItem("user");
+    const userFromStorage = sessionStorage.getItem("user");
 
     console.log("userFromStorage:", userFromStorage);
 
-    if (userFromStorage && userFromStorage !== 'undefined') {
+    if (userFromStorage && userFromStorage !== "undefined") {
       try {
         const loggedInUser = JSON.parse(userFromStorage);
         if (loggedInUser) {
@@ -24,13 +25,14 @@ const NavBar = () => {
         console.error("Erro ao parsear o JSON do usuário:", error);
       }
     } else {
-      console.log("Nenhum usuário encontrado no localStorageee");
+      console.log("Nenhum usuário encontrado no sessionStorageee");
     }
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("authToken");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("authTokenDriver");
     setUser(null);
     navigate("/");
     window.location.reload();
@@ -51,7 +53,12 @@ const NavBar = () => {
           </Link>
           <ul className="list">
             <li>
+              {/* arrumar isso aqui depois, pq mesmo nao sendo motorista ta redirecionando para o dashboard */}
+              {user ? (
+                <Link to="/dashboard/driver" className="list-item" id="list-item-drive">Dirigir</Link>
+              ) : (
               <Link to="/sign-in/driver" className="list-item" id="list-item-drive">Dirigir</Link>
+              )}
             </li>
             <li>
               <Link to="/aboutpage" className="list-item" id="list-item-about">Sobre</Link>
@@ -73,7 +80,7 @@ const NavBar = () => {
 
               {dropdownVisible && (
                 <div className="dropdown-menu">
-                  <button onClick={() => navigate(`/teste/${user.id}`)}>Perfil</button>
+                  <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
               )}

@@ -5,9 +5,9 @@ import Footer from "../../components/Footer/footer"
 const SafeAlert = () => {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <MapComponent />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

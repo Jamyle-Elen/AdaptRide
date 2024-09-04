@@ -20,11 +20,14 @@ const SignInDriver = () => {
   const onSubmit = async (data) => {
     try {
       const response = await api.post("/login/driver", data);
-      const userData = response.data;
-      const id = response.data.id;
+      const userData = response.data.driver;
+      const id = response.data.driver.id;
+      sessionStorage.setItem("user", JSON.stringify(userData)); 
+      sessionStorage.setItem("authTokenDriver", JSON.stringify(id));
       console.log(response.data)
       sucessToast("Login realizado com sucesso!");
-      navigate(`/teste/${id}`, { state: userData });
+      navigate('/')
+      // navigate(`/teste/${id}`, { state: userData });
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         errorToast(error.response.data.message);
@@ -32,34 +35,37 @@ const SignInDriver = () => {
         errorToast("Falha ao realizar login, tente novamente!");
       }
       reset();
-      console.error("Erro ao fazer login:", error.response ? error.response.data : error.message);
+      console.error("Erro ao fazer login:", error.response.data.message);
     }
   };
 
   return (
     <>
-      <main className="main">
+      <main className="main-log-driver">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <section className="section">
-            <div className="sign-in">
+          <section className="section-log-driver">
+            <div className="sign-in-log-driver">
               <div className="sign-in-arrow">
                 <Link to="/"><i className="bx bx-chevron-left"></i></Link>
               </div>
-              <div className="sign-in-text">
+              <div className="sign-in-text-log-driver">
                 <h2>Login</h2>
                 <p>Insira seus dados</p>
               </div>
-              <div className="sign-in-input">
+              <div className="sign-in-input-log-driver">
                 <input
                   type="email"
+                  required
                   name="email"
                   id="email"
                   placeholder="E-mail"
                   {...register("email")}
-                  className={errors.email ? "input-error" : ""}
+                  className={errors.email ? "input-error" : ""
+                  }
                 />
                 <input
                   type="password"
+                  required
                   name="password"
                   id="password"
                   placeholder="Senha"
@@ -70,13 +76,13 @@ const SignInDriver = () => {
                   <p>Esqueci minha senha</p>
                 </Link>
               </div>
-              <button type="submit" className="profile-passenger">
+              <button type="submit" className="profile-driver-log">
                 Entrar
               </button>
             </div>
-            <div className="sign-up-area">
+            <div className="sign-up-area-log-driver">
               <img src={images.logoAdapt} alt="Logo Adapt" />
-              <div className="sign-up-text">
+              <div className="sign-up-text-log-driver">
                 <h2>Ainda não possui conta?</h2>
                 <p>Crie sua conta</p>
               </div>

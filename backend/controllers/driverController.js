@@ -80,7 +80,7 @@ export const createDrivers = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Erro ao tentar cadastrar motorista", error });
+      .json({ message: "Erro ao tentar cadastrar, tente mais tarde", error });
   }
 };
 
@@ -93,12 +93,18 @@ export const loginDriver = async (req, res) => {
     }
     const isPasswordValid = await bcrypt.compare(password, driver.password);
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Senha incorreta" });
+      return res.status(400).json({ message: "Email ou senha inválidos" });
     }
 
-    res.status(200).json({ message: "Login bem sucedido!", id: driver.id });
+    return res.status(200).json({
+      message: "Login bem sucedido!",
+      driver: {
+        id: driver.id,
+        email: driver.email,
+        name: driver.name,
+      }});
   } catch (error) {
-    console.error("Erro ao tentar logar:", error.message);
+    console.error("Erro ao tentar logar:", error);
     res.status(500).json({ message: "Erro ao tentar logar" });
   }
 };
