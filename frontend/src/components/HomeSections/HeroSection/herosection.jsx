@@ -5,6 +5,7 @@ import "./herosection.css";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { api, url } from "../../../../config/axios.js";
+import LoadingIcon from "../../../utils/Loading/LoadingIcon.jsx";
 
 const GOOGLE_MAPS_LIBRARIES = ["places"];
 
@@ -16,6 +17,7 @@ const HeroSection = () => {
   const [geocoder, setGeocoder] = useState(null);
   const [startAutocomplete, setStartAutocomplete] = useState(null);
   const [destinationAutocomplete, setDestinationAutocomplete] = useState(null);
+  const [showHomepage, setShowHomepage] = useState(false);
   const navigate = useNavigate();
   const socket = io("http://localhost:3001");
 
@@ -47,6 +49,26 @@ const HeroSection = () => {
     }
   };
 
+  const reverseGeocode = async (lat, lng) => {
+    try {
+      const response = await api.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          latlng: `${lat},${lng}`,
+          key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+        },
+      });
+      console.log('Reverse Geocode API Response:', response.data);
+      const data = response.data;
+      if (data.results.length > 0) {
+        return data.results[0].formatted_address;
+      }
+      return "Endereço não encontrado";
+    } catch (error) {
+      console.error('Erro ao obter o endereço', error);
+      return "Erro ao obter o endereço";
+    }
+  };
+  
   useEffect(() => {
     if (isLoaded) {
       const geocoderInstance = new window.google.maps.Geocoder();
@@ -84,8 +106,11 @@ const HeroSection = () => {
   useEffect(() => {
     socket.on("rideAccepted", (data) => {
       console.log("Motorista aceitou a corrida", data);
-      rideAcceptToast("Corrida aceita pelo motorista!");
-      navigate("/race-request");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/race-request");
+      }, 2000);
     });
 
     return () => {
@@ -93,13 +118,16 @@ const HeroSection = () => {
     };
   }, [socket, navigate]);
 
-  const handleGeolocation = () => {
+  const watchPosition = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
+      navigator.geolocation.watchPosition(
+        async (position) => {
           const { latitude, longitude } = position.coords;
-          getAddressFromCoordinates(latitude, longitude, setStartAddress);
-          setGeolocationActive(true);
+          console.log("Coordenadas atuais:", latitude, longitude);
+          const address = await reverseGeocode(latitude, longitude);
+          if (address) {
+            setStartAddress(address);
+          }
         },
         (error) => {
           console.log("Erro ao tentar pegar a localização", error);
@@ -114,6 +142,12 @@ const HeroSection = () => {
     setStartAddress("");
     setGeolocationActive(false);
   };
+
+  useEffect(() => {
+    if (geolocationActive) {
+      watchPosition();
+    }
+  }, [geolocationActive]);
 
   const handleRequestRide = async () => {
     const token = sessionStorage.getItem("authToken");
@@ -143,12 +177,17 @@ const HeroSection = () => {
     return <div>Erro ao carregar a API do Google Maps</div>;
   }
 
-  if (!isLoaded) {
-    return <div>Carregando...</div>;
-  }
+  // if (!isLoaded) {
+  //   return <div>Carregando</div>;
+  // }
 
-  return (
+  return loading ? <LoadingIcon /> : (
     <div className="homepage">
+      {loading && (
+        <div className="loading-overlay">
+          <LoadingIcon />
+        </div>
+      )}
       <div className="hero-section">
         <section>
           <div className="form-container">
@@ -172,7 +211,13 @@ const HeroSection = () => {
               <i
                 className={`bx ${geolocationActive ? "bx-x" : "bx-target-lock"}`}
                 style={{ fontSize: "26px", color: "#3D4A6A", cursor: "pointer" }}
-                onClick={geolocationActive ? handleClearLocation : handleGeolocation}
+                onClick={() => {
+                  if (geolocationActive) {
+                    handleClearLocation();
+                  } else {
+                    setGeolocationActive(true);
+                  }
+                }}
               ></i>
             </div>
             <div className="input-container">
@@ -187,7 +232,7 @@ const HeroSection = () => {
                 required
               />
             </div>
-            <button type="submit">Solicitar</button>
+            <button type="submit" disabled={loading}>Solicitar</button>
           </form>
         </section>
         <img className="car-adapt" src={images.carAdapt} alt="Carro adaptado" />

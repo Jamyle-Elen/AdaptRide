@@ -173,7 +173,7 @@ const DriverDashboard = () => {
         {/* <CustomMap
         startLocation={[-7.887258, -34.914304]}
       /> */}
-      {/* <MapComponent className="map"/> */}
+      <MapComponent className="map"/>
       </>
       )}
 
