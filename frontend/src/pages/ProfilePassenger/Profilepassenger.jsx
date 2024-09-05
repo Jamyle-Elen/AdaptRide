@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import images from "../../assets/images"
 import "./profilePassenger.css";
 import SideBar from '../../components/sideBar/sideBar.jsx';
@@ -12,21 +12,18 @@ const Passenger = () => {
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null); 
     const [image, setImage] = useState(images.profileAdapt);
-
+    const navigate = useNavigate()
+    
     useEffect(() => {
         const fetchUserData = async () => {
+            const token = JSON.parse(sessionStorage.getItem("authToken"))
+            console.log(token)
             try {
-                const User = {
-                    name: "",
-                    cpf: "",
-                    email: "",
-                    phone: "",
-                    dateBirth: "",
-                    passengerDisability: "",
-                    passengerIllness: "",
-                    passengerAllergy: "",  
-                }
-                setUser(User); // Atualiza o estado com os dados recebidos
+                const response = await api.get(`/profile/passenger/${token}`)
+                setUser(response.data)
+                console.log(response.data)
+                navigate('/profile/passenger/${token}')
+                // setUser(user); // Atualiza o estado com os dados recebidos
             } catch (error) {
                 setError("Failed to fetch user data"); 
             } finally {
@@ -74,9 +71,10 @@ const Passenger = () => {
                     <div className='title-accessibility-passenger'>
                         <label><strong className='accessibility-passenger'>Acessibilidade</strong></label>
                     </div>
-                    <label><strong>Deficiência:</strong> {user.passengerDisability}</label>
-                    <label><strong>Alergia:</strong> {user.passengerAllergy}</label> 
-                    <label><strong>Informações adcionais :</strong> {user.additionalInformation}</label>
+                    <label><strong>Deficiência:</strong> {user.disability}</label>
+                    <label><strong>Nivel de assistência:</strong> {user.assistanceLevel}</label> 
+                    <label><strong>Contato de Emergência:</strong> {user.contactName}</label> 
+                    <label><strong>Informações adcionais :</strong> {user.emergencyContact}</label>
                 </section>
             </section>
         </main>
