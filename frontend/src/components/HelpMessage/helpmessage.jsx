@@ -6,7 +6,7 @@ const HelpMessage = () => {
   return (
     <section className="help">
       <div className="help-page">
-      <div className="helppage-arrow">
+      <div className="help-arrow">
           <Link to="/"><i className="bx bx-chevron-left"></i></Link>
       </div>
         <div className="help-text-center">
