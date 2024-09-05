@@ -7,11 +7,11 @@ import './raceRequest.css';
 import { api, url } from '../../../config/axios.js';
 import MapComponent from '../../components/Maps/Geocode.jsx';
 
-const geocodeAddress = async (address) => {
+const geocodeLatlng = async (latlng ) => {
   try {
     const response = await api.get('https://maps.googleapis.com/maps/api/geocode/json', {
       params: {
-        address: address,
+        latlng : latlng,
         key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
       },
     });
@@ -55,15 +55,15 @@ const RaceRequest = () => {
   useEffect(() => {
     const fetchRouteData = async () => {
       const rideRequest = JSON.parse(sessionStorage.getItem('rideRequest'));
-
+  
       if (rideRequest) {
-        const originLocation = await geocodeAddress(rideRequest.startLocation);
-        const destinationLocation = await geocodeAddress(rideRequest.destinationLocation);
-
+        const originLocation = await geocodeLatlng(`${rideRequest.startLocation.lat},${rideRequest.startLocation.lng}`);
+        const destinationLocation = await geocodeLatlng(`${rideRequest.destinationLocation.lat},${rideRequest.destinationLocation.lng}`);
+  
         if (originLocation && destinationLocation) {
           setOrigin(originLocation);
           setDestination(destinationLocation);
-
+  
           const routePolyline = await getRoute(
             `${originLocation.lat},${originLocation.lng}`,
             `${destinationLocation.lat},${destinationLocation.lng}`
@@ -72,7 +72,7 @@ const RaceRequest = () => {
         }
       }
     };
-
+  
     fetchRouteData();
   }, []);
 
@@ -148,16 +148,6 @@ const RaceRequest = () => {
         </div>
       </div>
       <section className="maps">
-        <div className="ride">
-          <div className="placa" id="saida">
-            <label>Saída:</label>
-            <input autoComplete="on" type="text" />
-          </div>
-          <div className="placa" id="chegada">
-            <label>Chegada:</label>
-            <input autoComplete="on" type="text" />
-          </div>
-        </div>
         <MapComponent
           style={{ height: '400px', width: '100%' }}
           zoomLevel={12}

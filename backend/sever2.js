@@ -68,7 +68,8 @@ const getNearbyDrivers = async (geohash) => {
     Driver.findAll({
       where: {
         locationZone: {
-          [Op.like]: `${neighbor}%`,
+          [Op.like]: `%`,
+          // [Op.like]: `${neighbor}%`,
         },
       },
     })
