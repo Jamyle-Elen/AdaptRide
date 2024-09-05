@@ -128,27 +128,33 @@ const DriverDashboard = () => {
       // )}{!rideData && (
         <div className="modal-overlay-ride">
           <div className="modal-ride">
-            <div className="modal-header-ride">
+            {/* <div className="modal-header-ride">
               <button className="close-button" onClick={handleCloseDetailsRide}>×</button>
-            </div>
-            <hr />
+            </div> */}
             <div className="modal-body-top">
               {/* <p>Motorista está a caminho</p> */}
               <div className="modal-body-ride">
-                <div className="car">
-                  <img src={images.car} alt="Carro adaptado" />
+                <div className="perfil-car">
+                  {/* <img src={images.car4Adapt} alt="Carro adaptado" /> */}
                 {/* <label htmlFor="place">FGE6453</label> */}
                 </div>
                 {/* <h3><strong>Corrida Aceita</strong></h3> */}
-                <h4>Valor estimado: R$ XX,XX</h4>
+                {/* <h4>Valor estimado: R$ XX,XX</h4> */}
             </div>
               {/* <p><strong>De:</strong> {rideData.startLocation.latitude}, {rideData.startLocation.longitude}</p>
               <p><strong>Para:</strong> {rideData.destinationLocation.latitude}, {rideData.destinationLocation.longitude}</p> */}
             </div>
             <div className="modal-footer-ride">
-              <img src={images.contact} width ="50px" alt="" />
-              <label htmlFor="Nome do passageiro">Nome:</label>
-              <p>Lorem, ipsum.</p>
+              <img src={images.contact} alt="" />
+              {/* <label htmlFor="Nome do passageiro">Nome:</label> */}
+              {/* <p>Lorem, ipsum.</p> */}
+            </div>
+            <div className="dashboard-passenger-info">
+              <ul>
+                <li>Nome:</li>
+                <li>Deficiência:</li>
+                <li>Nível de Deficiência:</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -156,12 +162,12 @@ const DriverDashboard = () => {
       {!rideData && (
         <>
       <div className="driver-status">
-      <nav><Link to={`/profile/driver/${defID}`}><i className="bx bx-chevron-left"></i></Link></nav>
-
+        <nav><Link to={`/profile/driver/${defID}`}><i className="bx bx-chevron-left"></i></Link></nav>
         <div className="status">
-        <div className="vide">  </div>
-          <p>Você está online</p>
-          <p>Aguardando nova solicitação de corrida...</p>
+            <div className="dashboard-nav-info">  
+              <p>Você está online</p>
+              <p>Aguardando nova solicitação de corrida...</p>
+            </div>
         </div>
       </div>
         {/* <CustomMap
