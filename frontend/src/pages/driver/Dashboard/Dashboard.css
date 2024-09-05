@@ -64,15 +64,14 @@ nav i {
     background: none;
     display: flex;
     align-items: end;
-
 }
 
 .modal,
 .modal-ride {
     background: white;
     border-radius: 8px;
-    max-width: 30rem;
-    max-height: 15rem;
+    /* max-width: 30rem; */
+    /* max-height: 15rem; */
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -80,9 +79,12 @@ nav i {
 
 .modal-ride {
     bottom: 0;
+    background-color: #282F41;
+    border-radius: 20px 20px 0 0;
     display: flex;
-    z-index: 1000;
-    width: 100%;
+    /* z-index: 1000; */
+    height: 20rem;
+    width: 30rem;
     align-items: center;
 }
 
@@ -100,18 +102,20 @@ nav i {
     cursor: pointer;
 }
 
-.car {
+.perfil-car img{
     display: flex;
+    height: 148px;
+    width: 236px;
 }
 
-.car label {
+.perfil-car label {
     font-family: "New Amsterdam", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 1.5rem;
 }
 
-h3 {
+h4 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
@@ -120,7 +124,28 @@ h3 {
     display: flex;
     justify-content: space-between;
     flex-direction: column-reverse;
+}
 
+.modal-footer-ride img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    width: 9rem;
+}
+
+.dashboard-passenger-info {
+    display: flex;
+    margin-top: 0.5rem;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.dashboard-passenger-info ul {
+    display: flex;
+    flex-direction: column;
+    margin-right: 14rem;
+    align-items: start;
 }
 
 .accept-button,
@@ -131,6 +156,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .accept-button {
@@ -138,10 +164,8 @@ h3 {
     color: white;
     width: 100%;
     height: 3.2rem;
-    /* border: red solid 1px; */
     margin: 1rem 0 0 0;
     padding: 10px;
-
 }
 
 .decline-button {
@@ -154,4 +178,139 @@ h3 {
 .decline-button:hover {
     background-color: white;
     border: none;
+}
+
+/* Responsividade */
+
+@media (max-width: 1280px) {
+    .modal-ride {
+        width: 28rem;
+        height: 18rem;
+    }
+
+    .modal-footer-ride img {
+        width: 8rem;
+    }
+    .dashboard-passenger-info {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .modal-ride {
+        width: 26rem;
+        height: 16rem;
+    }
+    .modal-footer-ride img {
+        width: 7rem;
+    }
+    .dashboard-passenger-info {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-ride {
+        width: 24rem;
+        height: 14rem;
+    }
+    .modal-footer-ride img {
+        width: 6rem;
+    }
+    .dashboard-passenger-info {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .modal-ride {
+        width: 23rem;
+        height: 12rem;
+    }
+    .modal-footer-ride img {
+        width: 5rem;
+    }
+    .dashboard-passenger-info {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-ride {
+        width: 18rem;
+        height: 20rem;
+    }
+    .modal-footer-ride img {
+        width: 6.8rem;
+    }
+    .dashboard-passenger-info {
+        width: 16rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .dashboard-nav-info {
+        font-size: 0.8rem;
+    }
+
+    .modal-ride {
+        width: 17rem;
+    }
+    .dashboard-passenger-info {
+        width: 15rem;
+    }
+}
+
+@media (max-width: 475px) {
+    .modal-ride {
+        width: 15rem;
+    }
+    .dashboard-passenger-info {
+        width: 13rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .driver-status i {
+        font-size: 2rem;
+        margin-left: 5rem;
+    }
+
+    .dashboard-nav-info {
+        font-size: 0.7rem;
+        margin-left: 5rem;
+    }
+
+    .modal-ride {
+        width: 14rem;
+        margin-left: 5rem;
+    }
+    .dashboard-passenger-info {
+        width: 12rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .modal-ride {
+        width: 13rem;
+    }
+
+    .modal-footer-ride img {
+        width: 5.5rem;
+    }
+
+    .dashboard-passenger-info {
+        width: 11rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .modal-ride {
+        width: 12rem;
+    }
+    .dashboard-passenger-info {
+        width: 10rem;
+    }
 }
