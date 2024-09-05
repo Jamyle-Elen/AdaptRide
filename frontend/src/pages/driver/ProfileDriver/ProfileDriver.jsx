@@ -56,8 +56,8 @@ const ProfileDriver = () => {
                     <label><strong>Número CNH:</strong> {user.numCNH}</label>
                 </section>
                 <section className="vehicle-info" title="Informação do veículo">
-                    <div className='title'>
-                        <label><strong className='title-veiculo'>Informações do veículo</strong></label>
+                    <div className="title">
+                        <strong className="title-veiculo">Informações do veículo</strong>
                     </div>
                     <label><strong>Placa do veículo:</strong> {user.vehiclePlate}</label>
                     <label><strong>Marca do veículo:</strong> {user.vehicleBrand}</label> 
