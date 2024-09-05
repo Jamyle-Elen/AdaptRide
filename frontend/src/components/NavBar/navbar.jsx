@@ -78,12 +78,29 @@ const NavBar = () => {
                 {user.name || 'Usuário'} <i className="bx bx-chevron-down"></i>
               </span>
 
-              {dropdownVisible && (
+              
+              {/* {dropdownVisible && ({  (
                 <div className="dropdown-menu">
                   <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
                   <button onClick={handleLogout}>Logout</button>
-                </div>
-              )}
+                
+                ) : (
+                  
+                    <button onClick={() => navigate(`/profile/passenger/${user.id}`)}>Perfil</button>
+                    <button onClick={handleLogout}>Logout</button>
+                  </div> */}
+                {user && tokenDriver && (
+                  <div>
+                    <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
+                    <button onClick={handleLogout}>Logout</button>
+                  </div>
+                )}
+                {user && !tokenDriver && (
+                  <div>
+                    <button onClick={() => navigate(`/profile/passenger/${user.id}`)}>Perfil</button>
+                    <button onClick={handleLogout}>Logout</button>
+                  </div>
+                )}
             </div>
           ) : (
             <div className="auth-options">
@@ -106,5 +123,6 @@ const NavBar = () => {
     </>
   );
 };
+
 
 export default NavBar;
