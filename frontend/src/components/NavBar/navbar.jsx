@@ -77,26 +77,14 @@ const NavBar = () => {
                 />
                 {user.name || 'Usuário'} <i className="bx bx-chevron-down"></i>
               </span>
-
-              
-              {/* {dropdownVisible && ({  (
-                <div className="dropdown-menu">
-                  <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
-                  <button onClick={handleLogout}>Logout</button>
-                
-                ) : (
-                  
-                    <button onClick={() => navigate(`/profile/passenger/${user.id}`)}>Perfil</button>
-                    <button onClick={handleLogout}>Logout</button>
-                  </div> */}
-                {user && tokenDriver && (
-                  <div>
+                {dropdownVisible && user && tokenDriver && (
+                  <div className="dropdown-menu">
                     <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
                     <button onClick={handleLogout}>Logout</button>
                   </div>
                 )}
-                {user && !tokenDriver && (
-                  <div>
+                {dropdownVisible && user && !tokenDriver && (
+                  <div className="dropdown-menu">
                     <button onClick={() => navigate(`/profile/passenger/${user.id}`)}>Perfil</button>
                     <button onClick={handleLogout}>Logout</button>
                   </div>
