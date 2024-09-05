@@ -37,7 +37,12 @@ const getRoute = async (origin, destination) => {
     });
     const data = response.data;
     if (data.routes[0]) {
-      return data.routes[0].overview_polyline.points;
+      const leg = data.routes[0].legs[0];
+      return {
+        distance: leg.distance.text,
+        distanceValue: leg.distance.value, // Distância em metros
+        polyline: data.routes[0].overview_polyline.points,
+      };
     }
     return null;
   } catch (error) {
@@ -51,6 +56,11 @@ const RaceRequest = () => {
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
   const [route, setRoute] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const [calculatedValue, setCalculatedValue] = useState(null);
+
+  // valor minimo da corrida por Km
+  const kmPrice = 1.93
 
   useEffect(() => {
     const fetchRouteData = async () => {
@@ -64,11 +74,17 @@ const RaceRequest = () => {
           setOrigin(originLocation);
           setDestination(destinationLocation);
 
-          const routePolyline = await getRoute(
+          const routeData = await getRoute(
             `${originLocation.lat},${originLocation.lng}`,
             `${destinationLocation.lat},${destinationLocation.lng}`
           );
-          setRoute(routePolyline);
+          if (routeData) {
+            setRoute(routeData.polyline);
+            setDistance(routeData.distanceValue);
+            const distanceInKm = (distance / 1000); // Convertendo metros para quilômetros
+            const ridePrice = (distanceInKm * kmPrice).toFixed(2); // Calcula o valor e arredonda para 2 casas decimais
+            setCalculatedValue(ridePrice);
+          }
         }
       }
     };
@@ -125,7 +141,7 @@ const RaceRequest = () => {
               <p className="prox">Próximo de você</p>
             </div>
             <div className="value">
-              <p className="price">R$ 9.98</p>
+              <p className="price">R$ {calculatedValue || '9.98'}</p>
             </div>
           </div>
 
