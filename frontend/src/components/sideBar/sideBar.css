@@ -13,6 +13,7 @@
     flex-direction: column;
     width: 4rem;
     align-items: center;
+    z-index: 100;
 }
 .sidebar i{
     font-size: 2.2rem;
