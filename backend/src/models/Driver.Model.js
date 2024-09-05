@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import db from "../config/database.js";
+import db from "../../config/database.js";
 // import Ride from "./Ride.Model.js";
 
 const Driver = db.define(

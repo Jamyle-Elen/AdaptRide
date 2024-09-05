@@ -1,5 +1,5 @@
 import NavBar from "../../components/NavBar/navbar";
-import ErrorMessage from "../../components/ErrorMessage/errormessage";
+import ErrorMessage from "../../components/Errormessage/errormessage.jsx";
 
 const NotFound = () => {
   return (

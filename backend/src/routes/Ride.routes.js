@@ -1,5 +1,5 @@
 import express from 'express'
-import { /*createRides*/ getAllRides, requestRides, acceptRide } from '../controllers/RideController.js'
+import { /*createRides*/ getAllRides, requestRides, acceptRide } from '../../backend/controllers/RideController.js'
 
 const router = express.Router()
 

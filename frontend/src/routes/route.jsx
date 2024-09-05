@@ -11,7 +11,7 @@ import TermsAndPrivacy from "../pages/TermsAndPrivacy/termsAndPrivacy.jsx";
 // Passageiro
 import SignIn from "../pages/passenger/Sign_in/sign-in.jsx";
 import SignUp from "../pages/passenger/Sign_up/sign-up.jsx";
-import ProfilePassenger from "../pages/profilePassenger/profilePassenger.jsx";
+import ProfilePassenger from "../pages/ProfilePassenger/ProfilePassenger.jsx";
 // import HistoryPassenger from "../pages/historyPassenger/historyPassenger.jsx"
 // Parceiro
 import SignInDriver from "../pages/driver/Sign_in/sign-in-driver.jsx";

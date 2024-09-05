@@ -2,10 +2,21 @@ import { Sequelize } from "sequelize";
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
 
-const db = new Sequelize({
-  dialect: "sqlite",
-  storage: "./db/banco.db",
-});
+// const db = new Sequelize({
+//   dialect: "sqlite",
+//   storage: "./db/banco.db",
+// });
+
+const conenction = mysql.creaePool({
+  host: process.env.DB_HOST ||'localhost',
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'rootpassword',
+  database: process.env.DB_NAME || 'adaptride'
+})
+
+
+
 
 const syncDatabase = async () => {
   try {

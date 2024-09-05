@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'; 
 import { useParams, Link } from 'react-router-dom';
-import images from "../../assets/images"
-import "./profilePassenger.css";
+import images from "../../assets/images.js"
+import "./ProfilePassenger.css";
 import SideBar from '../../components/sideBar/sideBar.jsx';
 import { api } from '../../../config/axios.js'
-import SignUpDriver from "../driver/Sign_up/sign-up-driver";
+import SignUpDriver from "../driver/Sign_up/sign-up-driver.jsx";
 
 const Passenger = () => {
     const { id } = useParams();
