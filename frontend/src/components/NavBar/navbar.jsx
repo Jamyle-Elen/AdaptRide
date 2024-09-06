@@ -54,7 +54,7 @@ const NavBar = () => {
           <ul className="list">
             <li>
               {/* arrumar isso aqui depois, pq mesmo nao sendo motorista ta redirecionando para o dashboard */}
-              {user ? (
+              {tokenDriver ? (
                 <Link to="/dashboard/driver" className="list-item" id="list-item-drive">Dirigir</Link>
               ) : (
               <Link to="/sign-in/driver" className="list-item" id="list-item-drive">Dirigir</Link>
@@ -77,13 +77,18 @@ const NavBar = () => {
                 />
                 {user.name || 'Usuário'} <i className="bx bx-chevron-down"></i>
               </span>
-
-              {dropdownVisible && (
-                <div className="dropdown-menu">
-                  <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
-                  <button onClick={handleLogout}>Logout</button>
-                </div>
-              )}
+                {dropdownVisible && user && tokenDriver && (
+                  <div className="dropdown-menu">
+                    <button onClick={() => navigate(`/profile/driver/${user.id}`)}>Perfil</button>
+                    <button onClick={handleLogout}>Logout</button>
+                  </div>
+                )}
+                {dropdownVisible && user && !tokenDriver && (
+                  <div className="dropdown-menu">
+                    <button onClick={() => navigate(`/profile/passenger/${user.id}`)}>Perfil</button>
+                    <button onClick={handleLogout}>Logout</button>
+                  </div>
+                )}
             </div>
           ) : (
             <div className="auth-options">
@@ -106,5 +111,6 @@ const NavBar = () => {
     </>
   );
 };
+
 
 export default NavBar;
