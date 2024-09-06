@@ -27,7 +27,6 @@
   width: 26rem;
 }
 
-/* Responsividade */
 
 @media (max-width: 1280px) {
   .Title-NotFound h1 {

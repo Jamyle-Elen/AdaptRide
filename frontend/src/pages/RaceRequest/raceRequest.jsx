@@ -1,25 +1,100 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import images from "../../assets/images.js";
-import "./raceRequest.css";
-import {api, url} from '../../../config/axios.js'
-import MapsOpenStreetMap from '../../components/Maps/Geocode.jsx'
-// import Passenger from "../../../../backend/models/Passenger.Model.js";
-// import PaymentModal from "../../components/PaymentModal";
+// RaceRequest.jsx
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import images from '../../assets/images.js';
+import './raceRequest.css';
+import { api, url } from '../../../config/axios.js';
+import MapComponent from '../../components/Maps/Geocode.jsx';
+
+const geocodeLatlng = async (latlng ) => {
+  try {
+    const response = await api.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      params: {
+        latlng : latlng,
+        key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+      },
+    });
+    const data = response.data;
+    if (data.results[0]) {
+      return data.results[0].geometry.location;
+    }
+    return null;
+  } catch (error) {
+    console.error('Erro ao obter coordenadas', error);
+    return null;
+  }
+};
+
+const getRoute = async (origin, destination) => {
+  try {
+    const response = await api.get('https://maps.googleapis.com/maps/api/directions/json', {
+      params: {
+        origin: origin,
+        destination: destination,
+        key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+      },
+    });
+    const data = response.data;
+    if (data.routes[0]) {
+      const leg = data.routes[0].legs[0];
+      return {
+        distance: leg.distance.text,
+        distanceValue: leg.distance.value, // Distância em metros
+        polyline: data.routes[0].overview_polyline.points,
+      };
+    }
+    return null;
+  } catch (error) {
+    console.error('Erro ao obter rota', error);
+    return null;
+  }
+};
 
 const RaceRequest = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
-  // const [openModalPayment, setOpenModalPayment] = useState(false);
+  const [origin, setOrigin] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [route, setRoute] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const [calculatedValue, setCalculatedValue] = useState(null);
+
+  // valor minimo da corrida por Km
+  const kmPrice = 1.93
+
+  useEffect(() => {
+    const fetchRouteData = async () => {
+      const rideRequest = JSON.parse(sessionStorage.getItem('rideRequest'));
+  
+      if (rideRequest) {
+        const originLocation = await geocodeLatlng(`${rideRequest.startLocation.lat},${rideRequest.startLocation.lng}`);
+        const destinationLocation = await geocodeLatlng(`${rideRequest.destinationLocation.lat},${rideRequest.destinationLocation.lng}`);
+  
+        if (originLocation && destinationLocation) {
+          setOrigin(originLocation);
+          setDestination(destinationLocation);
+
+          const routeData = await getRoute(
+            `${originLocation.lat},${originLocation.lng}`,
+            `${destinationLocation.lat},${destinationLocation.lng}`
+          );
+          if (routeData) {
+            setRoute(routeData.polyline);
+            setDistance(routeData.distanceValue);
+            const distanceInKm = (distance / 1000); // Convertendo metros para quilômetros
+            const ridePrice = (distanceInKm * kmPrice).toFixed(2); // Calcula o valor e arredonda para 2 casas decimais
+            setCalculatedValue(ridePrice);
+          }
+        }
+      }
+    };
+  
+    fetchRouteData();
+  }, []);
 
   const handleCardClick = async () => {
     setIsButtonActive(true);
     const user = JSON.parse(sessionStorage.getItem('user'));
-    console.log(user)
-
-    // if (passengerId) {
-    //   setPassengerId(passengerId);
-    //   sessionStorage.setItem("passengerId", passengerId);
-    // }
 
     const rideRequest = {
       Route: JSON.parse(sessionStorage.getItem('rideRequest')),
@@ -28,28 +103,18 @@ const RaceRequest = () => {
         name: user.name,
       }
     };
-    // const handlePayment = async () => {
-    
-    // }
-    
-   
-    
-  
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       const response = await url.post("/rides", rideRequest);
-      
+
       console.log("Corrida solicitada com sucesso!");
-      // rideAcceptToast("Motorista solicitado!");
       socket.emit("rideRequested", data);
       // navigate("/race-request");
     } catch (error) {
       console.error("Erro ao solicitar corrida", error);
       // errorToast("Erro ao solicitar corrida", error);
-    } finally {
-      // setLoading(false);
     }
-    
   };
 
   return (
@@ -76,16 +141,10 @@ const RaceRequest = () => {
               <p className="prox">Próximo de você</p>
             </div>
             <div className="value">
-              <p className="price">R$ 9.98</p>
+              <p className="price">R$ {calculatedValue || '9.98'}</p>
             </div>
           </div>
 
-          <div className="shortly">
-            <abbr title="Indisponível no momento">
-              <img src={images.shortly} alt="Serviço indisponível, em breve" />
-            </abbr>
-          </div>
-          
           <div className="shortly">
             <abbr title="Indisponível no momento">
               <img src={images.shortly} alt="Serviço indisponível, em breve" />
@@ -95,7 +154,7 @@ const RaceRequest = () => {
             <input className="payment" type="radio" name="payment" id="payment" defaultChecked />
             <img src={images.real} width={20} height={20} alt="" />
             <label htmlFor="Dinheiro">Dinheiro</label>
-            </div>
+          </div>
           <button
             className={`race-request-btn ${isButtonActive ? "active" : ""}`}
             aria-label="Confirmar solicitação de corrida adaptada"
@@ -103,21 +162,16 @@ const RaceRequest = () => {
             Confirmar viagem
           </button>
         </div>
-        </div>
+      </div>
       <section className="maps">
-
-        <div className="ride">
-          <div className="placa" id="saida">
-            <label>Saída:</label>
-            <input autoComplete="on" type="text" />
-          
-          </div>
-          <div className="placa" id="chegada">
-            <label>Chegada:</label>
-            <input autoComplete="on" type="text" />
-          </div>
-        </div>
-        <MapsOpenStreetMap />
+        <MapComponent
+          style={{ height: '400px', width: '100%' }}
+          zoomLevel={12}
+          center={origin || { lat: -23.5505, lng: -46.6333 }}
+          origin={origin}
+          destination={destination}
+          route={route}
+        />
       </section>
     </main>
   );

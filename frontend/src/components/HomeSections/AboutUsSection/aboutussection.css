@@ -1,5 +1,4 @@
 .about-us-section {
-    /* max-width: 1280px; */
     background-color: var(--second-section-color);
     display: flex;
     align-items: center;
@@ -11,7 +10,6 @@
     padding-bottom: 100px;
     border-radius: 40px 40px 0 0;
     gap: 10rem;
-    /* tirar isso aqui jaja */
 }
 
 .accessibility {
@@ -115,12 +113,9 @@ figcaption {
 }
 
 
-/* --RESPONSIVIDADE-- */
-
 @media (max-width: 1280px) {
     .about-us-section {
         gap: 5rem;
-        /* tirar isso aqui jaja */
     }
     
     .accessibility h2 {
@@ -142,20 +137,12 @@ figcaption {
     .people-adapt {
         width: 28rem;
     }
-    
-    /* .square {
-        width: 28rem;
-        height: 10rem;
-        bottom: -5rem;
-        font-size: 1.3rem;
-    } */
 }
 
 @media (max-width: 970px) {
     .about-us-section {
         padding: 0 20px;
         gap: 2.5rem;
-        /* tirar isso aqui jaja */
     }
     
     .people-adapt {
@@ -163,7 +150,6 @@ figcaption {
     }
 
     .square {
-        /* width: 25rem; */
         height: 7rem;
         bottom: -4rem;
     }
@@ -172,7 +158,6 @@ figcaption {
 @media (max-width: 768px) {
     .about-us-section {
         gap: 1rem;
-        /* tirar isso aqui jaja */
     }
     
     .accessibility h2 {
@@ -182,10 +167,6 @@ figcaption {
     .people-adapt {
         width: 20rem;
     }
-
-    /* .square {
-        width: 20rem;
-    } */
 }
 
 @media (max-width: 600px) {

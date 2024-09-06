@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Driver from './Driver.Model.js';
 import Passenger from './Passenger.Model.js';
 import { DataTypes } from 'sequelize';
-import db from '../../config/database.js';
+import db from '../config/database.js';
 
 const Ride = db.define('Ride', {
   id: {

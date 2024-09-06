@@ -1,6 +1,6 @@
 import db from "../config/database.js";
 import Passenger from '../models/Passenger.Model.js'
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 
 export const createPassenger = async (req, res) => {
     try {
@@ -27,7 +27,7 @@ export const createPassenger = async (req, res) => {
         }
 
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, 10);
 
         const newPassenger = await Passenger.create({
         name,
@@ -65,7 +65,7 @@ export const loginPassenger = async (req, res) => {
       return res.status(400).json({ message: "Passageiro não cadastrado" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, passenger.password);
+    const isPasswordValid = await bcryptjs.compare(password, passenger.password);
 
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Email ou senha inválidos!" });

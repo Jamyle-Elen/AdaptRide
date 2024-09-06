@@ -45,7 +45,6 @@
 }
 
 .input-container {
-    /* border: 1px solid red; */
     position: relative;
     max-width: fit-content;
     display: flex;
@@ -114,8 +113,6 @@
     transition: .4s;
 }
 
-
-/* --RESPONSIVIDADE-- */
 
 @media (max-width: 1280px) {
     .hero-section {

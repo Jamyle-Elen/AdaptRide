@@ -201,7 +201,7 @@
 
 @media (max-width: 350px) {
     .main-log-passenger {
-        padding: 0 1rem;
+        padding: 1rem;
     }
 
     .section-log-passenger .sign-in-log-passenger {

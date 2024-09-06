@@ -1,17 +1,19 @@
 
 :root{
-    --pg-profile-color: green;
+    --pg-profile-color:#d9d9d9;
+    --second-profile-color: #fff;
     --nv-i-color:var(--bg-color)
 }
 
 .profile-driver {
     display: grid;
-    background-color: var(--bg-color);
+    background-color: var(--pg-profile-color);
     min-height: 100vh;
     grid-template-columns: 3.75rem 1fr; 
 }
 
 .info-profile-driver {
+    background-color: var(--pg-profile-color);
     padding: 2rem; 
     border-radius: 0.625rem;
     grid-column: 2;
@@ -22,7 +24,7 @@
 }
 
 .driver {
-    background-color: white; 
+    background-color: var(--second-profile-color); 
     padding: 3.125rem; 
     border-radius: 0.5rem; 
     border-bottom: 0; 
@@ -34,13 +36,12 @@
     border-radius: 50%; 
     width: 8.75rem; 
     height: 8.75rem; 
-    
 }
 
 .personal-info {
     display: flex; 
     flex-direction: column;
-    background-color: white;
+    background-color: var(--second-profile-color);
     border-radius: 1rem;
     grid-column: 2;
     grid-row: 1;
@@ -63,7 +64,7 @@
 .vehicle-info {
     display: flex; 
     flex-direction: column;
-    background-color: white;
+    background-color: var(--second-profile-color);
     border-radius: 0.625rem; 
     grid-column: span 2;
     grid-row: 2;
@@ -71,6 +72,7 @@
     overflow: hidden;
     justify-content: space-evenly;
 }
+
 .vehicle-info label {
     font-size: 1rem; 
     color: #0a0606;
@@ -86,8 +88,86 @@
 }
 
 .title .title-veiculo{
-    color: white;
+    color: var(--second-profile-color);
     font-size: 1.2rem; 
     font-weight: bold;
 }
 
+@media (max-width: 768px) {
+    .driver {
+        padding: 3rem; 
+    }
+
+    .driver figure{
+        text-align: center; 
+    }
+
+    .profile-img { 
+        width: 8rem; 
+        height: 8rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .info-profile-driver {
+        padding: 1.5rem; 
+        grid-column: 2;
+        gap: 1.5rem 0.625rem; 
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-driver {
+        display: grid;
+        grid-column: 1;
+    }
+
+    .info-profile-driver { 
+        grid-column: 2;
+        grid-template-columns: 1;
+        grid-row: 3;
+    }
+
+    .driver {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .personal-info {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        gap: 1rem;
+    }
+
+    .vehicle-info {
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
+
+@media (max-width: 425px) {
+    .info-profile-driver { 
+        padding: 1rem;
+    }
+
+    .driver {
+        padding: 1rem;
+        height: auto;
+    }
+
+    .profile-img {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    .vehicle-info label {
+        padding-left:  1rem;
+        padding-bottom: 1rem;
+    }
+}
