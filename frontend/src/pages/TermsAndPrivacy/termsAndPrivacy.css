@@ -1,8 +1,11 @@
 .terms-privacy-container {
-    padding: 2rem;
-    margin: 1rem;
-    max-width: 80%;
+    padding: 1rem 2rem;
+    width: 100%;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   i{
@@ -11,7 +14,9 @@
 
   .header {
     display: flex;
+    justify-content: center;
     gap: 2rem;
+    padding-top: 1rem;
   }
 
 
@@ -28,6 +33,7 @@
   .content-itens {
     display: flex;
     justify-content: left;
+    border: 1px solid red;
   }
 
   .content h2{
@@ -47,6 +53,14 @@
     margin-top: 0.5rem;
     line-height: 1.6;
     font-size: 1rem;
+  }
+
+  .content span {
+    padding: 2rem 0 1rem;
+    background-color: transparent;
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
   }
   
   

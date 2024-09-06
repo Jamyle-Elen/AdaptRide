@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 * {
-    margin: 0;padding: 0;text-decoration: none;list-style: none;scroll-behavior: smooth;box-sizing: border-box;font-family: "Inter", sans-serif;list-style: none; /*color: var(--text-color); */
+    margin: 0;padding: 0;text-decoration: none;list-style: none;scroll-behavior: smooth;box-sizing: border-box;font-family: "Inter", sans-serif;list-style: none;
 }
 
 :root {
@@ -106,7 +106,7 @@ button:hover {
 }
 
 .profile-pic {
-    max-width: 2.4rem;
+    max-width: 2rem;
     border-radius: 30px;
 }
 
@@ -129,7 +129,6 @@ button:hover {
     border:none;
 }
 
-/* RESPONSIVIDADE */
 
 @media (max-width: 1280px) {
     .menu-content {
@@ -161,7 +160,7 @@ button:hover {
     }
     
     .profile-pic {
-        width: 2.2rem;
+        width: 1.8rem;
     }
 }
 
@@ -198,10 +197,6 @@ button:hover {
     .user-info {
         font-size: 13.5px;
     }
-    
-    .profile-pic {
-        width: 2rem;
-    }
 
     .dropdown-menu button {
         font-size: 0.7rem;
@@ -232,10 +227,6 @@ button:hover {
         font-size: 13px;
     }
     
-    .profile-pic {
-        width: 2rem;
-    }
-
     .dropdown-menu button {
         font-size: 0.7rem;
     }

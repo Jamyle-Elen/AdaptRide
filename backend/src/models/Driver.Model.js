@@ -78,6 +78,7 @@ const Driver = db.define(
       type: DataTypes.STRING(12),
       allowNull: false,
     },
+
     // latitude: {
     //   type: DataTypes.FLOAT,
     //   allowNull: true,

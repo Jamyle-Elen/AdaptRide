@@ -1,18 +1,19 @@
 
 :root{
-    --pg-profile-color: green;
+    --pg-profile-color:#d9d9d9;
+    --second-profile-color: #fff;
     --nv-i-color:var(--bg-color)
 }
 
 .profile-driver {
     display: grid;
-    /* background-color: var(--bg-color); */
+    background-color: var(--pg-profile-color);
     min-height: 100vh;
     grid-template-columns: 3.75rem 1fr; 
 }
 
 .info-profile-driver {
-    background-color: #d9d9d9;
+    background-color: var(--pg-profile-color);
     padding: 2rem; 
     border-radius: 0.625rem;
     grid-column: 2;
@@ -23,7 +24,7 @@
 }
 
 .driver {
-    background-color: white; 
+    background-color: var(--second-profile-color); 
     padding: 3.125rem; 
     border-radius: 0.5rem; 
     border-bottom: 0; 
@@ -40,7 +41,7 @@
 .personal-info {
     display: flex; 
     flex-direction: column;
-    background-color: white;
+    background-color: var(--second-profile-color);
     border-radius: 1rem;
     grid-column: 2;
     grid-row: 1;
@@ -63,13 +64,13 @@
 .vehicle-info {
     display: flex; 
     flex-direction: column;
-    background-color: white;
+    background-color: var(--second-profile-color);
     border-radius: 0.625rem; 
     grid-column: span 2;
     grid-row: 2;
     gap: 0.625rem 0; 
     overflow: hidden;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .vehicle-info label {
@@ -87,7 +88,7 @@
 }
 
 .title .title-veiculo{
-    color: white;
+    color: var(--second-profile-color);
     font-size: 1.2rem; 
     font-weight: bold;
 }
@@ -135,11 +136,11 @@
     }
 
     .personal-info {
-        /* grid-column: 1; */
         grid-row-start: 2;
         grid-row-end: 3;
         grid-column-start: 1;
         grid-column-end: 3;
+        gap: 1rem;
     }
 
     .vehicle-info {

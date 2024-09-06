@@ -62,6 +62,7 @@ const ProfileDriver = () => {
                     </div>
                     <label><strong>Placa do veículo:</strong> {user.vehiclePlate}</label>
                     <label><strong>Marca do veículo:</strong> {user.vehicleBrand}</label> 
+                    <label><strong>Ano do veículo:</strong> {user.vehicleYear}</label> 
                     <label><strong>Cor do veículo:</strong> {user.vehicleColor}</label>
                     <label><strong>Tipos de adaptações:</strong> {user.typesAdaptations}</label>
                     <label><strong>Capacidade:</strong> {user.totalCapacity}</label> 
