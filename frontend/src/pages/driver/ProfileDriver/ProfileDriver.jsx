@@ -52,7 +52,7 @@ const ProfileDriver = () => {
                     <label><strong>Cpf:</strong> {user.cpf}</label>
                     <label><strong>Email:</strong> {user.email}</label>
                     <label><strong>Telefone:</strong> {user.phone}</label>
-                    <label><strong>Data de Nascimento:</strong> {user.dateBirth}</label>
+                    <label><strong>Data de Nascimento:</strong> {user.date}</label>
                     <label><strong>Número CNH:</strong> {user.numCNH}</label>
                 </section>
                 <section className="vehicle-info" title="Informação do veículo">

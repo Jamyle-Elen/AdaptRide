@@ -64,7 +64,7 @@ const Passenger = () => {
                     <label><strong>Cpf:</strong> {user.cpf}</label>
                     <label><strong>Email:</strong> {user.email}</label>
                     <label><strong>Telefone:</strong> {user.phone}</label>
-                    <label><strong>Data de Nascimento:</strong> {user.dateBirth}</label>
+                    <label><strong>Data de Nascimento:</strong> {user.date}</label>
                 </section>
 
                 <section className="accessibility-info" title="Acessibilidade do passageiro">
