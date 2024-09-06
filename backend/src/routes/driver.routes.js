@@ -1,5 +1,5 @@
 import express from 'express'
-import { createDrivers, loginDriver, getDriverInfo } from '../../backend/controllers/driverController.js'
+import { createDrivers, loginDriver, getDriverInfo } from '../controllers/driverController.js'
 
 const router = express.Router()
 

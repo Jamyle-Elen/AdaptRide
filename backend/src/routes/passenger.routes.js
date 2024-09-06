@@ -1,6 +1,6 @@
 import express from 'express'
-import { createPassenger, loginPassenger } from '../../backend/controllers/passengerController.js'
-import { getPassengerInfo } from '../../backend/controllers/passengerController.js'
+import { createPassenger, loginPassenger, getPassengerInfo } from '../controllers/passengerController.js'
+// import { getPassengerInfo } from '../../backend/controllers/passengerController.js'
 
 const router = express.Router()
 

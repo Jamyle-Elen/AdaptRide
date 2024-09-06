@@ -9,6 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       # nome do banco
       MYSQL_DATABASE: adaptride
+      
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     ports:
@@ -40,7 +41,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "3000:80"
+      - "3003:80"
     depends_on:
       - backend
     networks:
