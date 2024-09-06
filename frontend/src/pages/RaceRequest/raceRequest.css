@@ -231,3 +231,181 @@ main {
     font-size: 14px;
     color: #282F41;
 }
+
+@media (max-width: 1280px) {
+    .payments img {
+        width: 1.3rem; 
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        width: 22rem;
+    }
+
+    .card-raceRequest {
+        width: 21rem;
+        height: 8rem;
+    }
+
+    .card-raceRequest img {
+        width: 5rem;
+        height: 3.1rem;
+    }
+
+    .request-info {
+        padding: 0 10px;
+    }
+
+    .shortly img {
+        width: 21rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 18rem;
+    }
+
+    .card-raceRequest {
+        width: 17rem;
+        height: 10rem;
+        flex-direction: column;
+    }
+
+    .request-info h2 {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .card-raceRequest img {
+        width: 5rem;
+        height: 3.1rem;
+    }
+
+    .card-raceRequest .request-info {
+        padding: 0 10px;
+    }
+ 
+    .card-raceRequest .descriptionRequest {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    
+    .card-raceRequest .prox {
+        margin-top: 0;
+    }
+
+    .card-raceRequest .price {
+        margin-top: 0;
+    }
+
+    .card-raceRequest .value {
+        padding: 0 0 5px;
+    }
+
+    .shortly img {
+        width: 17rem;
+    }
+
+    .menu {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 15rem;
+    }
+
+    .card-raceRequest {
+        width: 14rem;
+    }
+
+    .card-raceRequest img {
+        width: 5rem;
+        height: 3.1rem;
+    }
+
+    .shortly img {
+        width: 13rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        width: 12rem;
+    }
+
+    .card-raceRequest {
+        width: 11rem;
+    }
+
+    .card-raceRequest img {
+        width: 4.5rem;
+        height: 3rem;
+    }
+
+    .shortly img {
+        width: 11rem;
+    }
+
+    .request-info h2 {
+        font-size: 18px;
+    }
+
+    .card-raceRequest .descriptionRequest {
+        font-size: 14px;
+    }
+    
+    .card-raceRequest .prox {
+        font-size: 13px;
+    }
+
+    .race-request-btn {
+        width: 9rem;
+    }
+
+    .menu {
+        gap: 0;
+    }
+
+    .payments label {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 375px){
+    .container {
+        width: 10rem;
+    }
+
+    .card-raceRequest {
+        width: 9rem;
+        margin: 0;
+    }
+
+    .shortly img {
+        width: 8rem;
+    }
+
+    .card-raceRequest .descriptionRequest {
+        font-size: 11px;
+    }
+    
+    .card-raceRequest .prox {
+        font-size: 11px;
+    }
+
+    .race-request-btn {
+        width: 7rem;
+    }
+
+    .menu img {
+        display: none;
+    }
+
+    .payments label {
+        font-size: 12px;
+    }
+}

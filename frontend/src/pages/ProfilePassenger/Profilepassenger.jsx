@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
-<<<<<<< HEAD
-import { useParams, Link } from 'react-router-dom';
-import images from "../../assets/images.js"
-import "./ProfilePassenger.css";
-=======
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import images from "../../assets/images"
 import "./profilePassenger.css";
->>>>>>> backup-project
 import SideBar from '../../components/sideBar/sideBar.jsx';
 import { api } from '../../../config/axios.js'
 import SignUpDriver from "../driver/Sign_up/sign-up-driver.jsx";
