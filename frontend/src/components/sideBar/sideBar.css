@@ -1,12 +1,10 @@
-
-/* Navbar lateral esquerda */
 .sidebar {
     background-color: #282F41;
     border-radius: 0 0.625rem 0.625rem 0; 
     box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.2); 
-    height: 100vh; /* Faz a navbar ocupar toda a altura da tela */
+    height: 100vh;
     grid-column: 1;
-    font-size: 3.75rem; /* 60px => 3.75rem */
+    font-size: 3.75rem;
     gap: 0.8rem;
     position: fixed;
     display: flex;
@@ -15,6 +13,7 @@
     align-items: center;
     z-index: 100;
 }
+
 .sidebar i{
     font-size: 2.2rem;
     color: white;
@@ -32,4 +31,26 @@
     bottom: 0;
     left: 50%; 
     transform: translateX(-63%); 
+}
+
+@media (max-width: 650px) {
+    .sidebar {
+        font-size: 3.6rem;
+        gap: 0.6rem;
+        width: 3.5rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .sidebar {
+        font-size: 3.4rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .sidebar {
+        font-size: 3.4rem;
+        gap: 0.5rem;
+        width: 3.2rem;
+    }
 }
