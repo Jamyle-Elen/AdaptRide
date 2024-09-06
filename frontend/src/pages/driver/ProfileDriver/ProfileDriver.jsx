@@ -21,6 +21,7 @@ const ProfileDriver = () => {
                 const response = await api.get(`/profile/driver/${tokenDriver}`);
                 setUser(response.data);
                 navigate(`/profile/driver/${response.data.id}`);
+                console.log(response)
 
             } catch (error) {
                 errorToast("Falha ao buscar dados do motorista. Tente novamente mais tarde.");
@@ -48,11 +49,11 @@ const ProfileDriver = () => {
 
                 <section className="personal-info" title="Informação Pessoal">
                     <label><strong className='data'>Dados Pessoais</strong></label>
-                    <label><strong>Name:</strong>{user.name}</label>
+                    <label><strong>Nome:</strong> {user.name}</label>
                     <label><strong>Cpf:</strong> {user.cpf}</label>
                     <label><strong>Email:</strong> {user.email}</label>
                     <label><strong>Telefone:</strong> {user.phone}</label>
-                    <label><strong>Data de Nascimento:</strong> {user.dateBirth}</label>
+                    <label><strong>Data de Nascimento:</strong> {user.date}</label>
                     <label><strong>Número CNH:</strong> {user.numCNH}</label>
                 </section>
                 <section className="vehicle-info" title="Informação do veículo">
@@ -61,11 +62,12 @@ const ProfileDriver = () => {
                     </div>
                     <label><strong>Placa do veículo:</strong> {user.vehiclePlate}</label>
                     <label><strong>Marca do veículo:</strong> {user.vehicleBrand}</label> 
-                    <label><strong>Modelo do veículo:</strong> {user.vehicleModel}</label> 
                     <label><strong>Cor do veículo:</strong> {user.vehicleColor}</label>
                     <label><strong>Tipos de adaptações:</strong> {user.typesAdaptations}</label>
                     <label><strong>Capacidade:</strong> {user.totalCapacity}</label> 
-                    <label><strong>Descrição de adaptações:</strong> {user.descriptionAdaptations}</label>
+                    { user.descriptionAdaptations !== null ? ( 
+                        <label><strong>Descrição de adaptações:</strong> {user.descriptionAdaptations}</label>
+                    ): null}
                 </section>
             </section>
         </main>
