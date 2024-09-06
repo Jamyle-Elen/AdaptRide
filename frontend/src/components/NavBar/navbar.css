@@ -129,7 +129,6 @@ button:hover {
     border:none;
 }
 
-/* RESPONSIVIDADE */
 
 @media (max-width: 1280px) {
     .menu-content {

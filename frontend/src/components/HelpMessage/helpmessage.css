@@ -58,7 +58,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
   gap: 0.5rem;
   background-color: #d9d9d9;
   padding: 1.5rem;
@@ -82,7 +81,6 @@
   width: 62.5rem;
 }
 
-/* -------Responsividade--------- */
 
 @media (max-width: 1900px) {
   .help-arrow .bx-chevron-left {
@@ -113,7 +111,6 @@
     width: 50rem;
   }
 }
-
 
 @media (max-width: 1024px) {
   .help-arrow .bx-chevron-left {
