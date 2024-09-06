@@ -74,7 +74,7 @@ const Passenger = () => {
                     <label><strong>Deficiência:</strong> {user.disability}</label>
                     <label><strong>Nivel de assistência:</strong> {user.assistanceLevel}</label> 
                     <label><strong>Contato de Emergência:</strong> {user.contactName}</label> 
-                    <label><strong>Informações adcionais :</strong> {user.emergencyContact}</label>
+                    <label><strong>Informações adicionais :</strong> {user.emergencyContact}</label>
                 </section>
             </section>
         </main>
