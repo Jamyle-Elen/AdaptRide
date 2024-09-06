@@ -1,6 +1,6 @@
-import db from "../config/database.js";
+// import db from "../config/database.js";
 import Driver from "../models/Driver.Model.js";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import ngeohash from "ngeohash";
 
 export const createDrivers = async (req, res) => {
@@ -53,7 +53,7 @@ export const createDrivers = async (req, res) => {
     if (cnhExists)
       return res.status(400).json({ message: "Usuário já cadastrado (CNH)" });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
 
     const { latitude, longitude } = setLocationRandom();
     console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
@@ -91,7 +91,7 @@ export const loginDriver = async (req, res) => {
     if (!driver) {
       return res.status(400).json({ message: "Motorista não cadastrado" });
     }
-    const isPasswordValid = await bcrypt.compare(password, driver.password);
+    const isPasswordValid = await bcryptjs.compare(password, driver.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Email ou senha inválidos" });
     }
